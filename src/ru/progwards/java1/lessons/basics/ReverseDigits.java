@@ -1,5 +1,4 @@
 package ru.progwards.java1.lessons.basics;
-
 public class ReverseDigits {
     public static void main(String[] args) {
         System.out.println(reverseDigits(123));     //Работает
@@ -9,7 +8,6 @@ public class ReverseDigits {
         char[] charArray = inputString.toCharArray();
         String resultString = "";
         for (int i = charArray.length - 1; i >= 0; i--) resultString += charArray[i];
-        //int III = Integer.parseInt(resultString);
         return Integer.parseInt(resultString);
     }
 }

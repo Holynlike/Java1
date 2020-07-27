@@ -3,7 +3,7 @@ public class AccuracyDoubleFloat {
     public static void main(String[] args) {
         System.out.println(volumeBallDouble(1.0));
         System.out.println(volumeBallFloat(1.0f));
-        calculateAccuracy(1.0);
+        System.out.println(calculateAccuracy(1.0));
     }
     public static double volumeBallDouble(double radius) {
         double pi = 3.14;
