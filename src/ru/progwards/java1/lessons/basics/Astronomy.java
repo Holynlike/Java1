@@ -28,5 +28,8 @@ public class Astronomy {
     public static Double earthVsMercury() {
         return earthSquare() / mercurySquare();
     }
+    public static Double earthVsJupiter(){
+        return earthSquare() / jupiterSquare();
+    }
 }
 
