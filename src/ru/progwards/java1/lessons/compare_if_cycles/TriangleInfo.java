@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons.test;
+package ru.progwards.java1.lessons.compare_if_cycles;
 
 public class TriangleInfo {
     public static void main(String[] args) {
@@ -21,12 +21,11 @@ public class TriangleInfo {
     public static boolean isRightTriangle(int a, int b, int c) {
         System.out.println("Вызвана функция isRightTriangle с параметрами: " + a + ", " + b + ", " + c);
         boolean BLNisRightTriangle = false;
-        double Da = a, Db = b, Dc = c;
-        if (Math.pow(Da, 2) == (Math.pow(Db, 2) + Math.pow(Dc, 2))) {
+        if (Math.pow(a, 2) == (Math.pow(b, 2) + Math.pow(c, 2))) {
             BLNisRightTriangle = true;
-        } else if (Math.pow(Db, 2) == (Math.pow(Da, 2) + Math.pow(Dc, 2))) {
+        } else if (Math.pow(b, 2) == (Math.pow(a, 2) + Math.pow(c, 2))) {
             BLNisRightTriangle = true;
-        } else if (Math.pow(Dc, 2) == (Math.pow(Da, 2) + Math.pow(Db, 2))) {
+        } else if (Math.pow(c, 2) == (Math.pow(a, 2) + Math.pow(b, 2))) {
             BLNisRightTriangle = true;
         }
         System.out.println("Результат: " + BLNisRightTriangle);
@@ -40,6 +39,5 @@ public class TriangleInfo {
         }
         System.out.println("Результат: " + BLNisIsoscelesTriangle);
         return BLNisIsoscelesTriangle;
-
     }
 }
