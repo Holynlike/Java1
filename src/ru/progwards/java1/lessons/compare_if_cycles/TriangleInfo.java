@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 public class TriangleInfo {
     public static void main(String[] args) {
         isTriangle(1,2,8);
-        isTriangle(1,2,1);
+        isTriangle(4,1,5);
         isRightTriangle(1,2,1);
         isRightTriangle(3,4,5);
         isIsoscelesTriangle(1,2,1);
@@ -12,7 +12,7 @@ public class TriangleInfo {
     public static boolean isTriangle(int a, int b, int c){
         System.out.println("Вызвана функция isTriangle с параметрами: " + a + ", " + b + ", " + c);
         boolean BLNistriangle = true;
-        if (a > (b + c) | b > (a+c) | c > (a+b)) {
+        if (a >= (b + c) | b >= (a+c) | c >= (a+b)) {
             BLNistriangle = false;
         }
         System.out.println("Результат: " + BLNistriangle);
