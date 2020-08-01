@@ -4,12 +4,9 @@ public class CyclesGoldenFibo {
     private static int[] FIBOarr = new int[16]; // Массив для чисел Фибоначчи
 
     public static void main(String[] args) {
-        System.out.println(fiboNumber(1));
-        System.out.println(fiboNumber(17));
         for (int i = 1; i <= 15; i++) {
             System.out.println(i + " - " + fiboNumber(i)); // Фибо - цикл
         }
-
         for (int i = 1; i < 100; i++) {    // Цикл поиска золотых треугольников
             for (int j = 1; j <= i; j++) { // Стремление к оптимизации цикла! Так как заведомо ясно, что при j >= i необходимое соотношение не выполнится
                 if (isGoldenTriangle(i,i,j)){
@@ -29,20 +26,26 @@ public class CyclesGoldenFibo {
 
         if (n == 0 | n == 1){
             RESfiboNumber = n;// Для n == 0 и 1 Фибоначчи совпадает с n
-        }else if (n < FIBOarr.length - 1) { // Если n не выходит за пределы массива
-            if (FIBOarr[n] != 0) {          // и n-й элемент не равен 0
-                RESfiboNumber = FIBOarr[n]; // То просто без цикла выбираем его
-            }
-        } else { // Если в массиве нет готового ответа
-            for (int i = 2; i <= n; i++) { // Для бОльших чисел организуем "ханойский" цикл
-                RESfiboNumber = fiboprev1 + fiboprev2;
-                if (i < FIBOarr.length - 1) { // Пока счетчик цикла не превышает размер массива
-                    if (FIBOarr[i] == 0){
-                        FIBOarr[i] = RESfiboNumber; // Наполняем массив FIBOarr, избегая исключения выхода за границы массива
+        }else{
+            if (n < FIBOarr.length - 1) {// Если n не выходит за пределы массива и n-й элемент не равен 0
+                if (FIBOarr[n] != 0) {
+                    RESfiboNumber = FIBOarr[n]; // То просто без цикла выбираем его
+                }else{
+                    RESfiboNumber = fiboprev1 + fiboprev2; // Здесь идет вычисление числа Фибоначчи
+                    fiboprev1 = fiboprev2;
+                    fiboprev2 = RESfiboNumber;
+                }
+            } else { // Если в массиве нет готового ответа (или n больше размера массива)
+                for (int i = 2; i <= n; i++) { // Для бОльших чисел организуем "ханойский" цикл
+                    RESfiboNumber = fiboprev1 + fiboprev2;
+                    fiboprev1 = fiboprev2;
+                    fiboprev2 = RESfiboNumber; // Здесь снова идет вычисление числа Фибоначчи, пытался построить ветвление без повторов блоков кода, но не смог (
+                    if (i < FIBOarr.length - 1) { // Пока счетчик цикла не превышает размер массива
+                        if (FIBOarr[i] == 0) {
+                            FIBOarr[i] = RESfiboNumber; // Наполняем массив FIBOarr, избегая исключения выхода за границы массива
+                        }
                     }
                 }
-                fiboprev1 = fiboprev2;
-                fiboprev2 = RESfiboNumber;
             }
         }
         return RESfiboNumber;
