@@ -4,6 +4,7 @@ public class CyclesGoldenFibo {
     private static int[] FIBOarr = new int[16]; // Массив для чисел Фибоначчи
 
     public static void main(String[] args) {
+        System.out.println(fiboNumber(1));
         System.out.println(fiboNumber(17));
         for (int i = 1; i <= 15; i++) {
             System.out.println(i + " - " + fiboNumber(i)); // Фибо - цикл
@@ -26,17 +27,19 @@ public class CyclesGoldenFibo {
         int RESfiboNumber = 0;
         int fiboprev1 = 0, fiboprev2 = 1; // Переменные для двух предыдущих значений
 
-        if (n < FIBOarr.length - 1) {    // Если n не выходит за пределы массива
-            if (FIBOarr[n] != 0) { // и n-й элемент не равен 0
-                RESfiboNumber = FIBOarr[n]; // Если в массиве уже есть найденное число Фибоначчи, просто без цикла выбираем его
+        if (n == 0 | n == 1){
+            RESfiboNumber = n;// Для n == 0 и 1 Фибоначчи совпадает с n
+        }else if (n < FIBOarr.length - 1) { // Если n не выходит за пределы массива
+            if (FIBOarr[n] != 0) {          // и n-й элемент не равен 0
+                RESfiboNumber = FIBOarr[n]; // То просто без цикла выбираем его
             }
-        }else{
-            if (n == 0 | n == 1) RESfiboNumber = n; // Для 0 и 1 Фибоначчи совпадает с n
-            FIBOarr[1] = 1;
+        } else { // Если в массиве нет готового ответа
             for (int i = 2; i <= n; i++) { // Для бОльших чисел организуем "ханойский" цикл
                 RESfiboNumber = fiboprev1 + fiboprev2;
-                if (i < FIBOarr.length - 1 ) { // Пока счетчик цикла не превышает размер массива
-                    if (FIBOarr[i] == 0) FIBOarr[i] = RESfiboNumber; // Наполняем массив FIBOarr, избегая исключения выхода за границы массива
+                if (i < FIBOarr.length - 1) { // Пока счетчик цикла не превышает размер массива
+                    if (FIBOarr[i] == 0){
+                        FIBOarr[i] = RESfiboNumber; // Наполняем массив FIBOarr, избегая исключения выхода за границы массива
+                    }
                 }
                 fiboprev1 = fiboprev2;
                 fiboprev2 = RESfiboNumber;
