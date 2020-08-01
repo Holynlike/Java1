@@ -4,6 +4,7 @@ public class CyclesGoldenFibo {
     private static int[] FIBOarr = new int[16]; // Массив для чисел Фибоначчи
 
     public static void main(String[] args) {
+        System.out.println(fiboNumber(17));
         for (int i = 1; i <= 15; i++) {
             System.out.println(i + " - " + fiboNumber(i)); // Фибо - цикл
         }
@@ -30,10 +31,12 @@ public class CyclesGoldenFibo {
             if (n < FIBOarr.length - 1) {// Если n не выходит за пределы массива и n-й элемент не равен 0
                 if (FIBOarr[n] != 0) {
                     RESfiboNumber = FIBOarr[n]; // То просто без цикла выбираем его
-                }else{
-                    RESfiboNumber = fiboprev1 + fiboprev2; // Здесь идет вычисление числа Фибоначчи
-                    fiboprev1 = fiboprev2;
-                    fiboprev2 = RESfiboNumber;
+                }else {
+                    for (int i = 2; i <= n; i++) {
+                        RESfiboNumber = fiboprev1 + fiboprev2; // Здесь идет вычисление числа Фибоначчи
+                        fiboprev1 = fiboprev2;
+                        fiboprev2 = RESfiboNumber;
+                    }
                 }
             } else { // Если в массиве нет готового ответа (или n больше размера массива)
                 for (int i = 2; i <= n; i++) { // Для бОльших чисел организуем "ханойский" цикл
