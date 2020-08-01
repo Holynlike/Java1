@@ -11,7 +11,7 @@ public class CyclesGoldenFibo {
         }
 
         for (int i = 1; i < 100; i++) {    // Цикл поиска золотых треугольников
-            for (int j = 1; j <= i; j++) { // Стремление к оптимизации цикла!  :)
+            for (int j = 1; j <= i; j++) { // Стремление к оптимизации цикла! Так как заведомо ясно, что при j >= i необходимое соотношение не выполнится
                 if (isGoldenTriangle(i,i,j)){
                     System.out.println("Найден золотой треугольник с параметрами: " + i + ", " + i + ", " + j);
                 }
@@ -47,7 +47,7 @@ public class CyclesGoldenFibo {
         }
         return RESfiboNumber;
     }
-    public static boolean isGoldenTriangle(int a, int b, int c){//Хочется уложить функцию в одну строку
+    public static boolean isGoldenTriangle(int a, int b, int c){ //Хочется уложить функцию в одну строку
         return (a == b & (double)a/c >= 1.61703d & (double)a/c <= 1.61903d | a == c & (double)a/b  >= 1.61703d & (double)a/b  <= 1.61903d | b == c & (double)b/a  >= 1.61703d & (double)b/a  <= 1.61903d);
     }
 }
