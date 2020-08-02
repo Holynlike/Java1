@@ -16,10 +16,20 @@ public class ComplexNum {
     public String toString() {
         return Integer.toString(a) + "+" + Integer.toString(b) + "i";
     }
-    // приведение к строке, выдать в формате a+bi, например, при a=1 и b=56 должно быть выдано 1+56i
-    //public ComplexNum add(ComplexNum num){ //сложение комплексных чисел по формуле: (a + bi) + (c + di) = (a + c) + (b + d)i
 
-    //}
+    public ComplexNum add(ComplexNum num) { //сложение комплексных чисел по формуле:  (a + bi) + (c + di) = (a + c) + (b + d)i
+        return new ComplexNum(this.a += num.a, this.b += num.b);
+    }
 
- // Здесь ещё один соммент для коммита для гнитхаба для репо для пушА
+    public ComplexNum sub(ComplexNum num) { //вычитание комплексных чисел по формуле: (a + bi) - (c + di) = (a - c) + (b - d)i
+        return new ComplexNum(this.a -= num.a, this.b -= num.b);
+    }
+
+    public ComplexNum div(ComplexNum num) {
+        int c = num.a, d = num.b, resultA, resultB;
+        int a = this.a, b = this.b;
+        resultA = (a * c + b * d) / (c * c + d * d);
+        resultB = (b * c - a * d) / (c * c + d * d);
+        return new ComplexNum(resultA, resultB);
+    }
 }

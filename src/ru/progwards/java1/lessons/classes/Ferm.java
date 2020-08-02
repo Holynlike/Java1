@@ -10,5 +10,8 @@ public class Ferm {
         System.out.println(Donald.toStringFull());
         ComplexNum Standalone = new ComplexNum(1, 56);
         System.out.println(Standalone.toString());
+        ComplexNum complex2 = new ComplexNum(3, 6);
+        Standalone.add(complex2);
+        System.out.println(Standalone.toString());
     }
 }
