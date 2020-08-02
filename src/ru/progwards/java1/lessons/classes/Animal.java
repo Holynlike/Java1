@@ -17,7 +17,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "i am " + getKind() + ", eat " + getFoodKind();
+        return "I am " + getKind() + ", eat " + getFoodKind();
     }
 
     public double getWeight() {
@@ -33,7 +33,7 @@ public class Animal {
     }
 
     public String toStringFull() {
-        return "i am " + getKind() + ", eat " + getFoodKind() + " " + calculateFoodWeight();
+        return "I am " + getKind() + ", eat " + getFoodKind() + " " + calculateFoodWeight();
     }
 
     enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
