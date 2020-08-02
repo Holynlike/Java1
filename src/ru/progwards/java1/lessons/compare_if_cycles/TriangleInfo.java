@@ -2,22 +2,41 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 
 public class TriangleInfo {
     public static void main(String[] args) {
-        isTriangle(1,2,8);
-        isTriangle(4,1,5);
-        isRightTriangle(1,2,1);
-        isRightTriangle(3,4,5);
-        isIsoscelesTriangle(1,2,1);
-        isIsoscelesTriangle(1,2,3);
+        System.out.println("Вызвана функция isTriangle: с параметрами 3, 4, 5 " + isTriangle(3, 4, 5));
+        System.out.println("Вызвана функция isTriangle: с параметрами 1, 4, 5 " + isTriangle(1, 4, 5));
+        System.out.println("Вызвана функция isTriangle: с параметрами 1, 2, 2 " + isTriangle(1, 2, 2));
+        System.out.println(isTriangle2(3, 4, 5));
+        System.out.println(isTriangle2(1, 4, 5));
+        System.out.println(isTriangle2(1, 2, 2));
+        System.out.println(isTriangle3(3, 4, 5));
+        System.out.println(isTriangle3(1, 4, 5));
+        System.out.println(isTriangle3(1, 2, 2));
     }
-    public static boolean isTriangle(int a, int b, int c){
-        System.out.println("Вызвана функция isTriangle с параметрами: " + a + ", " + b + ", " + c);
-        boolean BLNistriangle = true;
-        if (a >= (b + c) | b >= (a+c) | c >= (a+b)) {
-            BLNistriangle = false;
+
+    // Вариант 1
+    public static boolean isTriangle(int a, int b, int c) {
+        return a < (b + c) && b < (a + c) && c < (a + b);
+    }
+
+    // Вариант 2
+    public static boolean isTriangle2(int a, int b, int c) {
+        if ((a + b) > c && (a + c) > b && (c + b) > a) {
+            return true;
+        } else {
+            return false;
         }
-        System.out.println("Результат: " + BLNistriangle);
-        return BLNistriangle;
     }
+
+    // Вариант 3
+    public static boolean isTriangle3(int a, int b, int c) {
+        return ((a + b) > c && (a + c) > b && (c + b) > a);
+    }
+
+    // Вариант 4
+    public static boolean isTriangle4(int a, int b, int c) {
+        return ((a + b) < c | (a + c) < b && (c + b) > a);
+    }
+
     public static boolean isRightTriangle(int a, int b, int c) {
         System.out.println("Вызвана функция isRightTriangle с параметрами: " + a + ", " + b + ", " + c);
         boolean BLNisRightTriangle = false;
