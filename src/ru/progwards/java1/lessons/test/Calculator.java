@@ -12,11 +12,11 @@ public class Calculator {
     }
 
     public void add(int num) {
-        result = result + num;
+        result += num;
     }
 
     public void sub(int num) {
-        result = result - num;
+        result -= num;
     }
 
     public int getResult() {
