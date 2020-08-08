@@ -13,8 +13,6 @@ public class Ferm {
         ComplexNum complex2 = new ComplexNum(3, 6);
         Standalone.add(complex2);
         System.out.println(Standalone.toString());
-        int[] UU = {1, 2, 3, 4};
-
     }
 
     public int sumArrayItems(int[] a) {

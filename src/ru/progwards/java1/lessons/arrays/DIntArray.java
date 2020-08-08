@@ -36,7 +36,7 @@ public class DIntArray {
         arr2 = new int[arr1.length]; // копия массива
         arr2 = Arrays.copyOf(arr1, arr1.length);
         arr1 = new int[arr1.length - 1];
-        for (int i = 0; i <= pos; i++) { // до pos копируем значения в ццикле
+        for (int i = 0; i <= pos; i++) { // до pos копируем значения в цикле
             arr1[i] = arr2[i];
         }
         for (int i = pos; i < arr2.length; i++) { // после pos копируем значения в цикле
