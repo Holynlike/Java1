@@ -35,11 +35,11 @@ public class DIntArray {
         }
     }
 
-    public void atDelete(int pos) { //Удаление значения в позиции pos
+    public void atDelete(int pos) { // Удаление значения в позиции pos
         arr2 = new int[arr1.length]; // копия массива
         arr2 = Arrays.copyOf(arr1, arr1.length);
         arr1 = new int[arr1.length - 1];
-        for (int i = 0; i < pos - 1; i++) { // до pos копируем значения в ццикле
+        for (int i = 0; i <= pos; i++) { // до pos копируем значения в ццикле
             arr1[i] = arr2[i];
         }
         for (int i = pos; i < arr2.length; i++) { // после pos копируем значения в цикле
@@ -48,10 +48,18 @@ public class DIntArray {
     }
 
     public int at(int pos) {
-        return arr1[pos - 1];
+        if (arr1.length == 0) {
+            return arr1[0];
+        } else {
+            return arr1[pos];
+        }
     }
 
     public int myLen() {
         return arr1.length;
+    }
+
+    public void Show() {
+        System.out.println(Arrays.toString(arr1));
     }
 }
