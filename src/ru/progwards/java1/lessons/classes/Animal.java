@@ -36,6 +36,7 @@ public class Animal implements FoodCompare {
         }
     }
 
+
     private double getWeight(Object anObject) {
         return weight;
     }
