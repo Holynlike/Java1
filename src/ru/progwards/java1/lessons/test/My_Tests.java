@@ -2,6 +2,13 @@ package ru.progwards.java1.lessons.test;
 
 public class My_Tests {
     public static void main(String[] args) {
+        Rectangle ree = new Rectangle(1, 2);
+        Rectangle ree1 = new Rectangle(2, 1);
+        Rectangle ree2 = new Rectangle(2, 2);
+
+        System.out.println(ree.equals(ree1));
+        System.out.println(ree.equals(ree2));
+
         System.out.println(addAsStrings(1, 7));
         System.out.println(factorial(7));
 
@@ -17,3 +24,4 @@ public class My_Tests {
         return Integer.valueOf(Integer.toString(n1) + Integer.toString(n2));
     }
 }
+

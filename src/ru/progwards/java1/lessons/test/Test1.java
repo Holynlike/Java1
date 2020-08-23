@@ -1,8 +1,16 @@
 package ru.progwards.java1.lessons.test;
 
+import ru.progwards.java1.lessons.Своё.interfaces.Родитель;
+
 public class Test1 {
 
     public static void main(String[] args) {
+//        Goat goat = new Goat();
+//        Dog dog = new Dog();
+//        System.out.println(goat.eat());
+//        System.out.println(goat.say());
+//        System.out.println(dog.eat());
+//        System.out.println(dog.say());
 
     }
 

@@ -1,7 +1,21 @@
 package ru.progwards.java1.lessons.arrays;
+
+import ru.progwards.java1.lessons.classes.Animal;
+import ru.progwards.java1.lessons.classes.Duck;
+import ru.progwards.java1.lessons.classes.Hamster;
+
 public class DIntArray_TEST {
     public static void main(String args[]) {
-        System.out.println(intToGrade(4));
+        //System.out.println(intToGrade(4));
+        Animal pig = new Animal(70);
+        Animal bat = new Animal(4);
+        System.out.println("Сравнение двух Animal с разным весом " + pig.equals(bat));
+        Animal bug = new Animal(4);
+        System.out.println("Сравнение двух Animal с одинаковым весом " + bug.equals(bat));
+
+        Duck Donald = new Duck(4);
+        Hamster RAT = new Hamster(4);
+        System.out.println("Сравнение хомяка и утки с одинаковым весом " + RAT.equals(Donald));
     }
 
     public static Grade intToGrade(int grade) {

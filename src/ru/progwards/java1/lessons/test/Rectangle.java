@@ -25,4 +25,12 @@ class Rectangle {
         }
         return intResult;
     }
+
+    @Override
+    public boolean equals(Object anObject) {
+        if (this == anObject) return true;
+        if (anObject == null || getClass() != anObject.getClass()) return false;
+        Rectangle r = (Rectangle) anObject;
+        return Double.compare(r.area(), this.area()) == 0;
+    }
 }

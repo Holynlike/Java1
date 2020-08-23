@@ -1,7 +1,5 @@
 package ru.progwards.java1.lessons.bitsworld;
-
 public class SumBits {
-
     public static int sumBits(byte value) {
         int result = 0;
         int result2 = value;

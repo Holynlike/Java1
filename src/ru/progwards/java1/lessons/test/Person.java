@@ -1,6 +1,10 @@
 package ru.progwards.java1.lessons.test;
 
+import ru.progwards.java1.lessons.classes.Animal;
+
 public class Person {
+
+
     private String name;
     private int age;
     private String country;
