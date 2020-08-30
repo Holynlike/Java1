@@ -1,8 +1,8 @@
 package ru.progwards.java1.lessons.arrays;
 
-import ru.progwards.java1.lessons.classes.Animal;
-import ru.progwards.java1.lessons.classes.Duck;
-import ru.progwards.java1.lessons.classes.Hamster;
+import ru.progwards.java1.lessons.interfaces.Animal;
+import ru.progwards.java1.lessons.interfaces.Duck;
+import ru.progwards.java1.lessons.interfaces.Hamster;
 
 public class DIntArray_TEST {
     public static void main(String args[]) {

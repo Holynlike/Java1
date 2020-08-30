@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons.classes;
+package ru.progwards.java1.lessons.interfaces;
 
 public class Cow extends Animal implements CompareWeight {
     public Cow(double weight) {

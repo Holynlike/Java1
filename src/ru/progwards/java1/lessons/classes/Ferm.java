@@ -1,5 +1,9 @@
 package ru.progwards.java1.lessons.classes;
 
+import ru.progwards.java1.lessons.interfaces.Cow;
+import ru.progwards.java1.lessons.interfaces.Duck;
+import ru.progwards.java1.lessons.interfaces.Hamster;
+
 public class Ferm {
     public static void main(String[] args) {
         Cow Burenka = new Cow(320);

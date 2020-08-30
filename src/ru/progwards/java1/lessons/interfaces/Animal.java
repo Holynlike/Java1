@@ -1,19 +1,11 @@
-package ru.progwards.java1.lessons.classes;
+package ru.progwards.java1.lessons.interfaces;
 
 public class Animal implements FoodCompare, CompareWeight {
     public CompareWeight CW;
     double weight;
 
-    @Override // Кто больше весит
-    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
-        Animal Beast = (Animal) smthHasWeigt;
-        switch (Double.compare(this.getWeight(), Beast.getWeight())) {
-            case (-1):
-                return CompareWeight.CompareResult.LESS;
-            case (0):
-                return CompareWeight.CompareResult.EQUAL;
-        }
-        return CompareWeight.CompareResult.GREATER;
+    public Animal(double weight) {
+        this.weight = weight;
     }
 
     public double getFood1kgPrice() { // Цена за кило еды
@@ -31,14 +23,23 @@ public class Animal implements FoodCompare, CompareWeight {
         }
         return myReturn;
     }
-    // Переменны объявлены
 
+    // Переменны объявлены
     enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
 
     enum FoodKind {UNKNOWN, HAY, CORN}
 
-    public double getFoodPrice() {
-        return calculateFoodWeight() * getFood1kgPrice();
+    @Override // Кто больше весит
+    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
+        Animal Beast = (Animal) smthHasWeigt;
+        switch (Double.compare(this.getWeight(), Beast.getWeight())) {
+            case (-1):
+                return CompareResult.LESS;
+            case (0):
+                return CompareResult.EQUAL;
+            default:
+                return CompareResult.GREATER;
+        }
     }
 
     public int compareFoodPrice(Animal aminal) {
@@ -55,13 +56,12 @@ public class Animal implements FoodCompare, CompareWeight {
         }
     }
 
+    public double getFoodPrice() {
+        return calculateFoodWeight() * getFood1kgPrice();
+    }
 
     private double getWeight(Object anObject) {
         return weight;
-    }
-
-    public Animal(double weight) {
-        this.weight = weight;
     }
 
     public AnimalKind getKind() {
