@@ -8,6 +8,12 @@ public class Animal implements FoodCompare, CompareWeight {
         this.weight = weight;
     }
 
+    public int compareFoodPrice(Animal aminal) {
+        return Double.compare(this.getFoodPrice(), aminal.getFoodPrice());
+    }
+
+    enum FoodKind {UNKNOWN, HAY, CORN}
+
     public double getFood1kgPrice() { // Цена за кило еды
         FoodKind FK = getFoodKind();
         double myReturn = 0.0;
@@ -24,11 +30,6 @@ public class Animal implements FoodCompare, CompareWeight {
         return myReturn;
     }
 
-    // Переменны объявлены
-    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
-
-    enum FoodKind {UNKNOWN, HAY, CORN}
-
     @Override // Кто больше весит
     public CompareResult compareWeight(CompareWeight smthHasWeigt) {
         Animal Beast = (Animal) smthHasWeigt;
@@ -42,9 +43,7 @@ public class Animal implements FoodCompare, CompareWeight {
         }
     }
 
-    public int compareFoodPrice(Animal aminal) {
-        return Double.compare(this.getFood1kgPrice(), aminal.getFood1kgPrice());
-    }
+    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}// Переменны объявлены
 
     @Override
     public boolean equals(Object anObject) {

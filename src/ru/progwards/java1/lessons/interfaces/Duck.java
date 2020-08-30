@@ -1,5 +1,4 @@
 package ru.progwards.java1.lessons.interfaces;
-
 public class Duck extends Animal implements FoodCompare {
     public Duck(double weight) {
         super(weight);
@@ -20,9 +19,9 @@ public class Duck extends Animal implements FoodCompare {
         return 0.04d;
     }
 
-    public int compareFoodPrice() { // Для задачи 8 - юзаем интерфейсы
+    public int compareFoodPrice() {
         return 0;
-    }
+    } // Для задачи 8 - юзаем интерфейсы
 
     @Override
     public CompareResult compareWeight(CompareWeight smthHasWeigt) {

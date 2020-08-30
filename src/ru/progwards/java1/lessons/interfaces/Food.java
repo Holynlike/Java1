@@ -1,5 +1,4 @@
 package ru.progwards.java1.lessons.interfaces;
-
 public class Food implements CompareWeight {
     private int weight;
 
@@ -14,7 +13,7 @@ public class Food implements CompareWeight {
     @Override
     public CompareResult compareWeight(CompareWeight smthHasWeigt) {
         Food unknownFOOD = (Food) smthHasWeigt;
-        int difFood = Double.compare(this.getWeight(), unknownFOOD.getWeight());             //2
+        int difFood = Double.compare(this.getWeight(), unknownFOOD.getWeight());
         switch (difFood) {
             case (-1):
                 return CompareResult.LESS;

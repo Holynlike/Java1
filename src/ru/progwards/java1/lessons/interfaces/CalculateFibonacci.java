@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons.compare_if_cycles;
+package ru.progwards.java1.lessons.interfaces;
 
 public class CalculateFibonacci {
     private static CacheInfo lastFibo;
