@@ -1,9 +1,23 @@
 package ru.progwards.java1.lessons.classes;
 
-public class Animal implements FoodCompare {
+public class Animal implements FoodCompare, CompareWeight {
+    public CompareWeight CW;
+    double weight;
 
-    public double getFood1kgPrice() {
-        FoodKind FK = FoodKind.UNKNOWN;
+    @Override // Кто больше весит
+    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
+        Animal Beast = (Animal) smthHasWeigt;
+        switch (Double.compare(this.getWeight(), Beast.getWeight())) {
+            case (-1):
+                return CompareWeight.CompareResult.LESS;
+            case (0):
+                return CompareWeight.CompareResult.EQUAL;
+        }
+        return CompareWeight.CompareResult.GREATER;
+    }
+
+    public double getFood1kgPrice() { // Цена за кило еды
+        FoodKind FK = getFoodKind();
         double myReturn = 0.0;
         switch (FK) {
             case HAY:
@@ -17,6 +31,11 @@ public class Animal implements FoodCompare {
         }
         return myReturn;
     }
+    // Переменны объявлены
+
+    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
+
+    enum FoodKind {UNKNOWN, HAY, CORN}
 
     public double getFoodPrice() {
         return calculateFoodWeight() * getFood1kgPrice();
@@ -40,8 +59,6 @@ public class Animal implements FoodCompare {
     private double getWeight(Object anObject) {
         return weight;
     }
-
-    double weight;
 
     public Animal(double weight) {
         this.weight = weight;
@@ -75,8 +92,4 @@ public class Animal implements FoodCompare {
     public String toStringFull() {
         return "I am " + getKind() + ", eat " + getFoodKind() + " " + calculateFoodWeight();
     }
-
-    enum AnimalKind {ANIMAL, COW, HAMSTER, DUCK}
-
-    enum FoodKind {UNKNOWN, HAY, CORN}
 }

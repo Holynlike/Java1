@@ -16,6 +16,7 @@ public class DIntArray_TEST {
         Duck Donald = new Duck(4);
         Hamster RAT = new Hamster(4);
         System.out.println("Сравнение хомяка и утки с одинаковым весом " + RAT.equals(Donald));
+        System.out.println("Цена еды существа: " + RAT.getFood1kgPrice());
     }
 
     public static Grade intToGrade(int grade) {

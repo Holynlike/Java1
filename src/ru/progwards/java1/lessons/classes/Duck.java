@@ -23,4 +23,9 @@ public class Duck extends Animal implements FoodCompare {
     public int compareFoodPrice() { // Для задачи 8 - юзаем интерфейсы
         return 0;
     }
+
+    @Override
+    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
+        return null;
+    }
 }

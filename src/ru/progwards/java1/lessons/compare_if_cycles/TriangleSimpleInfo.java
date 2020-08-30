@@ -2,14 +2,16 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 
 public class TriangleSimpleInfo {
     public static void main(String[] args) {
-        maxSide(1,2,3);
-        maxSide(1,20,3);
-        maxSide(10,2,3);
-        minSide(1,2,3);
-        minSide(1,20,3);
-        minSide(10,2,3);
-        System.out.println(isEquilateralTriangle(6,6,6));
-        System.out.println(isEquilateralTriangle(6,6,5));
+        System.out.println();
+
+//        maxSide(1,2,3);
+//        maxSide(1,20,3);
+//        maxSide(10,2,3);
+//        minSide(1,2,3);
+//        minSide(1,20,3);
+//        minSide(10,2,3);
+//        System.out.println(isEquilateralTriangle(6,6,6));
+//        System.out.println(isEquilateralTriangle(6,6,5));
     }
     public static int maxSide(int a, int b, int c){
         System.out.println("Вызвана функция maxSide с параметрами " + a + ", " + b + ", " + c);
