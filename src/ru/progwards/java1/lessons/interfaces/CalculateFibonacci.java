@@ -2,8 +2,6 @@ package ru.progwards.java1.lessons.interfaces;
 
 public class CalculateFibonacci {
     private static CacheInfo lastFibo;
-    public int n;
-    public int fibo;
 
     public static CacheInfo getLastFibo() {
         return lastFibo;
@@ -13,10 +11,10 @@ public class CalculateFibonacci {
         lastFibo = null;
     }
 
-    public int fiboNumber(int n) {
+    public static int fiboNumber(int n) {
         int fiboprev1 = 0, fiboprev2 = 1, RESfiboNumber = 0;
-        if (n == this.n) {
-            return fibo;
+        if (n == lastFibo.n) {
+            return lastFibo.fibo;
         } else {
             switch (n) {
                 case 0:
@@ -31,7 +29,7 @@ public class CalculateFibonacci {
                     }
             }
         }
-        fibo = RESfiboNumber;
+        lastFibo.fibo = RESfiboNumber;
         return RESfiboNumber;
     }
 
