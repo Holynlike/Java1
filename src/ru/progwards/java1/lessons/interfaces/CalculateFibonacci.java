@@ -34,7 +34,7 @@ public class CalculateFibonacci {
     }
 
     public static class CacheInfo {
-        public int n, fibo; // служебные переменные
+        public int n = 0, fibo = 0; // служебные переменные
 
         public CacheInfo(int n, int fibo) {
             this.n = n; // сохранение значений в переменных
