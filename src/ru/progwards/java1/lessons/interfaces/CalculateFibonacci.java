@@ -22,9 +22,9 @@ public class CalculateFibonacci {
         } else {
             switch (n) {
                 case 0:
-                    return n;
+                    RESfiboNumber = n;
                 case 1:
-                    return 1;
+                    RESfiboNumber = n;
                 default:
                     for (int i = 2; i <= n; i++) {
                         RESfiboNumber = fiboprev1 + fiboprev2;
@@ -34,6 +34,7 @@ public class CalculateFibonacci {
             }
         }
         lastFibo.fibo = RESfiboNumber;
+        lastFibo.n = n;
         return RESfiboNumber;
     }
 

@@ -1,15 +1,15 @@
 package ru.progwards.java1.lessons.test;
 
 import ru.progwards.java1.lessons.interfaces.Animal;
+import ru.progwards.java1.lessons.interfaces.CalculateFibonacci;
 import ru.progwards.java1.lessons.interfaces.Duck;
 import ru.progwards.java1.lessons.Своё.interfaces.Родитель;
 
 public class Test1 {
 
     public static void main(String[] args) {
-        Animal emu = new Animal(20);
-        Duck frog = new Duck(30);
-        System.out.println(emu.compareFoodPrice(frog));
+        int r = CalculateFibonacci.fiboNumber(10);
+        System.out.println(CalculateFibonacci.getLastFibo().n + " " + CalculateFibonacci.getLastFibo().fibo);
 
     }
 
