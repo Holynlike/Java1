@@ -8,7 +8,8 @@ import ru.progwards.java1.lessons.Своё.interfaces.Родитель;
 public class Test1 {
 
     public static void main(String[] args) {
-        int r = CalculateFibonacci.fiboNumber(10);
+        int r = CalculateFibonacci.fiboNumber(3);
+        CalculateFibonacci.clearLastFibo();
         System.out.println(CalculateFibonacci.getLastFibo().n + " " + CalculateFibonacci.getLastFibo().fibo);
 
     }
