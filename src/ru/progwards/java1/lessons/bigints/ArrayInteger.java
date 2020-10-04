@@ -27,21 +27,34 @@ BigInteger toInt() {
 boolean add(ArrayInteger num){
 // - сложить 2 числа, не используя BigInteger, а используя массив digits,
 // результат поместить в экземпляр ArrayInteger, у которого был вызван метод.
-// При переполнении вернуть false, при этом само число сбросить в 0
-    int mylen = num.digits.length;
-    if(digits.length < mylen){
-        mylen = digits.length;
-    }
+
+    byte Stage = 0;
     byte[] Digits2 = new byte[digits.length];
     byte[] Digits3 = digits;
+    Digits2 = Digits3;
     byte rebyte = 0;
     if(num.digits.length >digits.length){
         digits = new byte[digits.length];
-        return false;
+        return false;// При переполнении вернуть false, при этом само число сбросить в 0
     }else{
-        for (byte i = 0; i < mylen; i++) {
-            rebyte = (byte) (Byte.valueOf(Digits3[i]) + Byte.valueOf(num.digits[i]));
-            Digits2[i] = rebyte;
+        for (int i = 1; i < Digits2.length-1; i++) {
+            rebyte = (byte) (Byte.valueOf(Digits3[Digits3.length-i]) + Byte.valueOf(num.digits[num.digits.length-i])+Stage);
+            if (rebyte>9){
+                Stage = 1; // два плюс два, один в уме
+                rebyte = (byte) (rebyte - (byte) 10);
+            }else{
+                Stage = 0;
+            }
+            Digits2[Digits2.length - i] = rebyte;
+        }
+        if (Stage ==1){
+            int i =digits.length - num.digits.length;
+            if(i>0){
+                digits[i-1]++;
+            }else{
+                digits = new byte[digits.length];
+                return false;// При переполнении вернуть false, при этом само число сбросить в 0
+            }
         }
         digits = Digits2;
         return true;
