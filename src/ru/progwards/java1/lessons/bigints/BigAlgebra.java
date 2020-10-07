@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 public class BigAlgebra {
     public BigAlgebra(){}
-    BigDecimal fastPow(BigDecimal num, int pow){
+    public static BigDecimal fastPow(BigDecimal num, int pow){
         BigDecimal tmp = num;
         BigDecimal res = new BigDecimal("1");
         for (int i=1; i<=pow; i++){

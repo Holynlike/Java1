@@ -15,6 +15,6 @@ public class Test_Big_Number {
         ai2.fromInt(new BigInteger("169985"));
         ai1.add(ai2);
         System.out.println(ai1.toInt());
-        System.out.println("14045884 - должно быть ");
+        System.out.println("14104758 - должно быть ");
     }
 }

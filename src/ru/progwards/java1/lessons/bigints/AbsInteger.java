@@ -5,11 +5,11 @@ import java.math.BigInteger;
 public class AbsInteger {
     String base = "";
     public AbsInteger(String value){
-        base = new BigInteger(value).toString();
+        base = value;
+        //base = new BigInteger(value).toString();
     }
 
-    public AbsInteger() {
-    }
+    public AbsInteger() {}
 
     @Override
     public String toString(){
@@ -20,9 +20,12 @@ public class AbsInteger {
 //    Для того, чтобы это реализовать продумать, какие дополнительные методы нужно сделать у AbsInteger и его потомков.
 
     static AbsInteger add(AbsInteger num1, AbsInteger num2){
-        return new AbsInteger("123");  // ДОДЕ ЛАТЬ !!!!
+        ArrayInteger a = new ArrayInteger(num1.toString().length());
+        a.fromInt(new BigInteger(num1.toString()));
+        ArrayInteger b = new ArrayInteger(num2.toString().length());
+        b.fromInt(new BigInteger(num2.toString()));
+        a.add(b);
+        return new AbsInteger(a.toString());
 
     }
 }
-
-
