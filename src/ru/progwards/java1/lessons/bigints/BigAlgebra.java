@@ -4,15 +4,15 @@ import java.math.BigInteger;
 public class BigAlgebra {
     public BigAlgebra(){}
     public static BigDecimal fastPow(BigDecimal num, int pow){
-        BigDecimal tmp = num;
+        //BigDecimal tmp = num;
         BigDecimal res = new BigDecimal("1");
         for (int i=1; i<=pow; i++){
-            res = res.multiply(tmp);
+            res = res.multiply(num);
         }
         return res;
     }
     // Вычислить Фибоначчи
-    BigInteger fibonacci(int n){
+    public static BigInteger fibonacci(int n){
         BigInteger fiboprev1 = new BigInteger("0");
         BigInteger fiboprev2 = new BigInteger("1");
         BigInteger RESfiboNumber = new BigInteger("0");
