@@ -6,7 +6,8 @@ public class Coder extends CharFilter{
           System.out.println(logName + " - logName");
 
           String charINFO = new String(code);
-          System.out.println(charINFO);
+          System.out.println("Длина массива символов: " + code.length);
+          System.out.println("Сами символы:\n" + charINFO);
           String IN = read(inFileName); // Читаем файл
           String LOG; // Текст ЛОГа
           try{
