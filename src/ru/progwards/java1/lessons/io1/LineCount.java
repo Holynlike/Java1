@@ -1,13 +1,8 @@
 package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 public class LineCount {
-    /*Создать статический метод public static int calcEmpty(String fileName),
-    в котором посчитать количество пустых строк в файле. В случае возникновения
-    ошибок, вернуть -1
-     */
-    public static int calcEmpty(String fileName) throws Exception {
+    public static int calcEmpty(String fileName) {
         int rez = 0;
         try{
             FileReader weader = new FileReader(fileName);
@@ -17,10 +12,10 @@ public class LineCount {
                 if (strFromFile.length() ==0){rez++;}
             }
             return rez;
-        } catch (IOException e) {
+        } catch (Exception e) {
             rez = -1;
             e.printStackTrace();
-            throw new java.io.IOException("файл не найден", e);
+            throw new RuntimeException("файл не найден", e);
         }finally{return rez;}
     }
 }

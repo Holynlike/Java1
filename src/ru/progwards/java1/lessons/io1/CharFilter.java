@@ -3,22 +3,7 @@ import java.lang.*;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 public class CharFilter {
-//    Задача 3. Класс CharFilter
-//    Создать статический метод public static void filterFile(String inFileName, String outFileName, String filter),
-//    в котором прочитать файл inFileName и удалить символы, содержащиеся в String filter, результат записать в
-//    выходной файл. В случае возникновения ошибки, пробросить стандартное исключение выше, корректно закрыв все ресурсы
-//
-//    Например файл содержит:
-//    Java — строго типизированный объектно-ориентированный язык программирования, разработанный компанией
-//    Sun Microsystems (в последующем приобретённой компанией Oracle).
-//    obscene = " -,.()"
-//    Должен выдать результат:
-//    JavaстроготипизированныйобъектноориентированныйязыкпрограммированияразработанныйкомпаниейSunMicrosystemsвпоследующемприобретённойкомпаниейOracle
-//public static void main(String[] args) throws IOException {
-//    filterFile("C:\\JAVATemp\\infile.txt","C:\\JAVATemp\\out.txt","C:\\JAVATemp\\filter.txt");
-//}
 public static void filterFile(String inFileName, String outFileName, String filter) throws Exception {
     String FILT = read(filter);
     String IN = read(inFileName);
