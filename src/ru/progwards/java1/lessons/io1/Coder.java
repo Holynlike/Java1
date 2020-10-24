@@ -1,5 +1,4 @@
 package ru.progwards.java1.lessons.io1;
-import java.io.IOException;
 public class Coder extends CharFilter{
 //     Задача 2. Класс Coder
 //     Создать статический метод public static void codeFile(String inFileName,
@@ -9,7 +8,7 @@ public class Coder extends CharFilter{
 //     символу symbol оригинального файла соответствует символ code[(int)symbol] выходного
 //     файла. В случае ошибок, в файл с именем logName вывести название ошибки через метод
 //     класса Exception - getMessage()
-     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException, RuntimeException {
+     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws Exception {
           String charINFO = new String(code);
           System.out.println(charINFO);
           String IN = read(inFileName); // Читаем файл

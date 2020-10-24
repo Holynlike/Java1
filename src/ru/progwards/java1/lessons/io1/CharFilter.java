@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 public class CharFilter {
 //    Задача 3. Класс CharFilter
 //    Создать статический метод public static void filterFile(String inFileName, String outFileName, String filter),
@@ -17,12 +16,10 @@ public class CharFilter {
 //    obscene = " -,.()"
 //    Должен выдать результат:
 //    JavaстроготипизированныйобъектноориентированныйязыкпрограммированияразработанныйкомпаниейSunMicrosystemsвпоследующемприобретённойкомпаниейOracle
-public static void main(String[] args) throws IOException {
-    filterFile("C:\\JAVATemp\\infile.txt",
-            "C:\\JAVATemp\\out.txt",
-            "C:\\JAVATemp\\filter.txt");
-}
-public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
+//public static void main(String[] args) throws IOException {
+//    filterFile("C:\\JAVATemp\\infile.txt","C:\\JAVATemp\\out.txt","C:\\JAVATemp\\filter.txt");
+//}
+public static void filterFile(String inFileName, String outFileName, String filter) throws Exception {
     String FILT = read(filter);
     String IN = read(inFileName);
     String OUT;
@@ -32,11 +29,9 @@ public static void filterFile(String inFileName, String outFileName, String filt
         rep = FILT.charAt(i);
         IN = IN.replace(Character.toString(rep), "");
     }
-
-    write(outFileName,IN);
+    write(outFileName, IN);
 }
-
-    public static String read(String fileName) throws IOException { // Чтение
+    public static String read(String fileName) throws Exception { // Чтение
         String rez = "";
         FileReader reader;
         try{
@@ -52,8 +47,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
             throw new java.io.IOException("File not found", e);
         }
     }
-
-    public static void write(String fileName, String value) throws IOException { // Запись
+    public static void write(String fileName, String value) throws Exception { // Запись
         FileWriter writer;
         try{
             writer = new FileWriter(fileName);
