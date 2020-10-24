@@ -1,6 +1,10 @@
 package ru.progwards.java1.lessons.io1;
 public class Coder extends CharFilter{
-     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws Exception {
+     public static void codeFile(String inFileName, String outFileName, char[] code, String logName)  {
+          System.out.println(inFileName + " - inFileName");
+          System.out.println(outFileName + " - outFileName");
+          System.out.println(logName + " - logName");
+
           String charINFO = new String(code);
           System.out.println(charINFO);
           String IN = read(inFileName); // Читаем файл

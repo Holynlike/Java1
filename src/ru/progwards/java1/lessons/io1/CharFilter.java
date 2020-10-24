@@ -4,7 +4,10 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 public class CharFilter {
-public static void filterFile(String inFileName, String outFileName, String filter) throws Exception {
+public static void filterFile(String inFileName, String outFileName, String filter) {
+    System.out.println(inFileName + " - inFileName");
+    System.out.println(outFileName + " - outFileName");
+    System.out.println(filter + " - filter");
     String FILT = read(filter);
     String IN = read(inFileName);
     String OUT;
@@ -16,7 +19,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
     }
     write(outFileName, IN);
 }
-    public static String read(String fileName) throws Exception { // Чтение
+    public static String read(String fileName)  { // Чтение
         String rez = "";
         FileReader reader;
         try{
@@ -30,17 +33,17 @@ public static void filterFile(String inFileName, String outFileName, String filt
             return rez;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new java.io.IOException("File not found", e);
+            throw new RuntimeException("File not found", e);
         }
     }
-    public static void write(String fileName, String value) throws Exception { // Запись
+    public static void write(String fileName, String value)  { // Запись
         FileWriter writer;
         try{
             writer = new FileWriter(fileName);
             writer.write(value);
             writer.close();
         } catch (Exception e) {
-            throw new java.io.IOException("File not found", e);
+            throw new RuntimeException("File not found", e);
         }
     }
 }
