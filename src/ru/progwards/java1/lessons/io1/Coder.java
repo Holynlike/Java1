@@ -7,7 +7,11 @@ public class Coder extends CharFilter{
 
           String charINFO = new String(code);
           System.out.println("Длина массива символов: " + code.length);
-          System.out.println("Сами символы:\n" + charINFO);
+          System.out.println("Сами символы:\n" + charINFO + "\n");
+          System.out.println("Коды символов: ");
+          for (int i = 0; i < code.length; i++) {
+               System.out.println((int) code[i]);
+          }
           String IN = read(inFileName); // Читаем файл
           String LOG; // Текст ЛОГа
           try{

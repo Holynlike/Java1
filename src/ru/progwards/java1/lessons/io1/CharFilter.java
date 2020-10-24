@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 public class CharFilter {
 public static void filterFile(String inFileName, String outFileName, String filter) {
-    System.out.println(inFileName + " - inFileName");
-    System.out.println(outFileName + " - outFileName");
-    System.out.println(filter + " - filter");
+//    System.out.println(inFileName + " - inFileName");
+//    System.out.println(outFileName + " - outFileName");
+//    System.out.println(filter + " - filter");
     String IN = read(inFileName);
     char rep;
     for (int i = 0; i < filter.length(); i++) {
@@ -28,12 +28,12 @@ public static void filterFile(String inFileName, String outFileName, String filt
                 rez+=strFromFile;
             }
             reader.close();
-            System.out.println("Прочитан текст: " + rez);
-            System.out.println("Из файла: " + fileName);
+//            System.out.println("Прочитан текст: " + rez);
+//            System.out.println("Из файла: " + fileName);
             return rez;
         } catch (Exception e) {
-            System.out.println("Не удалось прочитать файл " + fileName);
-            System.out.println("Причина: " + e.getMessage());
+//            System.out.println("Не удалось прочитать файл " + fileName);
+//            System.out.println("Причина: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("File not found", e);
         }
@@ -41,14 +41,14 @@ public static void filterFile(String inFileName, String outFileName, String filt
     public static void write(String fileName, String value)  { // Запись
         FileWriter writer;
         try{
-            System.out.println("Запись файла: " + fileName);
-            System.out.println("Текст для записи: " + value);
+//            System.out.println("Запись файла: " + fileName);
+//            System.out.println("Текст для записи: " + value);
             writer = new FileWriter(fileName);
             writer.write(value);
             writer.close();
         } catch (Exception e) {
-            System.out.println("Не удалось записать файл: " + fileName);
-            System.out.println("Текст для записи: " + value);
+//            System.out.println("Не удалось записать файл: " + fileName);
+//            System.out.println("Текст для записи: " + value);
             throw new RuntimeException("File not found", e);
         }
     }
