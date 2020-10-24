@@ -8,13 +8,10 @@ public static void filterFile(String inFileName, String outFileName, String filt
     System.out.println(inFileName + " - inFileName");
     System.out.println(outFileName + " - outFileName");
     System.out.println(filter + " - filter");
-    String FILT = read(filter);
     String IN = read(inFileName);
-    String OUT;
-    char[] repl = FILT.toCharArray();
     char rep;
-    for (int i = 0; i < FILT.length(); i++) {
-        rep = FILT.charAt(i);
+    for (int i = 0; i < filter.length(); i++) {
+        rep = filter.charAt(i);
         IN = IN.replace(Character.toString(rep), "");
     }
     write(outFileName, IN);
