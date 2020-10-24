@@ -43,7 +43,8 @@ public static void filterFile(String inFileName, String outFileName, String filt
             }
             reader.close();
             return rez;
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new java.io.IOException("File not found", e);
         }
     }
@@ -53,7 +54,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
             writer = new FileWriter(fileName);
             writer.write(value);
             writer.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new java.io.IOException("File not found", e);
         }
     }

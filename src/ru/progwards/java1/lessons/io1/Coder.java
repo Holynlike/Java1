@@ -17,9 +17,10 @@ public class Coder extends CharFilter{
                for (int i = 0; i < code.length; i++) {
                     IN = IN.replace(Character.toString(code[i]), "");
                }
-          }catch(RuntimeException e){
+          }catch(Exception e){
                LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                write(LOG, logName);  // И выводим лог в файл
+               e.printStackTrace();
                throw new RuntimeException("Выход за пределы массива или массив не существует", e);
           }
           write(outFileName, IN);

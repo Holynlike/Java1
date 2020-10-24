@@ -19,6 +19,7 @@ public class LineCount {
             return rez;
         } catch (IOException e) {
             rez = -1;
+            e.printStackTrace();
             throw new java.io.IOException("файл не найден", e);
         }finally{return rez;}
     }
