@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.test;
 import ru.progwards.java1.lessons.interfaces.Animal;
 import ru.progwards.java1.lessons.interfaces.CalculateFibonacci;
 import ru.progwards.java1.lessons.interfaces.Duck;
-import ru.progwards.java1.lessons.Своё.interfaces.Родитель;
+//import ru.progwards.java1.lessons.Своё.interfaces.Родитель;
 
 public class Test1 {
 
