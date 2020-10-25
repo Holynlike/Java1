@@ -6,17 +6,17 @@ import java.io.IOException;
 public class io1_Tests {
 Integer ppp =0;
     public static void main(String[] args) throws Exception {
-        // LineCount Работает!
-        // CharFilter тоже.
-        // Осталось кодер добить...
+        // LineCount Р Р°Р±РѕС‚Р°РµС‚!
+        // CharFilter С‚РѕР¶Рµ.
+        // РћСЃС‚Р°Р»РѕСЃСЊ РєРѕРґРµСЂ РґРѕР±РёС‚СЊ...
         char[] result = new char[255];
 
         for (int i = 0; i < result.length; i++) {
               result[i] = (char) (i+1);
         }System.out.println(result[2]);
-        Coder.codeFile("C:\\Users\\Magic\\Desktop\\Программирование\\myOrig.bin",
-                      "C:\\Users\\Magic\\Desktop\\Программирование\\myRESul.bin", result,
-                        "C:\\Users\\Magic\\Desktop\\Программирование\\myRES_LOG.bin");
+        Coder.codeFile("C:\\Users\\Magic\\Desktop\\РџСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅРёРµ\\myOrig.bin",
+                      "C:\\Users\\Magic\\Desktop\\РџСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅРёРµ\\myRESul.bin", result,
+                        "C:\\Users\\Magic\\Desktop\\РџСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅРёРµ\\myRES_LOG.bin");
 
     }
 }
