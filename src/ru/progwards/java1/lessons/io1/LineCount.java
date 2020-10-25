@@ -1,3 +1,4 @@
+//                                                                                        начало ...-=-... LineCount...-=-...
 package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -19,4 +20,4 @@ public class LineCount {
             throw new RuntimeException("файл не найден", e);
         }finally{return rez;}
     }
-}
+}//                                                                                        конец ...-=-... LineCount...-=-...

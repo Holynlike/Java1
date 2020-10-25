@@ -1,3 +1,4 @@
+//                                                                                        начало ...-=-... CharFilter...-=-...
 package ru.progwards.java1.lessons.io1;
 import java.lang.*;
 import java.util.Scanner;
@@ -41,15 +42,17 @@ public static void filterFile(String inFileName, String outFileName, String filt
     public static void write(String fileName, String value)  { // Запись
         FileWriter writer;
         try{
-            System.out.println("Запись файла: " + fileName);
-            System.out.println("Текст для записи: " + value);
+            System.out.println("\n\nЗапись файла: " + fileName);
+            System.out.println("Текст для записи: " + value + "\n\n");
             writer = new FileWriter(fileName);
             writer.write(value);
             writer.close();
+            System.out.println("\n\nзаписано успешно\n\n" + value);
         } catch (Exception e) {
             System.out.println("Не удалось записать файл: " + fileName);
-            System.out.println("Текст для записи: " + value);
+            System.out.println("Текст для записи: \n" + value);
             throw new RuntimeException("File not found", e);
         }
     }
 }
+//                                                                                        конец ...-=-... CharFilter...-=-...

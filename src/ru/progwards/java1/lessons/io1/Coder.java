@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.io1;
 
-//    ...-=-... Coder...-=-...
+//                                                                                        Начало ...-=-... Coder...-=-...
 
 public class Coder extends CharFilter{
      public static void codeFile(String inFileName, String outFileName, char[] code, String logName)  {
@@ -15,9 +15,9 @@ public class Coder extends CharFilter{
           for (int i = 0; i < code.length; i++) {
                System.out.println((int) code[i]);
           }
-
           // Код выше - отладочная часть (вывод в консоль аргументов ProgWards'кого робота)
           String IN = read(inFileName); // Читаем файл
+          System.out.println("Прочитан файл: " + inFileName + " содержимое файла:\n" + IN + "\n\"");
           String OUT = new String();
           int vop;
           String LOG; // Текст ЛОГа
@@ -27,12 +27,14 @@ public class Coder extends CharFilter{
                     vop = (int)res[i];// берем его символ, выясняем его код (Переводим в int)
                     OUT+=code[vop];// по найденному индексу принимаем символ из code
                }
-               write(outFileName, OUT);
           }catch(Exception e){
+               System.out.println("Возникло исключение в блоке try ... catch метода coder");
                LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                write(LOG, logName);  // И выводим лог в файл
                e.printStackTrace();
                throw new RuntimeException("Выход за пределы массива или массив не существует", e);
+          }finally{
+               write(outFileName, OUT);  // всё равно пытаемся записать файл
           }
      }
-}
+}//                                                                                        конец ...-=-... Coder...-=-...
