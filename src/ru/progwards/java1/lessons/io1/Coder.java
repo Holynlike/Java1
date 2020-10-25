@@ -27,12 +27,12 @@ public class Coder extends CharFilter{
                     vop = (int)res[i];// берем его символ, выясняем его код (Переводим в int)
                     OUT+=code[vop];// по найденному индексу принимаем символ из code
                }
+               write(outFileName, OUT);
           }catch(Exception e){
                LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                write(LOG, logName);  // И выводим лог в файл
                e.printStackTrace();
                throw new RuntimeException("Выход за пределы массива или массив не существует", e);
           }
-          write(outFileName, OUT);
      }
 }
