@@ -16,7 +16,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
         rep = filter.charAt(i);
         IN = IN.replace(Character.toString(rep), "");
     }
-    write(outFileName, IN);
+    write1(outFileName, IN);
 }
     public static String read(String fileName)  { // Чтение
         System.out.println("Старт функции read");
@@ -40,7 +40,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
             throw new RuntimeException("File not found", e);
         }
     }
-    public static void write(String fileName, String value)  { // Запись
+    public static void write1(String fileName, String value)  { // Запись
         try{
             FileWriter writer;
             System.out.println("\n\nЗапись файла: " + fileName);
@@ -50,9 +50,10 @@ public static void filterFile(String inFileName, String outFileName, String filt
                 writer.write(value);
                 System.out.println("\n\nзаписано успешно\n\n" + value);
             }catch (Exception e) {
+                System.out.println("Ошибка! Текст для записи: \n" + value);
+                throw new RuntimeException(fileName + e.getMessage());
+            }finally{
                 writer.close();
-                System.out.println("Текст для записи: \n" + value);
-                throw new RuntimeException("File not found", e);
             }
         } catch (IOException e) {
             System.out.println("Не удалось записать файл: " + fileName + e.getMessage());

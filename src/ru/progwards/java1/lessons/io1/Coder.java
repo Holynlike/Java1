@@ -1,5 +1,4 @@
 package ru.progwards.java1.lessons.io1;
-
 //                              Начало ...-=-... Coder...-=-...
 /**      жавадок =)
 *        Задача 2. Класс Coder
@@ -21,11 +20,9 @@ public class Coder extends CharFilter{
       * String logName - путь к файлу, куда будет записан лог ошибок
       */
      public static void codeFile(String inFileName, String outFileName, char[] code, String logName)  {
-
           System.out.println(inFileName + " - inFileName");
           System.out.println(outFileName + " - outFileName");
           System.out.println(logName + " - logName");
-
           String charINFO = new String(code);
           System.out.println("Длина массива символов: " + code.length);
           System.out.println("Сами символы:\n" + charINFO + "\n");
@@ -39,7 +36,6 @@ public class Coder extends CharFilter{
           try{
                String IN = read(inFileName); // Читаем файл
                System.out.println("Прочитан файл: " + inFileName + " содержимое файла:\n" + IN + "\n\"");
-
                int vop;
                char[] res = IN.toCharArray();
                try{
@@ -49,19 +45,18 @@ public class Coder extends CharFilter{
                     }
                }catch(Exception e){
                     System.out.println("Возникло исключение в блоке try ... catch метода coder");
-
                     LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                     System.out.println(LOG);
-                    write(outFileName, OUT);  // всё равно пытаемся записать файл
+                    write1(outFileName, OUT);  // всё равно пытаемся записать файл
                }
           }catch(Exception e){
                System.out.println("Возникло исключение в блоке try ... catch метода codeFile класса coder");
                LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
-               write(LOG, logName);  // И выводим лог в файл
+               write1(LOG, logName);  // И выводим лог в файл
                e.printStackTrace();
                throw new RuntimeException("Выход за пределы массива или массив не существует", e);
           }finally{
-               write(outFileName, OUT);  // всё равно пытаемся записать файл
+               write1(outFileName, OUT);  // всё равно пытаемся записать файл
           }
      }
 }

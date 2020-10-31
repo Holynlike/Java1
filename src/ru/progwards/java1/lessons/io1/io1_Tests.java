@@ -9,14 +9,13 @@ Integer ppp =0;
         // LineCount Работает!
         // CharFilter тоже.
         // Осталось кодер добить...
-        char[] result = new char[255];
-
-        for (int i = 0; i < result.length; i++) {
-              result[i] = (char) (i+1);
-        }System.out.println(result[2]);
-        Coder.codeFile("D:\\forexp\\myOrig.bin",
-                "D:\\forexp\\myRESul1.bin", result,
-                        "D:\\forexp\\myRES_LOG.bin");//"C:\\Users\\Magic\\Desktop\\Программирование\\myRESul.bin"
-
+//        char[] result = new char[255];
+//
+//        for (int i = 0; i < result.length; i++) {result[i] = (char) (i+1);}
+//        System.out.println(result[2]);
+//        Coder.codeFile("D:\\forexp\\myOrig.bin",
+//                       "D:\\forexp\\myRESul1.bin", result,
+//                          "D:\\forexp\\myRES_LOG.bin");
+CharFilter.write1("D:\\forexp\\Halloween.txt","This is Halloween!");
     }
 }
