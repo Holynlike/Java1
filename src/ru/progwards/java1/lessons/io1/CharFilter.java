@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 public class CharFilter {
-public static void filterFile(String inFileName, String outFileName, String filter){
+public static void filterFile(String inFileName, String outFileName, String filter)throws IOException {
     System.out.println(inFileName + " - inFileName");
     System.out.println(outFileName + " - outFileName");
     System.out.println(filter + " - filter");
@@ -42,21 +42,21 @@ public static void filterFile(String inFileName, String outFileName, String filt
     }
     public static void write1(String fileName, String value)  { // Запись
         try{
-            FileWriter writer;
+            FileWriter writer = new FileWriter(fileName);
             System.out.println("\n\nЗапись файла: " + fileName);
             System.out.println("Текст для записи: " + value + "\n\n");
-            writer = new FileWriter(fileName);
             try {
                 writer.write(value);
                 System.out.println("\n\nзаписано успешно\n\n" + value);
-            }catch (Exception e) {
-                System.out.println("Ошибка! Текст для записи: \n" + value);
-                throw new RuntimeException(fileName + e.getMessage());
+//            }catch (Exception e) {
+//                System.out.println("Ошибка! Текст для записи: \n" + value);
+//
             }finally{
                 writer.close();
             }
         } catch (IOException e) {
-            System.out.println("Не удалось записать файл: " + fileName + e.getMessage());
+            System.out.println("Не удалось записать файл: " + e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -43,19 +43,15 @@ public class Coder extends CharFilter{
                          vop = (int)res[i];// берем его символ, выясняем его код (Переводим в int)
                          OUT+=code[vop];// по найденному индексу принимаем символ из code
                     }
-               }catch(Exception e){
+                    write1(outFileName, OUT); // Запись файла-вывода
+               }catch(Exception e){ // Если записать файл не получилось
                     System.out.println("Возникло исключение в блоке try ... catch метода coder");
                     LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                     System.out.println(LOG);
-                    write1(outFileName, OUT);  // всё равно пытаемся записать файл
+                    write1(logName, LOG);  // Пишем в лог-файл
                }
+
           }catch(Exception e){
-               System.out.println("Возникло исключение в блоке try ... catch метода codeFile класса coder");
-               LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
-               write1(LOG, logName);  // И выводим лог в файл
-               e.printStackTrace();
-               //throw new RuntimeException("Выход за пределы массива или массив не существует", e);
-          }finally{
                write1(outFileName, OUT);  // всё равно пытаемся записать файл
           }
      }
