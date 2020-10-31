@@ -14,7 +14,7 @@ Integer ppp =0;
         for (int i = 0; i < result.length; i++) {result[i] = (char) (i+1);}
         System.out.println(result[2]);
         Coder.codeFile("D:\\forexp\\myOrig.bin",
-                       "D:\\forexp\\?", result,
+                       "D:\\forexp\\", result,
                           "D:\\forexp\\myRES_LOG.bin");
 //CharFilter.write1("D:\\forexp\\?","This is Halloween!");
     }

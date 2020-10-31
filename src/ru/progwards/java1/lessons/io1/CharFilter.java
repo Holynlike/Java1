@@ -19,7 +19,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
     write1(outFileName, IN);
 }
     public static String read(String fileName)  { // Чтение
-        System.out.println("Старт функции read");
+        System.out.println("\nСтарт функции read");
         String rez = "";
         FileReader reader;
         try{

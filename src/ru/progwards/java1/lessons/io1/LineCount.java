@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 public class LineCount {
     public static int calcEmpty(String fileName) {
-        System.out.println(fileName + " - fileName");
+        //System.out.println(fileName + " - fileName");
         int rez = 0;
         try{
             FileReader weader = new FileReader(fileName);
@@ -21,3 +21,4 @@ public class LineCount {
         }finally{return rez;}
     }
 }//                                                                                        конец ...-=-... LineCount...-=-...
+
