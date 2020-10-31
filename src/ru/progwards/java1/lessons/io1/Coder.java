@@ -28,7 +28,7 @@ public class Coder extends CharFilter{
           System.out.println("Сами символы:\n" + charINFO + "\n");
           System.out.println("Коды символов: ");
           for (int i = 0; i < code.length; i++) {
-               System.out.println((int) code[i]);
+               System.out.print((int) code[i] + " | ");
           }
           // Код выше - отладочная часть (вывод в консоль аргументов ProgWards'кого робота)
           String LOG; // Текст ЛОГа
@@ -54,7 +54,7 @@ public class Coder extends CharFilter{
                LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
                write1(LOG, logName);  // И выводим лог в файл
                e.printStackTrace();
-               throw new RuntimeException("Выход за пределы массива или массив не существует", e);
+               //throw new RuntimeException("Выход за пределы массива или массив не существует", e);
           }finally{
                write1(outFileName, OUT);  // всё равно пытаемся записать файл
           }
