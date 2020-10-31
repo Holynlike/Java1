@@ -1,11 +1,12 @@
 //                                                                                        начало ...-=-... CharFilter...-=-...
 package ru.progwards.java1.lessons.io1;
+import java.io.IOException;
 import java.lang.*;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 public class CharFilter {
-public static void filterFile(String inFileName, String outFileName, String filter) {
+public static void filterFile(String inFileName, String outFileName, String filter){
     System.out.println(inFileName + " - inFileName");
     System.out.println(outFileName + " - outFileName");
     System.out.println(filter + " - filter");
@@ -40,18 +41,21 @@ public static void filterFile(String inFileName, String outFileName, String filt
         }
     }
     public static void write(String fileName, String value)  { // Запись
-        FileWriter writer;
         try{
+            FileWriter writer;
             System.out.println("\n\nЗапись файла: " + fileName);
             System.out.println("Текст для записи: " + value + "\n\n");
             writer = new FileWriter(fileName);
-            writer.write(value);
-            writer.close();
-            System.out.println("\n\nзаписано успешно\n\n" + value);
-        } catch (Exception e) {
-            System.out.println("Не удалось записать файл: " + fileName);
-            System.out.println("Текст для записи: \n" + value);
-            throw new RuntimeException("File not found", e);
+            try {
+                writer.write(value);
+                System.out.println("\n\nзаписано успешно\n\n" + value);
+            }catch (Exception e) {
+                writer.close();
+                System.out.println("Текст для записи: \n" + value);
+                throw new RuntimeException("File not found", e);
+            }
+        } catch (IOException e) {
+            System.out.println("Не удалось записать файл: " + fileName + e.getMessage());
         }
     }
 }

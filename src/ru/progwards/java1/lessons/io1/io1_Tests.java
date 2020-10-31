@@ -14,9 +14,9 @@ Integer ppp =0;
         for (int i = 0; i < result.length; i++) {
               result[i] = (char) (i+1);
         }System.out.println(result[2]);
-        Coder.codeFile("C:\\Users\\Magic\\Desktop\\Программирование\\myOrig.bin",
-                      "C:\\Users\\Magic\\Desktop\\Программирование\\myRESul.bin", result,
-                        "C:\\Users\\Magic\\Desktop\\Программирование\\myRES_LOG.bin");
+        Coder.codeFile("D:\\forexp\\myOrig.bin",
+                "D:\\forexp\\myRESul1.bin", result,
+                        "D:\\forexp\\myRES_LOG.bin");//"C:\\Users\\Magic\\Desktop\\Программирование\\myRESul.bin"
 
     }
 }
