@@ -32,7 +32,7 @@ public class Coder extends CharFilter{
           }
           // Код выше - отладочная часть (вывод в консоль аргументов ProgWards'кого робота)
           String LOG; // Текст ЛОГа
-          String OUT = new String();
+          String OUT ="";
           try{
                String IN = read(inFileName); // Читаем файл
                System.out.println("Прочитан файл: " + inFileName + " содержимое файла:\n" + IN + "\n\"");
@@ -40,7 +40,7 @@ public class Coder extends CharFilter{
                char[] res = IN.toCharArray();
                try{
                     for (int i = 0; i < res.length; i++) { // До конца файла
-                         vop = (int)res[i];// берем его символ, выясняем его код (Переводим в int)
+                         vop = res[i];// берем его символ, выясняем его код (Переводим в int)
                          OUT+=code[vop];// по найденному индексу принимаем символ из code
                     }
                     write1(outFileName, OUT); // Запись файла-вывода
@@ -53,6 +53,9 @@ public class Coder extends CharFilter{
 
           }catch(Exception e){
                write1(outFileName, OUT);  // всё равно пытаемся записать файл
+               LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
+               System.out.println(LOG);
+               write1(logName, LOG);  // Пишем в лог-файл
           }
      }
 }
