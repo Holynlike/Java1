@@ -25,7 +25,7 @@ public class Coder extends CharFilter{
       */
      public static void codeFile(String inFileName, String outFileName, char[] code, String logName)  {
           DebugTrace(inFileName, outFileName, code, logName); // Вывод отладочной инфы на консольку
-          String LOG; // Текст ЛОГа
+          //String LOG =""; // Текст ЛОГа
           String OUT ="";
           int vop;
           String IN = read(inFileName); // Читаем файл
@@ -39,14 +39,16 @@ public class Coder extends CharFilter{
                FileWriter writerOUT = new FileWriter(outFileName); // Запись в файл
                writerOUT.write(OUT);
                writerOUT.close();
-          } catch (IOException e) {
-               LOG = e.getMessage(); // Получив ошибку создаем ЛОГ
+          } catch (Exception e) {
                try {
                     FileWriter writerOUT = new FileWriter(logName);
-                    writerOUT.write(LOG); // И пишем его в файл ЛОГа
-                    writerOUT.close();
+                    try {
+                         writerOUT.write(e.getMessage()); // И пишем его в файл ЛОГа
+                    } finally {
+                         writerOUT.close();
+                    }
                }catch (IOException e2) {
-                    e2.printStackTrace(); // Если и лог не удается записать
+                    System.out.println(e.getMessage()); // Если и лог не удается записать
                }
           }
      }

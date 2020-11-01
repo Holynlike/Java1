@@ -32,12 +32,9 @@ public static void filterFile(String inFileName, String outFileName, String filt
             reader.close();
             System.out.println("Прочитан текст: " + rez);
             System.out.println("Из файла: " + fileName);
-            //return rez;
         } catch (Exception e) {
             System.out.println("Не удалось прочитать файл " + fileName);
             System.out.println("Причина: " + e.getMessage());
-            //e.printStackTrace();
-            //throw new RuntimeException("File not found", e);
         }finally {
             return rez;
         }
@@ -50,15 +47,11 @@ public static void filterFile(String inFileName, String outFileName, String filt
             try {
                 writer.write(value);
                 System.out.println("\n\nзаписано успешно\n\n" + value);
-//            }catch (Exception e) {
-//                System.out.println("Ошибка! Текст для записи: \n" + value);
-//
             }finally{
                 writer.close();
             }
         } catch (IOException e) {
             System.out.println("Не удалось записать файл: " + e.getMessage());
-            //throw new RuntimeException(e.getMessage());
         }
     }
 }
