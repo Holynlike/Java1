@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 public class CharFilter {
-public static void filterFile(String inFileName, String outFileName, String filter)throws IOException {
+public static void filterFile(String inFileName, String outFileName, String filter)throws Exception {
     System.out.println(inFileName + " - inFileName");
     System.out.println(outFileName + " - outFileName");
     System.out.println(filter + " - filter");
@@ -32,12 +32,14 @@ public static void filterFile(String inFileName, String outFileName, String filt
             reader.close();
             System.out.println("Прочитан текст: " + rez);
             System.out.println("Из файла: " + fileName);
-            return rez;
+            //return rez;
         } catch (Exception e) {
             System.out.println("Не удалось прочитать файл " + fileName);
             System.out.println("Причина: " + e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException("File not found", e);
+            //e.printStackTrace();
+            //throw new RuntimeException("File not found", e);
+        }finally {
+            return rez;
         }
     }
     public static void write1(String fileName, String value)  { // Запись
@@ -56,7 +58,7 @@ public static void filterFile(String inFileName, String outFileName, String filt
             }
         } catch (IOException e) {
             System.out.println("Не удалось записать файл: " + e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            //throw new RuntimeException(e.getMessage());
         }
     }
 }

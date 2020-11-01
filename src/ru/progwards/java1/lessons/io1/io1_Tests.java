@@ -16,6 +16,7 @@ Integer ppp =0;
         Coder.codeFile("D:\\forexp\\myOrig.bin",
                        "D:\\forexp\\", result,
                           "D:\\forexp\\myRES_LOG.bin");
-//CharFilter.write1("D:\\forexp\\?","This is Halloween!");
+CharFilter.write1("D:\\forexp\\?","This is Halloween!");
+        CharFilter.read("D:\\forexp\\myRES_LOG.bin");
     }
 }
