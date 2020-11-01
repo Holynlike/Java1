@@ -27,48 +27,27 @@ public class Coder extends CharFilter{
           DebugTrace(inFileName, outFileName, code, logName); // Вывод отладочной инфы на консольку
           String LOG; // Текст ЛОГа
           String OUT ="";
-          try{
-               String IN = read(inFileName); // Читаем файл
-               System.out.println("Прочитан файл: " + inFileName + " содержимое файла:\n" + IN + "\n\"");
-               int vop;
-               char[] res = IN.toCharArray();
-               try{
-                    for (int i = 0; i < res.length; i++) { // До конца файла
-                         vop = res[i];// берем его символ, выясняем его код (Переводим в int)
-                         OUT+=code[vop];// по найденному индексу принимаем символ из code
-                    }
-                    Mywrite(outFileName, OUT); // Запись файла-вывода
-               }catch(Exception e){ // Если записать файл не получилось
-                    System.out.println("Возникло исключение в блоке try ... catch метода coder");
-                    LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
-                    System.out.println(LOG);
-                    Mywrite(logName, LOG);  // Пишем в лог-файл
-               }
-
-          }catch(Exception e){
-               Mywrite(outFileName, OUT);  // всё равно пытаемся записать файл
-               LOG = e.getMessage(); // Если ошибка, пишем ошибку в лог
-               System.out.println(LOG);
-               Mywrite(logName, LOG);  // Пишем в лог-файл
+          int vop;
+          String IN = read(inFileName); // Читаем файл
+          char[] res = IN.toCharArray();
+          for (int i = 0; i < res.length; i++) { // До конца файла
+               vop = res[i];// берем его символ, выясняем его код (Переводим в int)
+               OUT+=code[vop];// по найденному индексу принимаем символ из code
           }
-     }
-     public static void Mywrite(String fileName, String value)  { // Запись
+// Файл перекодирован, приступаем к записи
           try{
-               FileWriter writer = new FileWriter(fileName);
-               System.out.println("\n\nЗапись файла: " + fileName);
-               System.out.println("Текст для записи: " + value + "\n\n");
-               try {
-                    writer.write(value);
-                    System.out.println("\n\nзаписано успешно\n\n" + value);
-//            }catch (Exception e) {
-//                System.out.println("Ошибка! Текст для записи: \n" + value);
-//
-               }finally{
-                    writer.close();
-               }
+               FileWriter writerOUT = new FileWriter(outFileName); // Запись в файл
+               writerOUT.write(OUT);
+               writerOUT.close();
           } catch (IOException e) {
-               System.out.println("Не удалось записать файл: " + e.getMessage());
-               //throw new RuntimeException(e.getMessage());
+               LOG = e.getMessage(); // Получив ошибку создаем ЛОГ
+               try {
+                    FileWriter writerOUT = new FileWriter(logName);
+                    writerOUT.write(LOG); // И пишем его в файл ЛОГа
+                    writerOUT.close();
+               }catch (IOException e2) {
+                    e2.printStackTrace(); // Если и лог не удается записать
+               }
           }
      }
      public static void DebugTrace(String inFileName, String outFileName, char[] code, String logName){
