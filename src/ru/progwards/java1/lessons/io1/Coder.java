@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class Coder extends CharFilter {
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+        System.out.println("Вызван to_log с параметрами:\ninFileName = " + inFileName + ";\noutFileName = " + outFileName + "\nlogName = " + logName);
         String IN = ""; // Текст на ввод
         String OUT = ""; // Текст на вывод
         String LOG = ""; // Текст ЛОГа
@@ -15,7 +16,8 @@ public class Coder extends CharFilter {
             } catch (Exception r) {
                 System.out.println("не указан файл ввода");
                 to_log(r.getMessage(), logName);
-                return;
+                throw new Exception (r);
+                //return;
             }
             char[] res = IN.toCharArray();
             for (int i = 0; i < res.length; i++) { // До конца файла
@@ -38,12 +40,14 @@ public class Coder extends CharFilter {
             try {
                 writerOUT.write(OUT);
             } catch (Exception f) {
+                System.out.println("Не удалось записать  файл " + outFileName + ". Пишем лог в файл " + logName);
                 to_log(f.getMessage(), logName);
             } finally {
                 writerOUT.close();
             }
 
         } catch (NullPointerException NP){
+            System.out.println("Некорректный файл вывода ( " + outFileName + ")");
             String NPE = NP.getMessage();
             if (NPE == null){NPE = NP.toString();}
             to_log(NPE, logName);
@@ -52,13 +56,13 @@ public class Coder extends CharFilter {
         }
     }
 
-    public static void to_log(String value3, String fName) {
-        System.out.println("Вызван to_log с параметрами:\nvalue3 = " + value3 + ";\nfName = " + fName);
+    public static void to_log(String value, String fName) {
+        System.out.println("Вызван to_log с параметрами:\nvalue3 = " + value + ";\nfName = " + fName);
         try {
             FileWriter writerOUT = new FileWriter(fName); // Запись в файл
-            if (value3 == null){ throw new IOException();}
+            if (value == null){ throw new IOException();}
             try {
-                writerOUT.write(value3);
+                writerOUT.write(value);
             } finally {
                 writerOUT.close();
             }
