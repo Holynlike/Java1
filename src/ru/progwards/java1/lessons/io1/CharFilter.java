@@ -1,6 +1,5 @@
-//                                                                                        начало ...-=-... CharFilter...-=-...
+//                                     // начало ...-=-... CharFilter...-=-...
 package ru.progwards.java1.lessons.io1;
-
 import java.io.IOException;
 import java.lang.*;
 import java.util.Scanner;
@@ -27,7 +26,7 @@ public class CharFilter {
     /** Пользовательская оболочка для функционала чтения файла (в строковом режиме)
      * @param fileName имя файла
      */
-    public static String read(String fileName) { // Чтение
+    public static String read(String fileName) throws Exception{ // Чтение
         System.out.println("\nСтарт функции read");
         String rez = "";
         FileReader reader;
@@ -44,9 +43,9 @@ public class CharFilter {
         } catch (Exception e) {
             System.out.println("Не удалось прочитать файл " + fileName);
             System.out.println("Причина: " + e.getMessage());
-        } finally {
-            return rez;
+            throw new Exception (e);
         }
+        return rez;
     }
 
     /** Пользовательская оболочка для функционала записи файла (в строковом режиме)
