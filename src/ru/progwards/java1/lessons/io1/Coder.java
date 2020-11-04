@@ -16,7 +16,7 @@ public class Coder extends CharFilter {
             } catch (Exception r) {
                 System.out.println("не указан файл ввода");
                 to_log(r.getMessage(), logName);
-                throw new Exception (r);
+                //throw new Exception (r);
                 //return;
             }
             char[] res = IN.toCharArray();
