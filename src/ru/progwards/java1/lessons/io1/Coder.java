@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Coder extends CharFilter {
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
         System.out.println("Вызван to_log с параметрами:\ninFileName = " + inFileName + ";\noutFileName = " + outFileName + "\nlogName = " + logName);
         String IN = ""; // Текст на ввод
         String OUT = ""; // Текст на вывод
