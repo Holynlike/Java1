@@ -8,12 +8,12 @@ public class Coder {
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
         System.out.println("Вызван codeFile с параметрами:\ninFileName = " + inFileName + ";\noutFileName = " + outFileName + "\nlogName = " + logName);
-        System.out.println("Корректность параметров:\n" + inFileName  + inFileName );
+        System.out.println("Корректность параметров:\n" + inFileName + inFileName);
         String IN = ""; // Текст на ввод
         String OUT = ""; // Текст на вывод
         int vop; // для кода символа
         try {
-            IN = read(inFileName); // Читаем файл
+            IN = read(inFileName, logName); // Читаем файл
             try {
                 char[] res = IN.toCharArray();
                 for (int i = 0; i < res.length; i++) { // До конца файла
@@ -37,7 +37,7 @@ public class Coder {
             } catch (IOException f) {
                 System.out.println("Не удалось записать файл " + outFileName + ". Пишем лог в файл " + logName);
                 to_log(f.getMessage(), logName);
-                throw new IOException (f);
+                throw new IOException(f);
             } finally {
                 writerOUT.close();
             }
@@ -65,26 +65,31 @@ public class Coder {
             } finally {
                 writerOUT.close();
             }
-
-        } catch (Exception w){
+        } catch (Exception w) {
             System.out.println(w.getMessage() + " - ошибка записи лога");
         }
     }
-
-    public static String read(String fileName) throws IOException { // Чтение
+    public static String read(String fileName, String namelog) throws IOException { // Чтение
         System.out.println("\nСтарт функции read с параметрами:\nfileName " + fileName);
-        if (fileName == null) {throw new IOException();} // Сразу выходим, если в качестве файла подан null!
         String rez = "";
-
-        FileInputStream reader = new FileInputStream(fileName);
-        byte[] arr = reader.readAllBytes();
-        reader.close();
-        for (int b = 0; b < arr.length;b++) {rez+=(char)arr[b];}
-
+        try {
+            FileInputStream reader = new FileInputStream(fileName);
+            try {
+                byte[] arr = reader.readAllBytes();
+                for (int b = 0; b < arr.length; b++) {rez += (char) arr[b];}
+            }finally {
+                reader.close();
+            }
+        } catch (IOException e) {
+            to_log(e.getMessage(), namelog);
+        }catch (NullPointerException NLP){
+            to_log(NLP.getMessage(), namelog);
+        }
         System.out.println("Прочитан текст: " + rez);
         System.out.println("Из файла: " + fileName);
         return rez;
     }
+
     public static boolean Exists(String Filename) { // Существует ли файл?
         if (Filename == null) {
             return false;
