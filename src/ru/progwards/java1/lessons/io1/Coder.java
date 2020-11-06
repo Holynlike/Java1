@@ -1,55 +1,54 @@
 package ru.progwards.java1.lessons.io1;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+import java.io.*;
 
-public class Coder extends CharFilter {
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-        System.out.println("Вызван to_log с параметрами:\ninFileName = " + inFileName + ";\noutFileName = " + outFileName + "\nlogName = " + logName);
+public class Coder {
+
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+        System.out.println("Вызван codeFile с параметрами:\ninFileName = " + inFileName + ";\noutFileName = " + outFileName + "\nlogName = " + logName);
+        System.out.println("Корректность параметров:\n" + inFileName  + inFileName );
         String IN = ""; // Текст на ввод
         String OUT = ""; // Текст на вывод
-        String LOG = ""; // Текст ЛОГа
         int vop; // для кода символа
         try {
+            IN = read(inFileName); // Читаем файл
             try {
-                IN = read(inFileName); // Читаем файл
-            } catch (Exception r) {
+
+                char[] res = IN.toCharArray();
+                for (int i = 0; i < res.length; i++) { // До конца файла
+                    vop = res[i];// берем его символ, выясняем его код (Переводим в int)
+                    OUT += code[vop];// по найденному индексу принимаем символ из code
+                }
+            } catch (ArrayIndexOutOfBoundsException out) {
                 System.out.println("не указан файл ввода");
-                to_log(r.getMessage(), logName);
-                //throw new Exception (r);
-                //return;
+                to_log(out.getMessage(), logName);
             }
-            char[] res = IN.toCharArray();
-            for (int i = 0; i < res.length; i++) { // До конца файла
-                vop = res[i];// берем его символ, выясняем его код (Переводим в int)
-                OUT += code[vop];// по найденному индексу принимаем символ из code
-            }
+
         } catch (Exception e) {
-            System.out.println("Ошибка - не найден файл чтения");
-            try {
-                FileWriter IN_LOG = new FileWriter(logName);
-                IN_LOG.write(LOG);
-                IN_LOG.close();
-            } catch (Exception e11) {
-                System.out.println("Не указан файл-источник");
-            }
+            to_log(e.getMessage(), logName);
         }
 
-        try {
-            FileWriter writerOUT = new FileWriter(outFileName); // Запись в файл
+        try { // Запись в файл
+            FileWriter writerOUT = new FileWriter(outFileName);
             try {
                 writerOUT.write(OUT);
             } catch (Exception f) {
-                System.out.println("Не удалось записать  файл " + outFileName + ". Пишем лог в файл " + logName);
+                System.out.println("Не удалось записать файл " + outFileName + ". Пишем лог в файл " + logName);
                 to_log(f.getMessage(), logName);
             } finally {
                 writerOUT.close();
             }
 
-        } catch (NullPointerException NP){
+        } catch (NullPointerException NP) {
             System.out.println("Некорректный файл вывода ( " + outFileName + ")");
             String NPE = NP.getMessage();
-            if (NPE == null){NPE = NP.toString();}
+            if (NPE == null) {
+                NPE = NP.toString();
+            }
             to_log(NPE, logName);
         } catch (Exception f2) {
             to_log(f2.getMessage(), logName);
@@ -57,7 +56,7 @@ public class Coder extends CharFilter {
     }
 
     public static void to_log(String value, String fName) {
-        System.out.println("Вызван to_log с параметрами:\nvalue3 = " + value + ";\nfName = " + fName);
+        System.out.println("Вызван to_log с параметрами:\nvalue = " + value + ";\nfName = " + fName);
         try {
             FileWriter writerOUT = new FileWriter(fName); // Запись в файл
             if (value == null){ throw new IOException();}
@@ -69,7 +68,32 @@ public class Coder extends CharFilter {
 
         } catch (Exception w){
             System.out.println(w.getMessage() + " - ошибка записи лога");
+        }
+    }
 
+    public static String read(String fileName) throws IOException { // Чтение
+        System.out.println("\nСтарт функции read с параметрами:\nfileName " + fileName);
+        if (fileName == null) {throw new IOException();} // Сразу выходим, если в качестве файла подан null!
+        String rez = "";
+
+        FileInputStream reader = new FileInputStream(fileName);
+        byte[] arr = reader.readAllBytes();
+        reader.close();
+        for (int b = 0; b < arr.length;b++) {rez+=(char)arr[b];}
+
+        System.out.println("Прочитан текст: " + rez);
+        System.out.println("Из файла: " + fileName);
+        return rez;
+    }
+    public static boolean Exists(String Filename) { // Существует ли файл?
+        if (Filename == null) {
+            return false;
+        }
+        try {
+            FileWriter FW = new FileWriter(Filename);
+            return true;
+        } catch (IOException e) {
+            return false;
         }
     }
 }
