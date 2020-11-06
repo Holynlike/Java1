@@ -1,9 +1,7 @@
 package ru.progwards.java1.lessons.io1;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.*;
 
 public class Coder {
@@ -17,7 +15,6 @@ public class Coder {
         try {
             IN = read(inFileName); // Читаем файл
             try {
-
                 char[] res = IN.toCharArray();
                 for (int i = 0; i < res.length; i++) { // До конца файла
                     vop = res[i];// берем его символ, выясняем его код (Переводим в int)
@@ -30,16 +27,17 @@ public class Coder {
 
         } catch (IOException e) {
             to_log(e.getMessage(), logName);
-            throw new IOException();
+            throw new IOException(e);
         }
 
         try { // Запись в файл
             FileWriter writerOUT = new FileWriter(outFileName);
             try {
                 writerOUT.write(OUT);
-            } catch (Exception f) {
+            } catch (IOException f) {
                 System.out.println("Не удалось записать файл " + outFileName + ". Пишем лог в файл " + logName);
                 to_log(f.getMessage(), logName);
+                throw new IOException (f);
             } finally {
                 writerOUT.close();
             }
@@ -51,8 +49,9 @@ public class Coder {
                 NPE = NP.toString();
             }
             to_log(NPE, logName);
-        } catch (Exception f2) {
+        } catch (IOException f2) {
             to_log(f2.getMessage(), logName);
+            throw new IOException(f2);
         }
     }
 
