@@ -5,9 +5,9 @@ public class io1_Tests {
         char[] result = new char[255];
         for (int i = 0; i < result.length; i++) {result[i] = (char) (i + 1);}
 
-        System.out.println("вызов кодера с корректными параметрами");
-        Coder.codeFile("D:\\forexp\\Halloween.txt", "D:\\forexp\\Halloween_1.txt", result,"D:\\forexp\\Halloween_LOG1.bin");
-        // При адекватных параметрах всё работает
+//        System.out.println("вызов кодера с корректными параметрами");
+//        Coder.codeFile("D:\\forexp\\Halloween.txt", "D:\\forexp\\Halloween_1.txt", result,"D:\\forexp\\Halloween_LOG1.bin");
+//        // При адекватных параметрах всё работает
 
         System.out.println("\n\nвызов кодера с некорректными параметрами (некорректный файл ввода)");
         Coder.codeFile(null, "D:\\forexp\\Halloween_2.txt", result,"D:\\forexp\\Halloween_LOG2.bin");

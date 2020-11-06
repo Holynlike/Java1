@@ -28,8 +28,9 @@ public class Coder {
                 to_log(out.getMessage(), logName);
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             to_log(e.getMessage(), logName);
+            throw new IOException();
         }
 
         try { // Запись в файл
