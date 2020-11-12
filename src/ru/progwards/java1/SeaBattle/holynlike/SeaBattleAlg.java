@@ -11,8 +11,8 @@ public class SeaBattleAlg {
     enum sector {nothing, empty, miss, hit, destroyed}
 
     public static sector[][] array;
-    public static int rows;
     public static int cols;
+    public static int rows;
 
     // enum sector:
     // nothing - в ячейку не стреляли, её значение неизвестно
@@ -24,7 +24,7 @@ public class SeaBattleAlg {
     public static void main(String[] args) {
 
         SeaBattle SB = new SeaBattle(true);
-        System.out.println(SB.toString());
+
         array = new sector[SB.getSizeX()][SB.getSizeX()]; //array - карта ходов, здесь отмечены попадания, утопленные корабли и вычисленные пустые позиции
         for (int x = 0; x < SB.getSizeX(); x++) {
             for (int y = 0; y < SB.getSizeY(); y++) {
@@ -32,20 +32,19 @@ public class SeaBattleAlg {
             }
         }  // проверочный массив создан и заполнен значениями "не стреляно"
 
-        rows = SB.getSizeX() - 1;
-        cols = SB.getSizeY() - 1;
+        cols = SB.getSizeX() - 1;
+        rows = SB.getSizeY() - 1;
         new SeaBattleAlg().battleAlgorithm(SB);
         System.out.println("Баллы: " + SB.getResult());
     }
 
     public void battleAlgorithm(SeaBattle seaBattle) {
-
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
         int fire_Count = 0;
         int targ = 0;
-        for (int y = 0; y < seaBattle.getSizeX(); y++) {
-            for (int x = 0; x < seaBattle.getSizeY(); x++) {
+        for (int y = 0; y < seaBattle.getSizeX(); y++) { // столбцы
+            for (int x = 0; x < seaBattle.getSizeY(); x++) { // строки
                 if (targ < 20 & array[x][y] != empty) { // Если нет 20 попаданий и поле не исследовано, стреляем
                     SeaBattle.FireResult fireResult = seaBattle.fire(x, y); // выстрел
                     fire_Count += 1; // Добавляем + 1 к счетчику выстрелов
@@ -63,13 +62,16 @@ public class SeaBattleAlg {
                 }
             }
         }
-        System.out.println("Выстрелов всего: " + fire_Count + " (" + (fire_Count - targ) + " промахов)\nПопаданий: " + targ);
-        System.out.println(nocorn + " - обход мертвеца");
-        System.out.println(corn + " - обход раненого");
-        System.out.println(corncount + " - вызовов финишботкорнов");
-        System.out.println(nocorncount + " - вызовов финишботов");
-        System.out.println(markcount + " - вызовов mark");
-        System.out.println(effect + " полей найдено Марком");
+        {
+            System.out.println(seaBattle.toString());
+            System.out.println("Выстрелов всего: " + fire_Count + " (" + (fire_Count - targ) + " промахов)\nПопаданий: " + targ);
+            System.out.println(nocorn + " - обход мертвеца");
+            System.out.println(corn + " - обход раненого");
+            System.out.println(corncount + " - вызовов финишботкорнов");
+            System.out.println(nocorncount + " - вызовов финишботов");
+            System.out.println(markcount + " - вызовов mark");
+            System.out.println(effect + " полей найдено Марком");
+        }
     }
 
     public void finishbot(int x, int y) { //если корабль убит, проставить вокруг него заведомо пустые поля
@@ -80,10 +82,10 @@ public class SeaBattleAlg {
                 mark(1, 0);
                 mark(1, 1);
                 mark(0, 1);
-            } else if (y == cols) { // указатель в ячейке 0 - 9 (правый верхний угол)
-                mark(0, cols - 1);
-                mark(1, cols - 1);
-                mark(1, cols);
+            } else if (y == rows) { // указатель в ячейке 0 - 9 (правый верхний угол)
+                mark(0, rows - 1);
+                mark(1, rows - 1);
+                mark(1, rows);
             } else {
                 mark(0, y - 1); // просто первая строка матрицы, не угол
                 mark(0, y + 1);
@@ -92,31 +94,31 @@ public class SeaBattleAlg {
                 mark(1, y);
             }
         }
-        if (x == rows) { // последняя строка
-            if (y == cols) {// указатель в ячейке 9 - 9 (правый нижний угол)
-                mark(rows - 1, cols - 1);
-                mark(rows - 1, cols);
-                mark(rows, cols - 1);
-            } else if (y == 0) {// указатель в ячейке 9 - 0 (левый нижний угол)
-                mark(rows - 1, 0);
-                mark(rows - 1, 1);
-                mark(rows, 1);
-            } else {
-                mark(rows, y - 1); // просто последняя строка матрицы, не угол
-                mark(rows, y + 1);
-                mark(rows - 1, y - 1);
-                mark(rows - 1, y + 1);
-                mark(rows - 1, y);
+        if (x == cols) { // последний столбец
+            if (y == rows) { // правый нижний угол
+                mark(cols - 1, rows - 1);
+                mark(cols - 1, rows);
+                mark(cols, rows - 1);
+            } else if (y == 0) {// левый нижний угол
+                mark(cols - 1, 0);
+                mark(cols - 1, 1);
+                mark(cols, 1);
+            } else {            // просто последний столбец матрицы, не угол
+                mark(cols, y - 1);
+                mark(cols, y + 1);
+                mark(cols - 1, y - 1);
+                mark(cols - 1, y + 1);
+                mark(cols - 1, y);
             }
         }
-        if (x != 0 & x != rows) { // не первая и не последняя строка
-            if (y == cols) { //правый столбец
+        if (x != 0 & x != cols) { // не первый и не последний столбец
+            if (y == rows) { // последняя строка
                 mark(x - 1, y);
                 mark(x + 1, y);
                 mark(x - 1, y - 1);
                 mark(x + 1, y - 1);
                 mark(x, y - 1);
-            } else if (y == 0) { // левый столбец
+            } else if (y == 0) { // верхняя строка
                 mark(x - 1, y);
                 mark(x + 1, y);
                 mark(x - 1, y + 1);
@@ -126,9 +128,9 @@ public class SeaBattleAlg {
                 mark(x, y - 1);
                 mark(x - 1, y - 1);
                 mark(x + 1, y - 1);
-                mark(x, y - 1);
-                mark(x - 1, y - 1);
-                mark(x + 1, y - 1);
+                mark(x, y + 1);
+                mark(x - 1, y + 1);
+                mark(x + 1, y + 1);
                 mark(x - 1, y);
                 mark(x + 1, y);
             }
@@ -137,38 +139,36 @@ public class SeaBattleAlg {
 
     public void finishbot_corn(int x, int y, SeaBattle seaBattle) {
         // Если корабль ранен, проставить вокруг него по углам заведомо пустые поля
-
         // Здесь процедура , которая отмечаетявно пустые поля вокруг раненого
 
         iscorn = true;
         corncount++;
         if (x == 0 && y == 0) {                  // левый верхний угол
             mark(1, 1);
-        } else if (x == 0 && y == cols) {        // правый верхний угол
+        } else if (x == 0 && y == rows) {        // правый верхний угол
             mark(1, y - 1);
-        } else if (x == 0 && y > 0 && y < cols) { // первая строка, не угловая позиция
+        } else if (x == 0 && y > 0 && y < rows) { // первый столбец, не угловая позиция
             mark(1, y - 1);
             mark(1, y + 1);
-        } else if (x == rows & y == cols) {     // правый нижний угол
+        } else if (x == cols & y == rows) {     // правый нижний угол
             mark(x - 1, y - 1);
-        } else if (x == rows & y == 0) {        // левый нижний угол
+        } else if (x == cols & y == 0) {        // левый нижний угол
             mark(x - 1, y + 1);
-        } else if (x == rows & y > 0 & y < cols) { // последняя строка, не угловая позиция
+        } else if (x == cols & y > 0 & y < rows) { // последний стролбец, не угловая позиция
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
-        } else if (x > 0 & x < rows & y == 0) {  // первый столбец, не угол
+        } else if (x > 0 & x < cols & y == 0) {  // первая строка, не угол
             mark(x - 1,  1);
             mark(x + 1,  1);
-        } else if (x > 0 & x < rows & y == cols) {// последний столбец, не угол
+        } else if (x > 0 & x < cols & y == rows) {// последняя строка, не угол
             mark(x + 1, y - 1);
             mark(x - 1, y - 1);
-        } else if (x > 0 & x < rows & y > 0 & y < cols) { // не крайние и не угловые позиции
+        } else if (x > 0 & x < cols & y > 0 & y < rows) { // не крайние и не угловые позиции
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
             mark(x + 1, y - 1);
             mark(x + 1, y + 1);
         }
-
     }
 
     public void mark(int x, int y) {
