@@ -21,24 +21,15 @@ public class SeaBattleAlg {
     // destroyed - в ячейку стреляли, попадание (ранение)
     // kill - в ячейку стреляли, попадание (убийство)
 
-    public static void main(String[] args) {
-
-        SeaBattle SB = new SeaBattle(true);
-
-        array = new sector[SB.getSizeX()][SB.getSizeX()]; //array - карта ходов, здесь отмечены попадания, утопленные корабли и вычисленные пустые позиции
-        for (int x = 0; x < SB.getSizeX(); x++) {
-            for (int y = 0; y < SB.getSizeY(); y++) {
+    public void battleAlgorithm(SeaBattle seaBattle) {
+        array = new sector[seaBattle.getSizeX()][seaBattle.getSizeX()]; //array - карта ходов, здесь отмечены попадания, утопленные корабли и вычисленные пустые позиции
+        for (int x = 0; x < seaBattle.getSizeX(); x++) {
+            for (int y = 0; y < seaBattle.getSizeY(); y++) {
                 array[x][y] = sector.nothing;
             }
         }  // проверочный массив создан и заполнен значениями "не стреляно"
-
-        cols = SB.getSizeX() - 1;
-        rows = SB.getSizeY() - 1;
-        new SeaBattleAlg().battleAlgorithm(SB);
-        System.out.println("Баллы: " + SB.getResult());
-    }
-
-    public void battleAlgorithm(SeaBattle seaBattle) {
+        cols = seaBattle.getSizeX() - 1;
+        rows = seaBattle.getSizeY() - 1;
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
         int fire_Count = 0;
@@ -71,6 +62,7 @@ public class SeaBattleAlg {
             System.out.println(nocorncount + " - вызовов финишботов");
             System.out.println(markcount + " - вызовов mark");
             System.out.println(effect + " полей найдено Марком");
+            System.out.println("Баллы: " + seaBattle.getResult());
         }
     }
 
