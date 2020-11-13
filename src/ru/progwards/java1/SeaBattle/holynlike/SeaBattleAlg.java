@@ -13,7 +13,8 @@ public class SeaBattleAlg {
     public static sector[][] array;
     public static int cols;
     public static int rows;
-
+    int fire_Count = 0;
+    int targ = 0;
     // enum sector:
     // nothing - в ячейку не стреляли, её значение неизвестно
     // empty - в ячейку стреляли, она пуста (промах)
@@ -32,25 +33,10 @@ public class SeaBattleAlg {
         rows = seaBattle.getSizeY() - 1;
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
-        int fire_Count = 0;
-        int targ = 0;
+
         for (int x = 0; x < seaBattle.getSizeX(); x++) { // строки
             for (int y = 0; y < seaBattle.getSizeY(); y++) { // столбцы
-                if (targ < 20 & array[x][y] != empty & array[x][y] != miss) { // Если нет 20 попаданий и поле не исследовано, стреляем
-                    SeaBattle.FireResult fireResult = seaBattle.fire(x, y); // выстрел
-                    fire_Count += 1; // Добавляем + 1 к счетчику выстрелов
-                    if (fireResult == SeaBattle.FireResult.DESTROYED) {
-                        targ += 1;
-                        array[x][y] = sector.destroyed; // Если убит
-                        finishbot(x, y);
-                    } else if (fireResult == SeaBattle.FireResult.HIT) {
-                        targ += 1;
-                        array[x][y] = sector.hit; // Если ранен
-                        finishbot_corn(x, y, seaBattle);
-                    } else if (fireResult == SeaBattle.FireResult.MISS) {
-                        array[x][y] = sector.miss;
-                    }
-                }
+                Fires(x, y, seaBattle); // выстрел по указанным координатам
             }
         }
         {
@@ -63,6 +49,24 @@ public class SeaBattleAlg {
             System.out.println(markcount + " - вызовов mark");
             System.out.println(effect + " полей найдено Марком");
             System.out.println("Баллы: " + seaBattle.getResult());
+        }
+    }
+
+    public void Fires(int x, int y, SeaBattle seaBattle) {
+        if (targ < 20 & array[x][y] == nothing) { // Если нет 20 попаданий и поле не исследовано, стреляем
+            SeaBattle.FireResult fireResult = seaBattle.fire(x, y); // выстрел
+            fire_Count += 1; // Добавляем + 1 к счетчику выстрелов
+            if (fireResult == SeaBattle.FireResult.DESTROYED) {
+                targ += 1;
+                array[x][y] = sector.destroyed; // Если убит
+                finishbot(x, y);
+            } else if (fireResult == SeaBattle.FireResult.HIT) {
+                targ += 1;
+                array[x][y] = sector.hit; // Если ранен
+                finishbot_corn(x, y, seaBattle);
+            } else if (fireResult == SeaBattle.FireResult.MISS) {
+                array[x][y] = sector.miss;
+            }
         }
     }
 
@@ -137,29 +141,53 @@ public class SeaBattleAlg {
         corncount++; // счет вызовов процедуры отметки углов
         if (x == 0 && y == 0) {                  // левый верхний угол
             mark(1, 1);
-        } else if (x == 0 && y == rows) {        // правый верхний угол
+            Fires(0, 1, seaBattle);       // добивание по горизонтали
+            Fires(1, 0, seaBattle);       // добивание по вертикали
+        } else if (x == 0 && y == rows) {        // нижний левый
             mark(1, y - 1);
+            Fires(1, y, seaBattle);          // добивание по горизонтали
+            Fires(0, y - 1, seaBattle);     // добивание по вертикали
         } else if (x == 0 && y > 0 && y < rows) { // первый столбец, не угловая позиция
             mark(1, y - 1);
             mark(1, y + 1);
+            Fires(0, y - 1, seaBattle);
+            Fires(1, y, seaBattle);
+            Fires(0, y + 1, seaBattle);
         } else if (x == cols & y == rows) {     // правый нижний угол
             mark(x - 1, y - 1);
-        } else if (x == cols & y == 0) {        // левый нижний угол
-            mark(x - 1, y + 1);
+            Fires(x - 1, y, seaBattle);
+            Fires(x, y - 1, seaBattle);
+        } else if (x == cols & y == 0) {        // правый верхний угол
+            mark(x - 1, 1);
+            Fires(x - 1, 0, seaBattle);
+            Fires(x, 1, seaBattle);
         } else if (x == cols & y > 0 & y < rows) { // последний стролбец, не угловая позиция
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
+            Fires(x - 1, y - 1, seaBattle);
+            Fires(x, y, seaBattle);
+            Fires(x - 1, y + 1, seaBattle);
         } else if (x > 0 & x < cols & y == 0) {  // первая строка, не угол
-            mark(x - 1,  1);
-            mark(x + 1,  1);
+            mark(x - 1, 1);
+            mark(x + 1, 1);
+            Fires(x - 1, 0, seaBattle);
+            Fires(x, 1, seaBattle);
+            Fires(x + 1, 0, seaBattle);
         } else if (x > 0 & x < cols & y == rows) {// последняя строка, не угол
             mark(x + 1, y - 1);
             mark(x - 1, y - 1);
+            Fires(x + 1, y, seaBattle);
+            Fires(x, y - 1, seaBattle);
+            Fires(x - 1, y, seaBattle);
         } else if (x > 0 & x < cols & y > 0 & y < rows) { // не крайние и не угловые позиции
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
             mark(x + 1, y - 1);
             mark(x + 1, y + 1);
+            Fires(x - 1, y, seaBattle);
+            Fires(x, y-1, seaBattle);
+            Fires(x, y+1, seaBattle);
+            Fires(x + 1, y, seaBattle);
         }
     }
 
