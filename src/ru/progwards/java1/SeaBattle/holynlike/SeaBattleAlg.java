@@ -53,6 +53,9 @@ public class SeaBattleAlg {
     }
 
     public void Fires(int x, int y, SeaBattle seaBattle) {
+        if (x < 0 || x > cols || y < 0 || y > rows){
+            return;
+        }  // Если аргументы мимо моря, ничего не делаем
         if (targ < 20 & array[x][y] == nothing) { // Если нет 20 попаданий и поле не исследовано, стреляем
             SeaBattle.FireResult fireResult = seaBattle.fire(x, y); // выстрел
             fire_Count += 1; // Добавляем + 1 к счетчику выстрелов
@@ -195,7 +198,9 @@ public class SeaBattleAlg {
         markcount++; // счетчик вызовов процедуры пометки
         if (iscorn) corn++;
         if (!iscorn) nocorn++;
-        if (x < 0 || x > cols || y < 0 || y > rows){return;}  // Если аргументы мимо моря, ничего не делаем
+        if (x < 0 || x > cols || y < 0 || y > rows){
+            return;
+        }  // Если аргументы мимо моря, ничего не делаем
         if (array[x][y] == nothing || array[x][y] == miss) {
             effect++;
             array[x][y] = empty;
