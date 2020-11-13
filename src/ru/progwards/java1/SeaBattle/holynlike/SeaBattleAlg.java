@@ -34,9 +34,9 @@ public class SeaBattleAlg {
         // стрельба по всем квадратам поля полным перебором
         int fire_Count = 0;
         int targ = 0;
-        for (int y = 0; y < seaBattle.getSizeX(); y++) { // столбцы
-            for (int x = 0; x < seaBattle.getSizeY(); x++) { // строки
-                if (targ < 20 & array[x][y] != empty) { // Если нет 20 попаданий и поле не исследовано, стреляем
+        for (int x = 0; x < seaBattle.getSizeX(); x++) { // строки
+            for (int y = 0; y < seaBattle.getSizeY(); y++) { // столбцы
+                if (targ < 20 & array[x][y] != empty & array[x][y] != miss) { // Если нет 20 попаданий и поле не исследовано, стреляем
                     SeaBattle.FireResult fireResult = seaBattle.fire(x, y); // выстрел
                     fire_Count += 1; // Добавляем + 1 к счетчику выстрелов
                     if (fireResult == SeaBattle.FireResult.DESTROYED) {
@@ -68,7 +68,7 @@ public class SeaBattleAlg {
 
     public void finishbot(int x, int y) { //если корабль убит, проставить вокруг него заведомо пустые поля
         iscorn = false;
-        nocorncount++;
+        nocorncount++; // счет вызовов процедуры обводки
         if (x == 0) { // первая строка
             if (y == 0) {// указатель в ячейке 0 - 0 (левый верхний угол)
                 mark(1, 0);
@@ -134,7 +134,7 @@ public class SeaBattleAlg {
         // Здесь процедура , которая отмечаетявно пустые поля вокруг раненого
 
         iscorn = true;
-        corncount++;
+        corncount++; // счет вызовов процедуры отметки углов
         if (x == 0 && y == 0) {                  // левый верхний угол
             mark(1, 1);
         } else if (x == 0 && y == rows) {        // правый верхний угол
@@ -163,8 +163,8 @@ public class SeaBattleAlg {
         }
     }
 
-    public void mark(int x, int y) {
-        markcount++;
+    public void mark(int x, int y) { // Отметить указанные поля (обводка)
+        markcount++; // счетчик вызовов процедуры пометки
         if (iscorn) corn++;
         if (!iscorn) nocorn++;
         if (array[x][y] == nothing || array[x][y] == miss) {
