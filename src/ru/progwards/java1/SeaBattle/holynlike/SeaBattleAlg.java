@@ -13,8 +13,8 @@ public class SeaBattleAlg {
     public static sector[][] array;
     public static int cols;
     public static int rows;
-    int fire_Count = 0;
-    int targ = 0;
+    public static int fire_Count = 0;
+    public static int targ = 0;
     // enum sector:
     // nothing - в ячейку не стреляли, её значение неизвестно
     // empty - в ячейку стреляли, она пуста (промах)
