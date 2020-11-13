@@ -144,53 +144,53 @@ public class SeaBattleAlg {
         corncount++; // счет вызовов процедуры отметки углов
         if (x == 0 && y == 0) {                  // левый верхний угол
             mark(1, 1);
-            Fires(0, 1, seaBattle);       // добивание по горизонтали
-            Fires(1, 0, seaBattle);       // добивание по вертикали
+//            Fires(0, 1, seaBattle);       // добивание по горизонтали
+//            Fires(1, 0, seaBattle);       // добивание по вертикали
         } else if (x == 0 && y == rows) {        // нижний левый
             mark(1, y - 1);
-            Fires(1, y, seaBattle);          // добивание по горизонтали
-            Fires(0, y - 1, seaBattle);     // добивание по вертикали
+//            Fires(1, y, seaBattle);          // добивание по горизонтали
+//            Fires(0, y - 1, seaBattle);     // добивание по вертикали
         } else if (x == 0 && y > 0 && y < rows) { // первый столбец, не угловая позиция
             mark(1, y - 1);
             mark(1, y + 1);
-            Fires(0, y - 1, seaBattle);
-            Fires(1, y, seaBattle);
-            Fires(0, y + 1, seaBattle);
+//            Fires(0, y - 1, seaBattle);
+//            Fires(1, y, seaBattle);
+//            Fires(0, y + 1, seaBattle);
         } else if (x == cols & y == rows) {     // правый нижний угол
             mark(x - 1, y - 1);
-            Fires(x - 1, y, seaBattle);
-            Fires(x, y - 1, seaBattle);
+//            Fires(x - 1, y, seaBattle);
+//            Fires(x, y - 1, seaBattle);
         } else if (x == cols & y == 0) {        // правый верхний угол
             mark(x - 1, 1);
-            Fires(x - 1, 0, seaBattle);
-            Fires(x, 1, seaBattle);
+//            Fires(x - 1, 0, seaBattle);
+//            Fires(x, 1, seaBattle);
         } else if (x == cols & y > 0 & y < rows) { // последний стролбец, не угловая позиция
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
-            Fires(x - 1, y - 1, seaBattle);
-            Fires(x, y, seaBattle);
-            Fires(x - 1, y + 1, seaBattle);
+//            Fires(x - 1, y - 1, seaBattle);
+//            Fires(x, y, seaBattle);
+//            Fires(x - 1, y + 1, seaBattle);
         } else if (x > 0 & x < cols & y == 0) {  // первая строка, не угол
             mark(x - 1, 1);
             mark(x + 1, 1);
-            Fires(x - 1, 0, seaBattle);
-            Fires(x, 1, seaBattle);
-            Fires(x + 1, 0, seaBattle);
+//            Fires(x - 1, 0, seaBattle);
+//            Fires(x, 1, seaBattle);
+//            Fires(x + 1, 0, seaBattle);
         } else if (x > 0 & x < cols & y == rows) {// последняя строка, не угол
             mark(x + 1, y - 1);
             mark(x - 1, y - 1);
-            Fires(x + 1, y, seaBattle);
-            Fires(x, y - 1, seaBattle);
-            Fires(x - 1, y, seaBattle);
+//            Fires(x + 1, y, seaBattle);
+//            Fires(x, y - 1, seaBattle);
+//            Fires(x - 1, y, seaBattle);
         } else if (x > 0 & x < cols & y > 0 & y < rows) { // не крайние и не угловые позиции
             mark(x - 1, y - 1);
             mark(x - 1, y + 1);
             mark(x + 1, y - 1);
             mark(x + 1, y + 1);
-            Fires(x - 1, y, seaBattle);
-            Fires(x, y-1, seaBattle);
-            Fires(x, y+1, seaBattle);
-            Fires(x + 1, y, seaBattle);
+//            Fires(x - 1, y, seaBattle);
+//            Fires(x, y-1, seaBattle);
+//            Fires(x, y+1, seaBattle);
+//            Fires(x + 1, y, seaBattle);
         }
     }
 
