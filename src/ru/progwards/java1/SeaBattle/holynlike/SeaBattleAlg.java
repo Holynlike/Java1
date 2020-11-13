@@ -195,6 +195,7 @@ public class SeaBattleAlg {
         markcount++; // счетчик вызовов процедуры пометки
         if (iscorn) corn++;
         if (!iscorn) nocorn++;
+        if (x < 0 || x > cols || y < 0 || y > rows){return;}  // Если аргументы мимо моря, ничего не делаем
         if (array[x][y] == nothing || array[x][y] == miss) {
             effect++;
             array[x][y] = empty;
