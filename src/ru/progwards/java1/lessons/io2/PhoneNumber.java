@@ -5,7 +5,7 @@ import java.io.IOException;
 public class PhoneNumber {
     public static String format(String phone) throws IOException {
         String result = phone.replaceAll("[\\D]", ""); // Регуляркой сносим всё, кроме чисел
-        if (result.length() == 11) {
+        if (result.length() > 11 || result.length() < 10) {
             throw new IOException("Неверно указан номер");
         } // Если символов 11, добавляем плюс
         result = printPhone(Long.valueOf(result));
