@@ -7,8 +7,8 @@ public class PhoneNumber {
             result = "+" + result;
         } // Если символов 11, добавляем плюс
         result = printPhone(Long.valueOf(result));
-//        result = result.replace("+8", "+7");
-//        result = result.replace("+9", "+7");
+        result = result.replace("+8", "+7");
+        result = result.replace("+9", "+7");
         return result;
     }
     public static String printPhone(Long phoneNum) {
