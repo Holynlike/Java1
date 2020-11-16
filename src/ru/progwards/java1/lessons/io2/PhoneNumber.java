@@ -1,10 +1,12 @@
 package ru.progwards.java1.lessons.io2;
 
+import java.io.IOException;
+
 public class PhoneNumber {
-    public static String format(String phone) {
+    public static String format(String phone) throws IOException {
         String result = phone.replaceAll("[\\D]", ""); // Регуляркой сносим всё, кроме чисел
         if (result.length() == 11) {
-            result = "+" + result;
+            throw new IOException("Неверно указан номер");
         } // Если символов 11, добавляем плюс
         result = printPhone(Long.valueOf(result));
         result = result.replace("+8", "+7");
