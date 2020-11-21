@@ -26,17 +26,22 @@ import java.util.Scanner;
  **/
 public class Censor {
 
+    private static Object Exception;
+
     public static class CensorException extends Exception {
         String FILE;
-        int ROW; // Две переменные - имя файла и строка
+        int ROW;
         Exception E;
+
         public CensorException(Exception mc2, String filename, int row) {
-            ROW = row;      // Конструктор
+            E = mc2;            // Конструктор
             FILE = filename;
-            E = mc2; // Не смог удержаться от шутки! =))
+            ROW = row;
         }
-        public String tostring(Exception e, String filename, int row) {
-            return E.getMessage() + ":" + FILE + ":" + ROW;
+
+        @Override
+        public String toString() {
+            return E.getMessage() + " : " + Integer.toString(ROW);
         }
     }
 
@@ -45,7 +50,7 @@ public class Censor {
         try {
             inout = read(inoutFileName); // Читаем файл
         } catch (Exception e) {
-            throw new CensorException(e, inoutFileName, 23);
+            throw new CensorException(e, inoutFileName, 0);
         }
         System.out.println(inout); // Тестовый вывод прочтенного файла
         for (int i = 0; i < obscene.length; i++) {
@@ -61,17 +66,20 @@ public class Censor {
 
     public static String read(String fileName) throws Exception { // Чтение
         String rez = "";
+        int stroka = 0;
         FileReader reader;
         try {
             reader = new FileReader(fileName);
             Scanner scanner = new Scanner(reader);
             while (scanner.hasNextLine()) {
                 String strFromFile = scanner.nextLine();
+                stroka++;
                 rez += strFromFile;
             }
             reader.close();
         } catch (Exception e) {
-            throw new Exception(e);
+            throw new CensorException(e, fileName, stroka);
+            //throw new Exception(e);
         }
         return rez;
     }
