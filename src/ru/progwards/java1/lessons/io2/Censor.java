@@ -41,7 +41,13 @@ public class Censor {
 
         @Override
         public String toString() {
-            return E.getMessage() + " : " + Integer.toString(ROW);
+            String ROWstr;
+            if(ROW ==0) {
+                ROWstr = null;
+            }else {
+                ROWstr = Integer.toString(ROW);
+            }
+            return E.getMessage() + ":" + ROWstr;
         }
     }
 

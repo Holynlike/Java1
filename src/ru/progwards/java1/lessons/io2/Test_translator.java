@@ -10,7 +10,8 @@ public class Test_translator {
 //        System.out.println(tran.translate("Hello world!"));
         String[] obscene = {"Java", "Oracle", "Sun", "Microsystems"};
         try {
-            Censor.censorFile("D:/forexp/victim.txt", obscene);
+            //Censor.censorFile("D:/forexp/victim.txt", obscene);
+            Censor.censorFile(null, obscene);
         }catch (Exception e){
             System.err.println(e.toString());
         }
