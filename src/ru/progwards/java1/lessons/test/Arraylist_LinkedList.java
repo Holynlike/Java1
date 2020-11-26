@@ -26,15 +26,15 @@ public class Arraylist_LinkedList {
         List listrez = new ArrayList();
         long res = 0;
         for (int i = 0; i < list.size(); i++) {
-            res += list.get(i);
+            res += list.get(i); // Подсчитали сумму элементов коллекции
         }
-        long res2 = res / 100;
+        long res2 = res / 100; // целочисленно разделили на сто
         for (int num : list) {
             if (num < res2) {
-                listrez.add(num);
+                listrez.add(num); // добавили в новую коллекцию элементы, меньшие, чем сотая от суммы эл-тов
             }
         }
-        return listrez;
+        return listrez; // Возвращаем список меньших, тогда как задача гласит и убрать и вернуть исходную коллекцию без них
     }
 
     /**
