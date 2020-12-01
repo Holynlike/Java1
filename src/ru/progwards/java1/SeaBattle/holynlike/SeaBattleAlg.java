@@ -161,7 +161,6 @@ public class SeaBattleAlg {
             mark(x + 1, y - 1);
             mark(x + 1, y + 1);
         }
-        // TODO: Здесь надо добавить код добивания, либо (лучше) вынести его в отдельный метод
     }
 
     public void mark(int x, int y) {

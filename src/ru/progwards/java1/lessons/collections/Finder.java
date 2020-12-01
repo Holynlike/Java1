@@ -23,7 +23,7 @@ public class Finder {
         list3.add(10);
 
         ArrayList<String> list5 = new ArrayList();
-        // Василий:3, Иван:2, Ганнибал:2, Франкл:3, Никита:4 (Фридрих:0 - исключен)
+        // Василий:3, Иван:2, Ганнибал:2, Франкл:3, Никита:4, Фридрих:1 (Показываем Никиту - его последовательность наибольшая)
         list5.add("Василий");  //  00
         list5.add("Василий");  //  01
         list5.add("Василий");  //  02
@@ -141,6 +141,7 @@ public class Finder {
      * повторяющаяся последовательность которого началась с наименьшего индекса.
      */
     public static String findSimilar(Collection<String> names) {
+        if (names.size() ==0){return "null:0";}
         String[] toar = names.toArray(new String[0]); // Переводим коллекцию в массив для удобства прохода по элементам
         int[] intnames = new int[toar.length]; // Массив целых чисел
         String ActualName = toar[0]; // Текущее значение коллекции
@@ -149,18 +150,19 @@ public class Finder {
         int tmp = 0; // для подсчета очередной последовательности
         intnames[0] = 1;
         try {
-            while (OneI <= toar.length) {
+            while (OneI < toar.length) {
                 while (ActualName == toar[prev]) {
                     OneI++;
                     ActualName = toar[OneI];
                 } // Последовательность пройдена
                 for (int i = prev; i < OneI; i++) {
                     intnames[i] = OneI - prev; // Прописываем в массив целых чисел значения последовательности
+                    if(intnames[i] ==0){intnames[i] = 1;}
                 }
                 prev = OneI;
             }
         }catch (Exception E){
-
+            System.out.println("Исключамба в симиларе!" + OneI + ":" + toar.length);
         }
         int MAX = intnames[0];
         int mystep = 0;
