@@ -1,9 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 class testShop {
     public static void main(String[] args) {
@@ -15,7 +12,7 @@ class testShop {
         Product product20 = new Product("Стул");
         Product product30 = new Product("Шкаф");
         Product product40 = new Product("Диван");
-        SortedSet<Product> Foods1 = new TreeSet();
+        List<Product> Foods1 = new ArrayList();
         Foods1.add(product1);
         Shop food = new Shop((List<Product>) Foods1);
     }
@@ -28,7 +25,7 @@ public class ProductAnalytics {
     // список всех имеющихся в ассортименте товаров. Все товары, присутствующие в магазинах,
     // обязательно присутствуют в products, но так же тут могут быть и товары, которых нет в магазинах
     public Set<Product> existInAll() {
-        Set<Product> result = null;
+        Set<Product> result = new TreeSet<>();
         for (Product prod : products) {
             result.add(prod);
         }
@@ -40,7 +37,7 @@ public class ProductAnalytics {
         this.products = products;
     }
     public Set<Product> existAtListInOne(){
-        Set<Product> result = null;
+        Set<Product> result = new TreeSet<>();
         for (Shop sho : shops){ // Во всех магазинах
             for (Product prod : products) { // товарный ряд магазина
                 if (!result.contains(prod)) { // если товара ещё нет в общей базе
@@ -51,8 +48,8 @@ public class ProductAnalytics {
         return result;
     }
     public Set<Product> notExistInShops() {
-        Set<Product> result = null;
-        Set<Product> result2 = null;
+        Set<Product> result = new TreeSet<>();
+        Set<Product> result2 = new TreeSet<>();
         for (Shop sho : shops){
             for (Product prod : products) {
                 result.add(prod); // В результ собраны все продукты в магазинах, теперь сравним с полным каталогом
@@ -67,7 +64,7 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-        Set<Product> result = null;
+        Set<Product> result = new TreeSet<>();
         for (Shop sho : shops){ // Во всех магазинах
             for (Product prod : products) { // товарный ряд магазина
                 if (!result.contains(prod)) { // если товара ещё нет в общей базе
