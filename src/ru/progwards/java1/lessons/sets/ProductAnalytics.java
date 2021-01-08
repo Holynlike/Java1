@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-class testShop{
+class testShop {
     public static void main(String[] args) {
         Product product1 = new Product("Молоко");
         Product product2 = new Product("Хлеб");
@@ -19,8 +19,6 @@ class testShop{
         Foods1.add(product1);
         Shop food = new Shop((List<Product>) Foods1);
     }
-
-
 }
 
 public class ProductAnalytics {
@@ -30,23 +28,67 @@ public class ProductAnalytics {
     // список всех имеющихся в ассортименте товаров. Все товары, присутствующие в магазинах,
     // обязательно присутствуют в products, но так же тут могут быть и товары, которых нет в магазинах
     public Set<Product> existInAll() {
-        return null;
+        Set<Product> result = null;
+        for (Product prod : products) {
+            result.add(prod);
+        }
+        return result;
     } //товары из products, которые имеются хотя бы в одном магазине
 
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
+        this.shops = shops;
+        this.products = products;
     }
-    public Set<Product> notExistInShops(){return null;}
-    public Set<Product> existOnlyInOne(){return null;}
+
+    public Set<Product> notExistInShops() {
+        Set<Product> result = null;
+        Set<Product> result2 = null;
+        for (Shop sho : shops){
+            for (Product prod : products) {
+                result.add(prod); // В результ собраны все продукты в магазинах, теперь сравним с полным каталогом
+            }
+        }
+        for (Product res : products) {
+            if (!result.contains(res)) {
+                result2.add(res);
+            }
+        }
+        return result2;
+    }
+
+    public Set<Product> existOnlyInOne() {
+        Set<Product> result = null;
+        for (Shop sho : shops){ // Во всех магазинах
+            for (Product prod : products) { // товарный ряд магазина
+                if (!result.contains(prod)) { // если товара ещё нет в общей базе
+                    result.add(prod);// то добавляем его в общую базу
+                }//набор уникальных товаров нсобран!
+            }
+        }
+        return result;
+    }
 }
 
 class Product { // Товар
     private String code; // Уникальный артикул товара
-    public Product(String code) {this.code = code;}
-    public String getCode() {return this.code;}
+
+    public Product(String code) {
+        this.code = code;
+    }
+
+    public String getCode() {
+        return this.code;
+    }
 }
 
 class Shop { // Магазин
     private List<Product> products; // товары имеющиеся в магазине
-    public Shop(List<Product> products) {this.products = products;} // конструктор
-    public List<Product> getProducts() {return products;}
+
+    public Shop(List<Product> products) {
+        this.products = products;
+    } // конструктор
+
+    public List<Product> getProducts() {
+        return products;
+    }
 }
