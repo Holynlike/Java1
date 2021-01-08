@@ -20,6 +20,8 @@ public class LettersInFile {
         for (char cha = 'a'; cha <= 'z'; cha++) {alphabet.add(cha);}
         for (char cha = 'А'; cha <= 'Я'; cha++) {alphabet.add(cha);}
         for (char cha = 'а'; cha <= 'я'; cha++) {alphabet.add(cha);}
+        alphabet.add('Ё');
+        alphabet.add('ё');
         for (Character num : alphabet) {
             if (list.contains(num)) {
                 result+=num;

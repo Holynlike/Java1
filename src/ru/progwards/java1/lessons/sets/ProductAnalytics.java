@@ -39,7 +39,17 @@ public class ProductAnalytics {
         this.shops = shops;
         this.products = products;
     }
-
+    public Set<Product> existAtListInOne(){
+        Set<Product> result = null;
+        for (Shop sho : shops){ // Во всех магазинах
+            for (Product prod : products) { // товарный ряд магазина
+                if (!result.contains(prod)) { // если товара ещё нет в общей базе
+                    result.add(prod);// то добавляем его в общую базу
+                }//набор уникальных товаров нсобран!
+            }
+        }
+        return result;
+    }
     public Set<Product> notExistInShops() {
         Set<Product> result = null;
         Set<Product> result2 = null;
@@ -74,6 +84,7 @@ class Product { // Товар
 
     public Product(String code) {
         this.code = code;
+        System.out.println("Добавлен продкут: " + code);
     }
 
     public String getCode() {
