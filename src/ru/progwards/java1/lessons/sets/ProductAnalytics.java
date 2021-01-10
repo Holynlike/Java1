@@ -17,35 +17,37 @@ class testShop {
         Shop food = new Shop((List<Product>) Foods1);
     }
 }
- class compareProd implements Comparator<Product>{
 
+class compareProd implements Comparator<Product> {
     @Override
-    public int compare(Product o1, Product o2) {
-        return o1.getCode().compareTo(o2.getCode());
-    }
+    public int compare(Product o1, Product o2) {return o1.getCode().compareTo(o2.getCode());}
 }
+
 public class ProductAnalytics {
-    private List<Shop> shops;// список магазинов
-    private List<Product> products;// список всех товаров всех магазинов
+    private List<Shop> shops; private List<Product> products;
 
-    // список всех имеющихся в ассортименте товаров. Все товары, присутствующие в магазинах,
-    // обязательно присутствуют в products, но так же тут могут быть и товары, которых нет в магазинах
     public Set<Product> existInAll() {
-
-        Set<Product> result = new TreeSet<>(new  compareProd());
+        Set<Product> result = new TreeSet<>(new compareProd());
+        int shopcountProd = 0;
         for (Product prod : products) {
-            result.add(prod);
+            for (Shop sho : shops) {
+                if (sho.getProducts().contains(prod)) {shopcountProd++;}
+                if (shopcountProd == shops.size()) {
+                    result.add(prod);
+                    shopcountProd = 0;
+                }
+            }
         }
         return result;
-    } //товары из products, которые имеются хотя бы в одном магазине
+    }
 
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
-        this.shops = shops;
-        this.products = products;
+        this.shops = shops; this.products = products;
     }
-    public Set<Product> existAtListInOne(){
-        Set<Product> result = new TreeSet<>(new  compareProd());
-        for (Shop sho : shops){ // Во всех магазинах
+
+    public Set<Product> existAtListInOne() {
+        Set<Product> result = new TreeSet<>(new compareProd());
+        for (Shop sho : shops) { // Во всех магазинах
             for (Product prod : products) { // товарный ряд магазина
                 if (!result.contains(prod)) { // если товара ещё нет в общей базе
                     result.add(prod);// то добавляем его в общую базу
@@ -54,30 +56,35 @@ public class ProductAnalytics {
         }
         return result;
     }
+
     public Set<Product> notExistInShops() {
-        Set<Product> result = new TreeSet<>(new  compareProd());
-        Set<Product> result2 = new TreeSet<>(new  compareProd());
-        for (Shop sho : shops){
+        Set<Product> result = new TreeSet<>(new compareProd());
+        for (Shop sho : shops) {
             for (Product prod : products) {
                 result.add(prod); // В результ собраны все продукты в магазинах, теперь сравним с полным каталогом
             }
         }
         for (Product res : products) {
-            if (!result.contains(res)) {
-                result2.add(res);
+            if (result.contains(res)) {
+                result.remove(res); // Если содержится в магазине, удаляем
             }
         }
-        return result2;
+        return result;
     }
 
     public Set<Product> existOnlyInOne() {
-        Set<Product> result = new TreeSet<>(new  compareProd());
-        for (Shop sho : shops){ // Во всех магазинах
-            for (Product prod : products) { // товарный ряд магазина
-                if (!result.contains(prod)) { // если товара ещё нет в общей базе
-                    result.add(prod);// то добавляем его в общую базу
-                }//набор уникальных товаров нсобран!
+        Set<Product> result = new TreeSet<Product>(new compareProd());
+        int intcountProd = 0;
+        for (Product prod : products) { // товарный ряд общего каталога
+            for (Shop sho : shops) { // Во всех магазинах
+                if (sho.getProducts().contains(prod)) {
+                    intcountProd++;
+                } // если товар есть в магазине
             }
+            if (intcountProd == 1) {
+                result.add(prod);
+            }
+            intcountProd = 0;
         }
         return result;
     }
