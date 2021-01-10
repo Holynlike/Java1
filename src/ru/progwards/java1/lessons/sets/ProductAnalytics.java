@@ -25,7 +25,14 @@ public class ProductAnalytics {
     // список всех имеющихся в ассортименте товаров. Все товары, присутствующие в магазинах,
     // обязательно присутствуют в products, но так же тут могут быть и товары, которых нет в магазинах
     public Set<Product> existInAll() {
-        Set<Product> result = new TreeSet<>();
+        class compareProd implements Comparator<Product>{
+
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getCode().compareTo(o2.getCode());
+            }
+        }
+        Set<Product> result = new TreeSet<>(new  compareProd());
         for (Product prod : products) {
             result.add(prod);
         }
