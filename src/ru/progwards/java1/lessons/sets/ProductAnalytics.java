@@ -32,11 +32,9 @@ public class ProductAnalytics {
         for (Product prod : products) {
             for (Shop sho : shops) {
                 if (sho.getProducts().contains(prod)) {shopcountProd++;}
-                if (shopcountProd == shops.size()) {
-                    result.add(prod);
-                    shopcountProd = 0;
-                }
             }
+            if (shopcountProd == shops.size()) {result.add(prod);}
+            shopcountProd = 0;
         }
         return result;
     }
@@ -45,13 +43,14 @@ public class ProductAnalytics {
         this.shops = shops; this.products = products;
     }
 
-    public Set<Product> existAtListInOne() {
+    public Set<Product> existAtListInOne() {//если имеются хотя бы в одном магазине
         Set<Product> result = new TreeSet<>(new compareProd());
-        for (Shop sho : shops) { // Во всех магазинах
-            for (Product prod : products) { // товарный ряд магазина
-                if (!result.contains(prod)) { // если товара ещё нет в общей базе
+        for (Product prod : products) { // товарный ряд магазина
+            for (Shop sho : shops) { // Во всех магазинах
+                if (sho.getProducts().contains(prod)) { // если товара ещё нет в общей базе
                     result.add(prod);// то добавляем его в общую базу
-                }//набор уникальных товаров нсобран!
+                    break;
+                }
             }
         }
         return result;
