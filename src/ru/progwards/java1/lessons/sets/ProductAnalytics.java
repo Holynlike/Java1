@@ -59,8 +59,10 @@ public class ProductAnalytics {
     public Set<Product> notExistInShops() {
         Set<Product> result = new TreeSet<>(new compareProd());
         Set<Product> result2 = new TreeSet<>(new compareProd());
-        result2 = result;
-        for (Product prod : products) {result.add(prod);} // В результ собраны все продукты из каталога
+        for (Product prod : products) {
+            result.add(prod);
+            result2.add(prod);
+        } // В результ собраны все продукты из каталога
         for (Product prod : result) {
             for (Shop sho : shops) { // Во всех магазинах
                 if (sho.getProducts().contains(prod)) {result2.remove(prod);}
