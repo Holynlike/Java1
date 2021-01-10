@@ -17,7 +17,13 @@ class testShop {
         Shop food = new Shop((List<Product>) Foods1);
     }
 }
+ class compareProd implements Comparator<Product>{
 
+    @Override
+    public int compare(Product o1, Product o2) {
+        return o1.getCode().compareTo(o2.getCode());
+    }
+}
 public class ProductAnalytics {
     private List<Shop> shops;// список магазинов
     private List<Product> products;// список всех товаров всех магазинов
@@ -25,13 +31,7 @@ public class ProductAnalytics {
     // список всех имеющихся в ассортименте товаров. Все товары, присутствующие в магазинах,
     // обязательно присутствуют в products, но так же тут могут быть и товары, которых нет в магазинах
     public Set<Product> existInAll() {
-        class compareProd implements Comparator<Product>{
 
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o1.getCode().compareTo(o2.getCode());
-            }
-        }
         Set<Product> result = new TreeSet<>(new  compareProd());
         for (Product prod : products) {
             result.add(prod);
@@ -44,7 +44,7 @@ public class ProductAnalytics {
         this.products = products;
     }
     public Set<Product> existAtListInOne(){
-        Set<Product> result = new TreeSet<>();
+        Set<Product> result = new TreeSet<>(new  compareProd());
         for (Shop sho : shops){ // Во всех магазинах
             for (Product prod : products) { // товарный ряд магазина
                 if (!result.contains(prod)) { // если товара ещё нет в общей базе
@@ -55,8 +55,8 @@ public class ProductAnalytics {
         return result;
     }
     public Set<Product> notExistInShops() {
-        Set<Product> result = new TreeSet<>();
-        Set<Product> result2 = new TreeSet<>();
+        Set<Product> result = new TreeSet<>(new  compareProd());
+        Set<Product> result2 = new TreeSet<>(new  compareProd());
         for (Shop sho : shops){
             for (Product prod : products) {
                 result.add(prod); // В результ собраны все продукты в магазинах, теперь сравним с полным каталогом
@@ -71,7 +71,7 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-        Set<Product> result = new TreeSet<>();
+        Set<Product> result = new TreeSet<>(new  compareProd());
         for (Shop sho : shops){ // Во всех магазинах
             for (Product prod : products) { // товарный ряд магазина
                 if (!result.contains(prod)) { // если товара ещё нет в общей базе
