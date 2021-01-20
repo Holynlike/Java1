@@ -4,7 +4,10 @@ public class CyclesGoldenFibo {
     private static int[] FIBOarr = new int[16]; // Массив для чисел Фибоначчи
 
     public static void main(String[] args) {
-        System.out.println(fiboNumber(17));
+        for (int i = 0; i < 40; i++) {
+            System.out.println(fiboNumber(i));
+        }
+
         for (int i = 1; i <= 15; i++) {
             System.out.println(i + " - " + fiboNumber(i)); // Фибо - цикл
         }

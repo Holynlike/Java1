@@ -4,18 +4,31 @@ import java.util.*;
 
 class testShop {
     public static void main(String[] args) {
+        ArrayDeque ad = new ArrayDeque();
+        ad.add(1);
+        ad.add(2);
+        ad.add(3);
+        sumLastAndFirst(ad);
+        System.out.println("-----------------------------------------------------");
+
+
         Product product1 = new Product("Молоко");
-        Product product2 = new Product("Хлеб");
-        Product product3 = new Product("Мясо");
-        Product product4 = new Product("Сахар");
-        Product product10 = new Product("Стол");
-        Product product20 = new Product("Стул");
-        Product product30 = new Product("Шкаф");
-        Product product40 = new Product("Диван");
+//        Product product2 = new Product("Хлеб");
+//        Product product3 = new Product("Мясо");
+//        Product product4 = new Product("Сахар");
+//        Product product10 = new Product("Стол");
+//        Product product20 = new Product("Стул");
+//        Product product30 = new Product("Шкаф");
+//        Product product40 = new Product("Диван");
         List<Product> Foods1 = new ArrayList();
         Foods1.add(product1);
         Shop food = new Shop((List<Product>) Foods1);
     }
+
+    static int sumLastAndFirst(ArrayDeque<Integer> deque){
+        if(deque.isEmpty()){return 0;}
+        return deque.getFirst()+deque.getLast();}
+
 }
 
 class compareProd implements Comparator<Product> {

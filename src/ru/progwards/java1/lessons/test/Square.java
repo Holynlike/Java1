@@ -9,10 +9,10 @@ public class Square extends Figure {
     public double getSide() {
         return side;
     }
-//    public String figDetect(Figure fig){
-//        if (fig.getClass() == this.getClass()){
-//            return "Сторона квадрата "+side;
-//        }
-//        return "Неизвестная фигура";
-//    }
+    public String figDetect(Figure fig){
+        if (fig.getClass() == this.getClass()){
+            return "Сторона квадрата "+side;
+        }
+        return "Неизвестная фигура";
+    }
 }

@@ -21,7 +21,7 @@ public class User {
     }
 
     public TreeSet<User> createSet() {
-        Set set = new TreeSet(new compareUser());
+        TreeSet set = new TreeSet(new compareUser());
         return new TreeSet<User>(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
