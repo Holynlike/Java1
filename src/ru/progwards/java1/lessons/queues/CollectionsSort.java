@@ -4,16 +4,17 @@ import java.util.*;
 
 public class CollectionsSort {
     public static void main(String[] args) {
-        Collection k = compareSort();
-        System.out.println(k);
-//        ArrayList <Integer>al = new ArrayList();
-//        al.add(1);
-//        al.add(10);
-//        al.add(2);
-//        al.add(100);
-//        al.add(-3);
-//        mySort(al);
-//        System.out.println(al.toString());
+//        Collection k = compareSort();
+//        System.out.println(k);
+        ArrayList <Integer>al = new ArrayList();
+        al.add(43);
+        al.add(80);
+        al.add(5);
+        al.add(52);
+        al.add(69);
+        al.add(80);
+        minSort(al);
+        System.out.println(al.toString());
     }
 
     public static void mySort(Collection<Integer> data){
@@ -31,7 +32,7 @@ public class CollectionsSort {
         }// Бинго! Очередь заодно с минимумом элегантно решает сортировку коллекции!
     }
     public static void minSort(Collection<Integer> data){
-        Collection col = new TreeSet();
+        List col = new ArrayList();
         for (int i = data.size()-1; i >=0; i--) {
             col.add(Collections.min(data));
             data.remove(Collections.min(data));
