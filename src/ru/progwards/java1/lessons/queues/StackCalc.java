@@ -1,39 +1,41 @@
 package ru.progwards.java1.lessons.queues;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Queue;
 
 public class StackCalc {
-    double Lastnum;
-    int Count = 0;
-    public static void main(String[] args) {
-        StackCalc stackCalc = new StackCalc();
-        stackCalc.push(10.0);
-        stackCalc.push(2.0);
-        stackCalc.sub();
-        System.out.println(stackCalc.pop());
-        System.out.println(stackCalc.pop());
-        System.out.println(stackCalc.pop());
-    }
-    
-
-    Queue queue = new ArrayDeque();
+    public ArrayDeque queue = new ArrayDeque();
 
     /**положить value на вершину стека*/
-    public void push(double value){queue.add(value); Lastnum = value;}//TODO: Проработать во всех функциях исключения NullPointException
-
-    public double pop(){return (double) queue.poll();}
-
-    public void add(){push ((double) queue.poll() + (double) queue.poll());}
-
-    public void sub(){
-        double tmp = (double) queue.poll();
-        push ((double) queue.poll() - tmp);
+    public void push(double value){queue.add(value);}
+    // TODO: Продумать алгоритм на NullPointException
+    /** Извлечь из очереди **/
+    public double pop(){
+        return (double) queue.pollLast(); // Правкой приведено к LIFO - последним зашел - первым выходит.
     }
-
-    public void mul(){push((double) queue.poll() * (double) queue.poll());}
+    /** Сложение **/
+    public void add(){
+        double tmp = pop();
+        double tmp2 = pop(); // Попытки однострочной записи неудачны: оба последних значения меняются
+        push  (tmp2 + tmp);
+    }
+    /** Разница **/
+    public void sub(){
+        double tmp = pop();
+        double tmp2 = pop();
+        push  (tmp2 - tmp);
+    }
+    /** Умножение **/
+    public void mul(){
+        double tmp = pop();
+        double tmp2 = pop();
+        push  (tmp2 * tmp);
+    }
+    /** Деление **/
     public void div(){
-        double tmp = (double) queue.poll();
-        push ((double) queue.poll() / tmp);
+        double tmp = pop();
+        double tmp2 = pop();
+        push  (tmp2 / tmp);
     }
 }
