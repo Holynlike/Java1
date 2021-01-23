@@ -4,17 +4,17 @@ import java.util.*;
 
 public class CollectionsSort {
     public static void main(String[] args) {
-//        Collection k = compareSort();
-//        System.out.println(k);
-        ArrayList <Integer>al = new ArrayList();
-        al.add(43);
-        al.add(80);
-        al.add(5);
-        al.add(52);
-        al.add(69);
-        al.add(80);
-        minSort(al);
-        System.out.println(al.toString());
+        Collection k = compareSort();
+        System.out.println(k);
+//        ArrayList <Integer>al = new ArrayList();
+//        al.add(43);
+//        al.add(80);
+//        al.add(5);
+//        al.add(52);
+//        al.add(69);
+//        al.add(80);
+//        minSort(al);
+//        System.out.println(al.toString());
     }
 
     public static void mySort(Collection<Integer> data){
@@ -41,7 +41,7 @@ public class CollectionsSort {
     }
     static void collSort(Collection<Integer> data){Collections.sort((List) data);}
     public static Collection<String> compareSort() {
-        int MySize = 5000;
+        int MySize = 500;
         long start;
         List<String> strList = new ArrayList(); // Коллекция в три значения (здесь будут лежать названия методов сортировки)
         strList.add((String)"mySort");
@@ -68,9 +68,11 @@ public class CollectionsSort {
         if (intList.get(1) > intList.get(2)){Collections.swap(intList,1,2); Collections.swap(strList,1,2);}
         if (intList.get(0) > intList.get(1)){Collections.swap(intList,0,1); Collections.swap(strList,0,1);}
         //----------Теперь в трёх строках сортировка трехэлементной коллекции (в алфавитном порядке по именам функций-сортировщиков)
-        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) == -1) {Collections.swap(strList,0,1);}
-        if (intList.get(1) == intList.get(2) && strList.get(1).compareTo(strList.get(2)) == -1) {Collections.swap(strList,1,2);}
-        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) == -1) {Collections.swap(strList,0,1);}
+        System.out.println(strList.get(0).compareTo(strList.get(1)));
+        System.out.println(strList.get(1).compareTo(strList.get(2)));
+        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) >0) {Collections.swap(strList,0,1);}
+        if (intList.get(1) == intList.get(2) && strList.get(1).compareTo(strList.get(2)) >0) {Collections.swap(strList,1,2);}
+        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) >0) {Collections.swap(strList,0,1);}
         System.out.println(intList);
         return strList;
     }
