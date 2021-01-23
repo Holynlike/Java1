@@ -68,8 +68,8 @@ public class CollectionsSort {
         if (intList.get(0) > intList.get(1)){Collections.swap(intList,0,1); Collections.swap(strList,0,1);}
         //----------Теперь в трёх строках сортировка трехэлементной коллекции (в алфавитном порядке по именам функций-сортировщиков)
         if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) == -1) {Collections.swap(strList,0,1);}
-        if (intList.get(1) == intList.get(2) && strList.get(1).compareTo(strList.get(2)) == -1){Collections.swap(strList,0,1);}
-        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) == -1){Collections.swap(strList,0,1);}
+        if (intList.get(1) == intList.get(2) && strList.get(1).compareTo(strList.get(2)) == -1) {Collections.swap(strList,1,2);}
+        if (intList.get(0) == intList.get(1) && strList.get(0).compareTo(strList.get(1)) == -1) {Collections.swap(strList,0,1);}
         System.out.println(intList);
         return strList;
     }
