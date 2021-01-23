@@ -62,7 +62,7 @@ public class CollectionsSort {
         start = System.currentTimeMillis();
         minSort(c);
         intList.add((int) (System.currentTimeMillis() - start));
-        //----------Теперь в трёх строках сортировка трехэлементной коллекции (Точнее двух)
+        //----------Теперь в трёх строках сортировка трехэлементной коллекции (Точнее двух коллекций)
         if (intList.get(0) > intList.get(1)){Collections.swap(intList,0,1); Collections.swap(strList,0,1);}
         if (intList.get(1) > intList.get(2)){Collections.swap(intList,1,2); Collections.swap(strList,1,2);}
         if (intList.get(0) > intList.get(1)){Collections.swap(intList,0,1); Collections.swap(strList,0,1);}
