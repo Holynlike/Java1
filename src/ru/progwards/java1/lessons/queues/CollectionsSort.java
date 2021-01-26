@@ -2,8 +2,19 @@ package ru.progwards.java1.lessons.queues;
 
 import java.util.*;
 
+import static com.sun.tools.attach.VirtualMachine.list;
+
 public class CollectionsSort {
     public static void main(String[] args) {
+        String Something = "Something";
+        String Super = "";
+        List list = new LinkedList();
+        list.add(Something);
+        list.add(Super);
+        for(Object c: list){
+            System.out.println(c.hashCode());
+        }
+
         Collection k = compareSort();
         System.out.println(k);
 //        ArrayList <Integer>al = new ArrayList();
