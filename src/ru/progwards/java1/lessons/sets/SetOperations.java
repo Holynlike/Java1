@@ -1,5 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
+import java.util.ArrayDeque;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -32,7 +33,17 @@ public class SetOperations {
         }
         return unionSet; // готово!
     }
-
+    ArrayDeque<Integer> array2queue(int[] a){
+        ArrayDeque<Integer> rez = new ArrayDeque<>();
+        for (int i = 0; i < a.length; i++) {
+            rez.add(a[i]);
+        }
+        return rez;
+    }
+    int sumLastAndFirst(ArrayDeque<Integer> deque){
+        if (deque.isEmpty()){return 0;}
+        return deque.peekFirst() + deque.peekLast();
+    }
     public static Set<Integer> intersection(Set<Integer> set1, Set<Integer> set2) {
         // объединение
         SortedSet<Integer> interSet = new TreeSet();

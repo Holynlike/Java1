@@ -1,4 +1,5 @@
 package ru.progwards.java1.lessons.queues;
+import java.util.ArrayDeque;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -23,7 +24,7 @@ class Order{
 
     public Order(double sum){num++; thisnum = num; this.sum = sum;} // Конструктор
     public double getSum(){return sum;} // Геттер
-    public int getNum(){return thisnum;}    // Геттер
+    public int getNum(){return thisnum;}// Геттер
 
     static class Checker implements Comparator<Order>
     {
@@ -54,6 +55,7 @@ class Order{
 }
 class testus{
     public static void main(String[] args) {
+        dequeueTest();
         Order ord1 = new Order(5000);
         Order ord2 = new Order(27000);
         Order ord3 = new Order(12000);
@@ -70,5 +72,13 @@ class testus{
         System.out.println(oq.get().sum);
         Order o99 = oq.get();
         System.out.println(oq.get().sum);
+    }
+    static void dequeueTest() {
+        PriorityQueue pQueue = new PriorityQueue<>();
+        pQueue.offer(10);
+        pQueue.offer(1);
+        pQueue.offer(9);
+        pQueue.offer(3);
+        System.out.println(pQueue);
     }
 }

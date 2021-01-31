@@ -1,8 +1,5 @@
 package ru.progwards.java1.lessons.queues;
-
 import java.util.*;
-
-import static com.sun.tools.attach.VirtualMachine.list;
 
 public class CollectionsSort {
     public static void main(String[] args) {
@@ -11,21 +8,9 @@ public class CollectionsSort {
         List list = new LinkedList();
         list.add(Something);
         list.add(Super);
-        for(Object c: list){
-            System.out.println(c.hashCode());
-        }
-
+        for(Object c: list){System.out.println(c.hashCode());}
         Collection k = compareSort();
         System.out.println(k);
-//        ArrayList <Integer>al = new ArrayList();
-//        al.add(43);
-//        al.add(80);
-//        al.add(5);
-//        al.add(52);
-//        al.add(69);
-//        al.add(80);
-//        minSort(al);
-//        System.out.println(al.toString());
     }
 
     public static void mySort(Collection<Integer> data){

@@ -1,9 +1,6 @@
 package ru.progwards.java1.lessons.queues;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
-
 public class StackCalc {
     public ArrayDeque queue = new ArrayDeque();
 
