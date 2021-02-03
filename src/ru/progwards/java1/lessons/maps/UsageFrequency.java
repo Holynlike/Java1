@@ -1,7 +1,4 @@
-package ru.progwards.java1.lessons.maps;
-
-import lombok.With;
-import ru.progwards.java1.lessons.io2.Censor;
+package ru.progwards.java1.lessons.maps;;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,11 +10,15 @@ public class UsageFrequency {
     Map Exchar = new TreeMap<Character, Integer>(); // Список исключаемых знаков препинания
     public static String TextFromFile = ""; // Здесь будет весь текст файла
     public static void main(String[] args) {
+        long starttime = System.currentTimeMillis();
         UsageFrequency UF = new UsageFrequency();
-        //UF.processFile("C:/forexp/wiki.train.tokens");
+        UF.processFile("C:/forexp/wiki.train.tokens");
+        UF.getWords();
+        UF.getLetters();
         UF.processFile("D:/forexp/wiki.test.tokens");
         UF.getWords();
         UF.getLetters();
+        System.out.println(System.currentTimeMillis() - starttime);
     }
     public void processFile(String fileName){
         // загрузить содержимое файла
@@ -67,11 +68,7 @@ public class UsageFrequency {
             Exchar.put(" ",++I);
     } // Наполнение карты знаками препинания
     public Map<Character, Integer> getLetters(){
-        // вернуть Map, который содержит все найденные буквы и цифры, и
-        // количество раз, которое встретился каждый искомый символ.
-        // Знаки препинания, такие как “.,!? @” и др не учитывать
         if (Exchar.isEmpty()){delimiters();} // Если словарь знаков препинания пуст, наполняем его.
-
         long IN = System.currentTimeMillis();
         Map map = new TreeMap<Character, Integer>();
         if(TextFromFile ==""){System.err.println("Текста нет, будет возвращен пустой словарь"); return map;}
@@ -88,32 +85,24 @@ public class UsageFrequency {
                 }
             }
         }
-
-        System.out.println(System.currentTimeMillis() - IN + " - Обработка файла, мсек.");
         return map;
     }
 
     public Map<String, Integer> getWords(){
-        // вернуть Map, который содержит все
-        // найденные слова и количество раз,
-        // которое каждое слово встретилось.
-        // Знаки препинания, такие как “.,!? @”
-        // и др являются разделителями.
         if (Exchar.isEmpty()){delimiters();} // Если словарь знаков препинания пуст, наполняем его.
         Map map = new TreeMap<String, Integer>();
         Integer tmp = 0;
+        long IN = System.currentTimeMillis();
         if(TextFromFile ==""){System.err.println("Текста нет, будет возвращен пустой словарь"); return map;}
         char[] fromtextchar = TextFromFile.toCharArray();
         Character num;
-        TextFromFile = "";
         for (int i = 0; i < fromtextchar.length; i++) {
             num = fromtextchar[i];
             if(Exchar.containsKey(num.toString())){
-                fromtextchar[i] = ' ';
+                fromtextchar[i]=' ';
             }
-            TextFromFile+=fromtextchar[i];
         }
-
+        TextFromFile = String.valueOf(fromtextchar);
         TextFromFile = TextFromFile.replaceAll(" +"," "); // замена множественных пробелов одинарными
         String[] textarr = TextFromFile.trim().split(" "); // Получаем массив слов
         for (String str : textarr) {

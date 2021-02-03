@@ -49,7 +49,6 @@ public class SalesInfo {
                 //double sumPokup = getcustomers.
             }
 
-
             return true;
         }catch (Exception e){
             System.out.println("blnmasParse - ошибка при парсинге строки: " + Arrays.toString(arr)); return false;
