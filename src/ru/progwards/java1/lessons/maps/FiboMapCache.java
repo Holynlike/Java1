@@ -30,7 +30,7 @@ public class FiboMapCache {
                     fiboprev2 = RESfiboNumber;
                 }
         }
-        if (fibocache && fiboCache != null && !fiboCache.containsValue(RESfiboNumber)) {
+        if (fibocache && fiboCache != null && !fiboCache.containsKey(n)) {
             fiboCache.put(fiboCache.size(), RESfiboNumber);
         }
         return RESfiboNumber;
