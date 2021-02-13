@@ -5,12 +5,13 @@ public class FiboMapCache_Test {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void main(String[] args)
     {
-        FiboMapCache fc = new FiboMapCache(true);
-        for (int i = 0; i < 8; i++) {
+        FiboMapCache fc = new FiboMapCache(false);
+        for (int i = 1; i < 8; i++) {
             System.out.println(i + " - " + fc.fiboNumber(i));
         }
+        fc = new FiboMapCache(true);
         System.out.println();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 1; i < 8; i++) {
             System.out.println(i + " - " + fc.fiboNumber(i));
         }
 //        ArrayList<AbstractMap.SimpleEntry<Integer, Integer> >arrayList = new ArrayList<AbstractMap.SimpleEntry<Integer, Integer> >();

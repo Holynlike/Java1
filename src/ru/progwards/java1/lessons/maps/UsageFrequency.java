@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons.maps;;
+package ru.progwards.java1.lessons.maps;
 
 import java.io.File;
 import java.io.FileReader;
