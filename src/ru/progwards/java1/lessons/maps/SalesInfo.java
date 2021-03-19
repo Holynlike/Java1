@@ -35,8 +35,8 @@ public class SalesInfo {
     }
 
     public void toMaps(String[] args) { //  сюда придёт текстовый массив только если он прошел проверку
-        String stWhat1 = args[0]; // клиент
-        String stWhat2 = args[1]; // товар
+        String stWhat1 = args[0].trim(); // клиент
+        String stWhat2 = args[1].trim(); // товар
 
         Integer intWhat1 = Integer.valueOf(args[2].replaceAll("[\\D]", "")); // количество
         Double dblWhat2 = Double.valueOf(args[3].replaceAll("[\\D]", ""));   // цена

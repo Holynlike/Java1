@@ -8,8 +8,13 @@ public class FiboMapCache {
     static Map<Integer, BigDecimal> fiboCache = new HashMap<>();
     boolean fibocache;
 
-    public static void main(String[] args) {test();}
-    public FiboMapCache(boolean cacheOn) {fibocache = cacheOn;}
+    public static void main(String[] args) {
+        test();
+    }
+
+    public FiboMapCache(boolean cacheOn) {
+        fibocache = cacheOn;
+    }
 
     public BigDecimal fiboNumber(int n) {
         BigDecimal fiboprev1 = new BigDecimal("0");
@@ -18,20 +23,18 @@ public class FiboMapCache {
         if (fiboCache != null && fiboCache.containsKey(n)) {
             return fiboCache.get(n);
         }
-        switch (n) {
-            case 0:
-                RESfiboNumber = new BigDecimal(String.valueOf(n));
-            case 1:
-                RESfiboNumber = new BigDecimal(String.valueOf(n));
-            default:
-                for (int i = 2; i <= n; i++) {
-                    RESfiboNumber = fiboprev1.add(fiboprev2);
-                    fiboprev1 = fiboprev2;
-                    fiboprev2 = RESfiboNumber;
-                }
+
+        if (n < 2) {
+            RESfiboNumber = fiboprev2;
+        } else {
+            for (int i = 1; i < n; i++) {
+                RESfiboNumber = fiboprev1.add(fiboprev2);
+                fiboprev1 = fiboprev2;
+                fiboprev2 = RESfiboNumber;
+            }
         }
         if (fibocache && fiboCache != null && !fiboCache.containsKey(n)) {
-            fiboCache.put(fiboCache.size(), RESfiboNumber);
+            fiboCache.put(n, RESfiboNumber);
         }
         return RESfiboNumber;
     }
