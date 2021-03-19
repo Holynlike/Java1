@@ -6,7 +6,7 @@ import java.util.AbstractMap.SimpleEntry;
 
 public class SalesInfo {
     Map<String, AbstractMap.SimpleEntry<Double, Integer>> getcustomers = new TreeMap<>();
-    public TreeMap<String, Double> getgoods;
+    public TreeMap<String, Double> getgoods = new TreeMap<>();
     private int openedOrders = 0;
 
     public static void main(String[] args) {
@@ -17,6 +17,8 @@ public class SalesInfo {
         }
         System.out.println("Количество успешно считанных строк = " + salesInfo.openedOrders);
         System.out.println(salesInfo.getcustomers);
+        System.out.println(salesInfo.getgoods);
+
     }
 
     public SalesInfo(String fileName) {
@@ -57,7 +59,6 @@ public class SalesInfo {
 
         if (getcustomers.size() == 0) { // если пуст
             getcustomers.put(stWhat1, new SimpleEntry(dblWhat2, intWhat1));
-            return;
         } else {
             for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : getcustomers.entrySet()) { // если не пуст
                 if (ES.getKey().equals(stWhat1)) { // ищем в словаре свежеспарсенное ФИО
@@ -66,6 +67,18 @@ public class SalesInfo {
                 }
             }
             getcustomers.put(stWhat1, new SimpleEntry<Double, Integer>(dblWhat2, intWhat1));
+        }
+        //==========геткустомерс заполнен===========//
+        Double prod = Double.valueOf(args[3].replaceAll("[\\D]", ""));   // цена
+        if (getgoods.size() == 0) { // если пуст
+            getgoods.put(stWhat2, dblWhat2);
+        } else {
+            for (Map.Entry<String, Double> GS : getgoods.entrySet()) { // если не пуст
+                if (GS.getKey().equals(stWhat2)) { // ищем в словаре свежеспарсенный товар
+                    prod+=GS.getValue();
+                }
+            }
+            getgoods.put(stWhat2, prod);
         }
     }
 
