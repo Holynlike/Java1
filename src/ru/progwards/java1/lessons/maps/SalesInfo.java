@@ -9,22 +9,6 @@ public class SalesInfo {
     public TreeMap<String, Double> getgoods = new TreeMap<>();
     private int openedOrders = 0;
 
-    public static void main(String[] args) {
-        SalesInfo salesInfo = new SalesInfo("D:/forexp/Пример.csv");
-        System.out.println("-------------");
-        for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : salesInfo.getcustomers.entrySet()) {
-            System.out.println(ES.getKey() + " " + ES.getValue());
-        }
-        System.out.println("Количество успешно считанных строк = " + salesInfo.openedOrders);
-        System.out.println(salesInfo.getcustomers);
-        System.out.println(salesInfo.getgoods);
-
-    }
-
-    public SalesInfo(String fileName) {
-        run(fileName);
-    }
-
     public void run(String fileName) {
         FileReader reader;
         try {
@@ -36,7 +20,6 @@ public class SalesInfo {
                 String[] strarr = strFromFile.split(","); // переводим в массив
                 if (blnmasParse(strarr)) { // проверяем на корректность массива (4 значения, первые два ходят в стрингах, третий и четвертый - ИНТы.)
                     toMaps(strarr); // вынесу в отдельный метод упаковку в МАПы
-                    //TODO в toMaps организовать распих по всем мапам
                     openedOrders++;
                 }
             }
@@ -47,6 +30,7 @@ public class SalesInfo {
     }
 
     public int loadOrders(String fileName) { // вернуть количество успешно загруженных строк
+        run(fileName);
         return openedOrders;
     }
 
@@ -80,6 +64,7 @@ public class SalesInfo {
             }
             getgoods.put(stWhat2, prod);
         }
+        //==========getgoods заполнен===========//
     }
 
     boolean blnmasParse(String[] arr) { // проверка массива
