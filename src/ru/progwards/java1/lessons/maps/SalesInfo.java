@@ -2,19 +2,21 @@ package ru.progwards.java1.lessons.maps;
 
 import java.io.FileReader;
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
 
 public class SalesInfo {
-    Map<String, AbstractMap.SimpleEntry<Double, Integer>> getcustomers = new HashMap<>();
-    public Map<String, Double> getgoods;
+    Map<String, AbstractMap.SimpleEntry<Double, Integer>> getcustomers = new TreeMap<>();
+    public TreeMap<String, Double> getgoods;
     private int openedOrders = 0;
 
     public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo("D:/forexp/Пример.csv");
         System.out.println("-------------");
-        for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES :  salesInfo.getcustomers.entrySet()) {
+        for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : salesInfo.getcustomers.entrySet()) {
             System.out.println(ES.getKey() + " " + ES.getValue());
         }
         System.out.println("Количество успешно считанных строк = " + salesInfo.openedOrders);
+        System.out.println(salesInfo.getcustomers);
     }
 
     public SalesInfo(String fileName) {
@@ -47,32 +49,23 @@ public class SalesInfo {
     }
 
     public void toMaps(String[] args) { //  сюда придёт текстовый массив только если он прошел проверку
-        double tmp = 0;
-        boolean isFound = false;
-        String stWhat1 = args[0];
-        String stWhat2 = args[1];
+        String stWhat1 = args[0]; // клиент
+        String stWhat2 = args[1]; // товар
 
-        int intWhat1 = Integer.parseInt(args[2].replaceAll("[\\D]", ""));
-        int intWhat2 = Integer.parseInt(args[3].replaceAll("[\\D]", ""));
-        try { // если словарь пуст, добавляем в него и сразу выходим
-            if (getcustomers.size() == 0) { // если пуст
-                getcustomers.put(stWhat1, new AbstractMap.SimpleEntry(intWhat1, intWhat2));
-                return;
-            } else {
-                for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : getcustomers.entrySet()) { // если не пуст
-                    if (ES.getKey().equals(stWhat1)) { // ищем в словаресвежеспарсенное ФИО
-                        isFound = true; // В цикле пр
-                        tmp = ES.getValue().getKey() + intWhat1; // найдя, суммируем покупки к этому покупателю
-                    }
-                }
-                if (isFound) {
-                    getcustomers.put(stWhat1, new AbstractMap.SimpleEntry(tmp, intWhat2));
-                } else {
-                    getcustomers.put(stWhat1, new AbstractMap.SimpleEntry(intWhat1, intWhat2));
+        Integer intWhat1 = Integer.valueOf(args[2].replaceAll("[\\D]", "")); // количество
+        Double dblWhat2 = Double.valueOf(args[3].replaceAll("[\\D]", ""));   // цена
+
+        if (getcustomers.size() == 0) { // если пуст
+            getcustomers.put(stWhat1, new SimpleEntry(dblWhat2, intWhat1));
+            return;
+        } else {
+            for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : getcustomers.entrySet()) { // если не пуст
+                if (ES.getKey().equals(stWhat1)) { // ищем в словаре свежеспарсенное ФИО
+                    intWhat1+=ES.getValue().getValue();
+                    dblWhat2+=ES.getValue().getKey();
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            getcustomers.put(stWhat1, new SimpleEntry<Double, Integer>(dblWhat2, intWhat1));
         }
     }
 
