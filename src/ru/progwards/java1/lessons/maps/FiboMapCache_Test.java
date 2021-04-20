@@ -1,30 +1,44 @@
 package ru.progwards.java1.lessons.maps;
+
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
 public class FiboMapCache_Test {
-    public static void main(String[] args)
-    {
-        int too = 8;
-        FiboMapCache fc = new FiboMapCache(false);
-        for (int i = 1; i < too; i++) {
-            System.out.println(i + " - " + fc.fiboNumber(i));
-        }
+    public static void main(String[] args) {
 
-        System.out.println();
-        for (int i = 1; i < too; i++) {
-            System.out.println(i + " - " + fc.fiboNumber(i));
-        }
-        System.out.println();
+    }
 
-        fc = new FiboMapCache(true);
-        for (int i = 1; i < too; i++) {
-            System.out.println(i + " - " + fc.fiboNumber(i));
+    public static void poi() {
+        Instant instant = Instant.now();
+        ZonedDateTime zdt = instant.atZone(ZoneId.of("Europe/Moscow"));
+
+        LocalDateTime ldt = zdt.toLocalDateTime();
+        System.out.println(ldt);
+    }
+
+    HashMap<Integer, String> a2map(int[] akey, String[] aval) {
+        HashMap<Integer, String> a = new HashMap<Integer, String>();
+        for (int i = 0; i < akey.length; i++) {
+            a.put(akey[i], aval[i]);
         }
-        System.out.println();
-        for (int i = 1; i < too; i++) {
-            System.out.println(i + " - " + fc.fiboNumber(i));
-        }
-        System.out.println();
-        for (int i = 1; i < too; i++) {
-            System.out.println(i + " - " + fc.fiboNumber(i));
-        }
+        return a;
+    }
+
+    public static Date createDate() { //28 февраля 1986, 0 часов, 0 минут, 0 секунд, 0 миллисекунд
+        return new Date(1986, 3, 28);
+    }
+
+    public static void ggg() {
+        ZoneId zid1 = ZoneId.of("Europe/Moscow");
+        System.out.println(zid1.getRules().getOffset(Instant.now()));
+    }
+
+    public static Instant createInstant() { // Instant, соответствующий 1 января 2020 года, 15 часов и одна наносекунда по Московскому времени
+        return Instant.ofEpochSecond(1577901600).plusNanos(1);
     }
 }
