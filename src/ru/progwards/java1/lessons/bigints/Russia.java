@@ -1,8 +1,6 @@
 package ru.progwards.java1.lessons.bigints;
-
 public class Russia {
     public static void main(String[] args) {
-
         System.out.println(summ(0, 9));
         System.out.println(125 +  397 + 942);
         System.out.println(summ(396, 399));

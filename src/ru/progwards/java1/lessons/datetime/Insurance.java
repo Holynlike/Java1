@@ -18,6 +18,7 @@ public class Insurance {
     public Insurance(ZonedDateTime start) {this.start = start;}
 
     public Insurance(String strStart, FormatStyle style){
+        System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
 //        - установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
@@ -97,7 +98,11 @@ public class Insurance {
         //- вернуть строку формата "Insurance issued on " + start + validStr,
         // где validStr = " is valid", если страховка действительна на данный момент и
         // " is not valid", если она недействительна.
+        ZonedDateTime zt = ZonedDateTime.now();
+        String ret = "";
+        if (this.start.plusNanos(duration.toNanos()).getNano() > System.nanoTime()){
 
+        }
         return "true"; //TODO:  DE LAT
     }
 }

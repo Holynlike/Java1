@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.arrays;
 public class ArraySort {
     int SortedArr[];
 
-    public static void sort(int[] a) { // Классика, соритровка - пузырек
+    public static void sort(int[] a) { // Классика, сортировка - пузырек
         int tmp; // сам пузырек
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
