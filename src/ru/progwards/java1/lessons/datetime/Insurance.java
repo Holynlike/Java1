@@ -6,8 +6,11 @@ import java.time.temporal.TemporalAccessor;
 
 public class Insurance {
     public static void main(String[] args) {
-        Insurance insurance = new Insurance("13.03.2021", FormatStyle.SHORT);
-        insurance.setDuration(15,2,3); //Ожидаем 3060
+        Insurance insurance = new Insurance("01.01.2021", FormatStyle.SHORT);
+        insurance.setDuration(2,0,1); //Ожидаем 3060
+        System.out.println("---------------");
+        System.out.println(insurance.checkValid(ZonedDateTime.now()));
+        System.out.println(insurance.toString());
     }
     public static enum FormatStyle {SHORT, LONG, FULL}
 
@@ -15,7 +18,9 @@ public class Insurance {
     private Duration duration;// - продолжительность действия.
 
     // Конструкторы:
-    public Insurance(ZonedDateTime start) {this.start = start;}
+    public Insurance(ZonedDateTime start) {
+        this.start = start;
+    }
 
     public Insurance(String strStart, FormatStyle style){
         System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
@@ -38,7 +43,8 @@ public class Insurance {
         DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         TemporalAccessor ta = dtf.parse("12.12.2012 12:12:12");
         LocalDateTime ldt = LocalDateTime.from(ta);
-        System.out.println(ldt);
+        //System.out.println(ldt);
+        start = zdt2;
     }
     public void setDuration(Duration duration){this.duration = duration;}
     public void setDuration(ZonedDateTime expiration) {
@@ -48,10 +54,10 @@ public class Insurance {
     public void setDuration(int months, int days, int hours) {
         int MontToHours = 0;
         int yea=months % 12;
-        System.out.println(yea);
+        //System.out.println(yea);
         int fullMonths = months - (months % 12); // задел на будущее если робот подаст больше 12 месяцев
-        System.out.println(fullMonths);
-        switch (yea){ //TODO: Вариант покрывает страховку не дольше года. Надо бы пилить на большее через деление по модулю и его остаток
+        //System.out.println(fullMonths);
+        switch (yea){
             case 1: MontToHours = 31;
                 break;
             case 2: MontToHours = 59;
@@ -80,29 +86,31 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-
+        Instant in = Instant.parse(style.toString());
+        System.out.println(in);
     }
-
-
     //1.4 Реализовать методы возврата информации:
 
     public boolean checkValid(ZonedDateTime dateTime){
         //- проверить действительна ли страховка на указанную дату-время.
         // Если продолжительность не задана считать страховку бессрочной.
-        boolean blnRES;
-        blnRES = (dateTime == null) ? true : false;
-        return blnRES; //TODO:  DE LAT
+        if(duration.isZero()){return true;} // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
+        boolean b;
+        ZonedDateTime z = this.start.plusNanos(duration.toNanos()); // Здесь должно получиться время окончания страховки
+//        System.out.println(z + " - дата окончания страховки");
+//        System.out.println(start + " - дата, которая тестируется");
+        return z.isAfter(dateTime); // Вроде работает
     }
 
     public String toString() {
         //- вернуть строку формата "Insurance issued on " + start + validStr,
         // где validStr = " is valid", если страховка действительна на данный момент и
         // " is not valid", если она недействительна.
-        ZonedDateTime zt = ZonedDateTime.now();
-        String ret = "";
-        if (this.start.plusNanos(duration.toNanos()).getNano() > System.nanoTime()){
-
+        boolean b = checkValid(ZonedDateTime.now());
+        if(b) {
+            return "Insurance issued on " + start + " is valid";
+        }else{
+            return "Insurance issued on " + start + " is not valid";
         }
-        return "true"; //TODO:  DE LAT
     }
 }
