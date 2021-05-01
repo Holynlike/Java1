@@ -120,7 +120,7 @@ public class Insurance {
         } // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
         boolean b;
         ZonedDateTime z = this.start.plusNanos(duration.toNanos()); // Здесь должно получиться время окончания страховки
-        return z.isBefore(dateTime); // Вроде работает
+        return z.isAfter(dateTime); // Вроде работает
     }
 
     public String toString() {
