@@ -7,9 +7,11 @@ import java.time.temporal.TemporalAccessor;
 public class Insurance {
     public static void main(String[] args) {
         Insurance insurance = new Insurance("01.01.2021", FormatStyle.SHORT);
-        insurance.setDuration(2,0,1); //Ожидаем 3060
+        //insurance.setDuration(2,0,1); //Ожидаем 3060
         System.out.println("---------------");
+        insurance.setDuration(ZonedDateTime.parse("2021-05-03T15:04:14.607559+03:00[Europe/Moscow]"));
         System.out.println(insurance.checkValid(ZonedDateTime.now()));
+
         System.out.println(insurance.toString());
     }
     public static enum FormatStyle {SHORT, LONG, FULL}
@@ -94,11 +96,10 @@ public class Insurance {
     public boolean checkValid(ZonedDateTime dateTime){
         //- проверить действительна ли страховка на указанную дату-время.
         // Если продолжительность не задана считать страховку бессрочной.
+        if(duration == null){return true;} // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
         if(duration.isZero()){return true;} // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
         boolean b;
         ZonedDateTime z = this.start.plusNanos(duration.toNanos()); // Здесь должно получиться время окончания страховки
-//        System.out.println(z + " - дата окончания страховки");
-//        System.out.println(start + " - дата, которая тестируется");
         return z.isAfter(dateTime); // Вроде работает
     }
 
