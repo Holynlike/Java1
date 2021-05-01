@@ -2,87 +2,103 @@ package ru.progwards.java1.lessons.datetime;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
 
 public class Insurance {
-    public static void main(String[] args) {
-        Insurance insurance = new Insurance("01.01.2021", FormatStyle.SHORT);
-        //insurance.setDuration(2,0,1); //Ожидаем 3060
-        System.out.println("---------------");
-        insurance.setDuration(ZonedDateTime.parse("2021-05-03T15:04:14.607559+03:00[Europe/Moscow]"));
-        System.out.println(insurance.checkValid(ZonedDateTime.now()));
-
-        System.out.println(insurance.toString());
-    }
+    // ====== Переменные класса
     public static enum FormatStyle {SHORT, LONG, FULL}
-
     private ZonedDateTime start;// - дата-время начала действия страховки.
     private Duration duration;// - продолжительность действия.
+    // ======
+    public static void main(String[] args) {
+        Insurance insurance = new Insurance("2021-04-30", Insurance.FormatStyle.SHORT);
+        System.out.println(insurance.toString());
 
-    // Конструкторы:
-    public Insurance(ZonedDateTime start) {
-        this.start = start;
+//        insurance.setDuration(ZonedDateTime.parse("2021-05-03T15:04:14.607559+03:00[Europe/Moscow]"));
+//        System.out.println(insurance.checkValid(ZonedDateTime.now()));//
+//        System.out.println(insurance.toString());
     }
 
-    public Insurance(String strStart, FormatStyle style){
+    // Конструкторы:
+    public Insurance(ZonedDateTime start) {this.start = start;}
+
+    public Insurance(String strStart, FormatStyle style) {
         System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
-//        - установить дату-время начала действия страховки
+//        установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
 //        FULL - ISO_ZONED_DATE_TIME
 //        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
-        String ss = "";
-        DateTimeFormatter dtf3 = DateTimeFormatter.BASIC_ISO_DATE;
-        switch (style){
-            case FULL : dtf3= DateTimeFormatter.ISO_ZONED_DATE_TIME;
-            case LONG : dtf3= DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-           case SHORT : dtf3= DateTimeFormatter.ISO_LOCAL_DATE;
-            default   : dtf3 = DateTimeFormatter.BASIC_ISO_DATE;
+        DateTimeFormatter dtf;
+        switch (style) {
+            case FULL:
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                break;
+            case LONG:
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                break;
+            case SHORT:
+                dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+// Чистый шорт она НИКАК не парсит - приходится ставить костыли (привешивать нулевые часы и минуты
+                strStart+=" 00:00";
+                break;
+            default:
+                dtf = DateTimeFormatter.BASIC_ISO_DATE;
         }
-        ZonedDateTime zdt2 = Instant.now().atZone(ZoneId.of("Europe/Moscow"));
-
-
-        DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-        TemporalAccessor ta = dtf.parse("12.12.2012 12:12:12");
-        LocalDateTime ldt = LocalDateTime.from(ta);
-        //System.out.println(ldt);
-        start = zdt2;
+        LocalDateTime z = LocalDateTime.parse(strStart, dtf);
+        start = z.atZone(ZoneId.of("Europe/Moscow"));
     }
-    public void setDuration(Duration duration){this.duration = duration;}
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
     public void setDuration(ZonedDateTime expiration) {
         duration = Duration.ofSeconds(expiration.getSecond());
     }
 
     public void setDuration(int months, int days, int hours) {
         int MontToHours = 0;
-        int yea=months % 12;
+        int yea = months % 12;
         //System.out.println(yea);
         int fullMonths = months - (months % 12); // задел на будущее если робот подаст больше 12 месяцев
         //System.out.println(fullMonths);
-        switch (yea){
-            case 1: MontToHours = 31;
+        switch (yea) {
+            case 1:
+                MontToHours = 31;
                 break;
-            case 2: MontToHours = 59;
+            case 2:
+                MontToHours = 59;
                 break;
-            case 3: MontToHours = 90;
+            case 3:
+                MontToHours = 90;
                 break;
-            case 4: MontToHours = 120;
+            case 4:
+                MontToHours = 120;
                 break;
-            case 5: MontToHours = 151;
+            case 5:
+                MontToHours = 151;
                 break;
-            case 6: MontToHours = 181;
+            case 6:
+                MontToHours = 181;
                 break;
-            case 7: MontToHours = 212;
+            case 7:
+                MontToHours = 212;
                 break;
-            case 8: MontToHours = 243;
+            case 8:
+                MontToHours = 243;
                 break;
-            case 9: MontToHours = 273;
+            case 9:
+                MontToHours = 273;
                 break;
-            case 10: MontToHours = 304;
+            case 10:
+                MontToHours = 304;
                 break;
-            case 11: MontToHours = 334;
+            case 11:
+                MontToHours = 334;
         }
-        duration = Duration.ofDays(((fullMonths/12)*365) + MontToHours + days);
+        duration = Duration.ofDays(((fullMonths / 12) * 365) + MontToHours + days);
         duration = duration.plusHours(hours);
         System.out.println(duration.toMinutes());
     }
@@ -93,11 +109,15 @@ public class Insurance {
     }
     //1.4 Реализовать методы возврата информации:
 
-    public boolean checkValid(ZonedDateTime dateTime){
+    public boolean checkValid(ZonedDateTime dateTime) {
         //- проверить действительна ли страховка на указанную дату-время.
         // Если продолжительность не задана считать страховку бессрочной.
-        if(duration == null){return true;} // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
-        if(duration.isZero()){return true;} // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
+        if (duration == null) {
+            return true;
+        } // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
+        if (duration.isZero()) {
+            return true;
+        } // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
         boolean b;
         ZonedDateTime z = this.start.plusNanos(duration.toNanos()); // Здесь должно получиться время окончания страховки
         return z.isBefore(dateTime); // Вроде работает
@@ -108,10 +128,10 @@ public class Insurance {
         // где validStr = " is valid", если страховка действительна на данный момент и
         // " is not valid", если она недействительна.
         boolean b = checkValid(ZonedDateTime.now());
-        if(b) {
-            return "Insurance issued on " + start + " is valid";
-        }else{
-            return "Insurance issued on " + start + " is not valid";
+        if (b) {
+            return "Insurance issued on " + this.start + " is valid";
+        } else {
+            return "Insurance issued on " + this.start + " is not valid";
         }
     }
 }
