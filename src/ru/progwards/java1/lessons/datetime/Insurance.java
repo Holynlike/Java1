@@ -2,8 +2,6 @@ package ru.progwards.java1.lessons.datetime;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAccessor;
 
 public class Insurance {
     // ====== Переменные класса
@@ -12,12 +10,28 @@ public class Insurance {
     private Duration duration;// - продолжительность действия.
     // ======
     public static void main(String[] args) {
-        Insurance insurance = new Insurance("2021-04-30", Insurance.FormatStyle.SHORT);
+//========================
+        Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-02T17:12:13.509744+03:00[Europe/Moscow]"));
         System.out.println(insurance.toString());
-
-//        insurance.setDuration(ZonedDateTime.parse("2021-05-03T15:04:14.607559+03:00[Europe/Moscow]"));
-//        System.out.println(insurance.checkValid(ZonedDateTime.now()));//
-//        System.out.println(insurance.toString());
+        System.out.println("Ожидалось:\n" +
+                "Insurance issued on 2021-05-02T17:12:13.509744+03:00[Europe/Moscow] is not valid\n");
+//========================
+        insurance = new Insurance(ZonedDateTime.parse("2021-04-30T17:12:13.514547+03:00[Europe/Moscow]"));
+        insurance.setDuration(Duration.ofDays(2));
+        System.out.println(insurance.toString());
+        System.out.println("Ожидалось:\n" +
+                "Insurance issued on 2021-04-30T17:12:13.514547+03:00[Europe/Moscow] is valid\n");
+//========================
+        insurance = new Insurance(ZonedDateTime.parse("2021-04-29T17:12:13.519406+03:00[Europe/Moscow]"));
+        insurance.setDuration(ZonedDateTime.parse("2021-04-30T17:12:13.519459+03:00[Europe/Moscow]"));
+        System.out.println(insurance.toString());
+        System.out.println("Ожидалось:\n" +
+                "Insurance issued on 2021-04-29T17:12:13.519406+03:00[Europe/Moscow] is not valid\n");
+//========================
+        insurance = new Insurance(ZonedDateTime.parse("2021-04-29T17:12:13.524329+03:00[Europe/Moscow]"));
+        insurance.setDuration(Duration.ofDays(3));
+        System.out.println(insurance.toString());
+        System.out.println("Ожидалось: False");
     }
 
     // Конструкторы:
@@ -112,15 +126,19 @@ public class Insurance {
     public boolean checkValid(ZonedDateTime dateTime) {
         //- проверить действительна ли страховка на указанную дату-время.
         // Если продолжительность не задана считать страховку бессрочной.
-        if (duration == null) {
-            return true;
-        } // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
-        if (duration.isZero()) {
-            return true;
-        } // Если не задано время действия страховки, сразу выходим с тру (бессрочная страховка)
         boolean b;
+        if (duration == null) {
+            duration = Duration.ZERO;
+        } // Если старт страховки больше указанного времени (ещё не вступила в действие)
+
         ZonedDateTime z = this.start.plusNanos(duration.toNanos()); // Здесь должно получиться время окончания страховки
-        return z.isAfter(dateTime); // Вроде работает
+        if (z.isBefore(dateTime)) { // Если окончание страховки < указанного времени, то фальс
+            return false;
+        }
+        if (start.isAfter(dateTime)){ // Если страховка ещё не вступила в действие
+            return false;
+        }
+        return  true;  // Все прочие ситуации
     }
 
     public String toString() {
