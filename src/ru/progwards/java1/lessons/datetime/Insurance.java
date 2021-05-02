@@ -106,7 +106,13 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        System.out.println("вызов метода setDuration; strDuration = " + strDuration + "FormatStyle = " + style.toString());
+        System.out.println("вызов метода setDuration; strDuration = " + strDuration + "; FormatStyle = " + style.toString());
+        if (strDuration.replaceAll("\\D+","") == strDuration) {// Если там одни числа
+            long l = Long.valueOf(strDuration);
+            System.out.println("В качестве strDuration  пришло число: " + l);
+            duration = Duration.ofNanos(l);
+            return;
+        }
 //        установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
@@ -135,7 +141,6 @@ public class Insurance {
 
     public boolean checkValid(ZonedDateTime dateTime) {
         if (duration == null){ // Если бессрочна, сравниваем только старт
-            System.out.println("бессрочная");
             if (start.isBefore(dateTime)){ // Бессрочная страховка, ещё не вступила в действие
                 return true;
             }else {
@@ -144,7 +149,6 @@ public class Insurance {
         }
         // Если продолжительность указана, сравниваем старт и окончание
         ZonedDateTime z = this.start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
-        System.out.println("Действует до: " + z);
         if (z.isAfter(dateTime) & start.isBefore(dateTime)){ // Если окончание страховки позднее, чем текущая дата, а старт страховки раньше текущего времени
             return true;
         }
