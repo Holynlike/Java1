@@ -12,40 +12,13 @@ public class Insurance {
     public static void main(String[] args) {
 //========================
         Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-03T10:15:30+01:00"));
-        insurance = new Insurance("2021-05-01T10:15:30+01:00[Europe/Paris]",FormatStyle.FULL);
+        insurance.setDuration("2021-05-01T10:15:30+01:00[Europe/Paris]",FormatStyle.FULL);
         System.out.println(insurance.toString());
         System.out.println("Ожидалось:\n" + "Insurance issued on 2021-05-03T00:00+03:00[Europe/Moscow] is not valid\n");
     }
 
     // Конструкторы:
     public Insurance(ZonedDateTime start) {this.start = start;}
-
-    public Insurance(String strStart, FormatStyle style) {
-        System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
-//        установить дату-время начала действия страховки
-//        SHORT соответствует ISO_LOCAL_DATE
-//        LONG  - ISO_LOCAL_DATE_TIME
-//        FULL - ISO_ZONED_DATE_TIME
-//        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
-        DateTimeFormatter dtf;
-        switch (style) {
-            case FULL:
-                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-                break;
-            case LONG:
-                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                break;
-            case SHORT:
-                dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-// Чистый шорт она НИКАК не парсит - приходится ставить костыли (привешивать нулевые часы и минуты
-                strStart+=" 00:00";
-                break;
-            default:
-                dtf = DateTimeFormatter.BASIC_ISO_DATE;
-        }
-        LocalDateTime z = LocalDateTime.parse(strStart, dtf);
-        start = z.atZone(ZoneId.of("Europe/Moscow"));
-    }
 
     public void setDuration(Duration duration) {
         this.duration = duration;
@@ -56,6 +29,13 @@ public class Insurance {
     }
 
     public void setDuration(int months, int days, int hours) {
+        try {
+            System.out.println("Вызван метод: public void setDuration(int months, int days, int hours)");
+            System.out.printf(String.valueOf(months), " - Monts", days, " - days", hours, " - Hours");
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+
         System.out.println("Вызван метод: public void setDuration(int months, int days, int hours)");
         System.out.printf(String.valueOf(months), " - Monts", days, " - days", hours, " - Hours");
         int MontToHours = 0;
@@ -100,7 +80,31 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        Instant in = Instant.parse(style.toString());
+        System.out.println("вызов метода setDuration; strDuration = " + strDuration + "FormatStyle = " + style.toString());
+//        установить дату-время начала действия страховки
+//        SHORT соответствует ISO_LOCAL_DATE
+//        LONG  - ISO_LOCAL_DATE_TIME
+//        FULL - ISO_ZONED_DATE_TIME
+//        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
+        DateTimeFormatter dtf;
+        switch (style) {
+            case FULL:
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                break;
+            case LONG:
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                break;
+            case SHORT:
+                dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+// Чистый шорт она НИКАК не парсит - приходится ставить костыли (привешивать нулевые часы и минуты
+                strDuration+=" 00:00";
+                break;
+            default:
+                dtf = DateTimeFormatter.BASIC_ISO_DATE;
+        }
+
+        LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
+        duration = Duration.parse(z.toString());
     }
 
     public boolean checkValid(ZonedDateTime dateTime) {
