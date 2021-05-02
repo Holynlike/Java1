@@ -11,10 +11,10 @@ public class Insurance {
     // ======
     public static void main(String[] args) {
 //========================
-        Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-03T10:15:30+01:00"));
-        insurance.setDuration("2021-05-01T10:15:30+01:00[Europe/Paris]",FormatStyle.FULL);
+        Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-01T16:26:13.843932+03:00[Europe/Moscow]"));
+        insurance.setDuration("1000000000", Insurance.FormatStyle.SHORT);
         System.out.println(insurance.toString());
-        System.out.println("Ожидалось:\n" + "Insurance issued on 2021-05-03T00:00+03:00[Europe/Moscow] is not valid\n");
+        System.out.println("Ожидалось:\n" + "Insurance issued on 2021-05-01T16:26:13.843932+03:00[Europe/Moscow] is valid\n");
     }
 
     // Конструкторы:
@@ -110,7 +110,7 @@ public class Insurance {
         if (strDuration.replaceAll("\\D+","") == strDuration) {// Если там одни числа
             long l = Long.valueOf(strDuration);
             System.out.println("В качестве strDuration  пришло число: " + l);
-            duration = Duration.ofNanos(l);
+            duration = Duration.ofSeconds(l);
             return;
         }
 //        установить дату-время начала действия страховки
@@ -120,16 +120,11 @@ public class Insurance {
 //        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
         DateTimeFormatter dtf;
         switch (style) {
-            case FULL:
+            case FULL: // FULL - стандартный формат Duration, который получается через toString()
                 dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
                 break;
             case LONG:
                 dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                break;
-            case SHORT:
-                dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-// Чистый шорт она НИКАК не парсит - приходится ставить костыли (привешивать нулевые часы и минуты
-                strDuration+=" 00:00";
                 break;
             default:
                 dtf = DateTimeFormatter.BASIC_ISO_DATE;
@@ -149,6 +144,7 @@ public class Insurance {
         }
         // Если продолжительность указана, сравниваем старт и окончание
         ZonedDateTime z = this.start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
+        System.out.println(z);
         if (z.isAfter(dateTime) & start.isBefore(dateTime)){ // Если окончание страховки позднее, чем текущая дата, а старт страховки раньше текущего времени
             return true;
         }
