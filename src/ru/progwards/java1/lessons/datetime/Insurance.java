@@ -56,6 +56,8 @@ public class Insurance {
     }
 
     public void setDuration(int months, int days, int hours) {
+        System.out.println("Вызван метод: public void setDuration(int months, int days, int hours)");
+        System.out.printf(String.valueOf(months), " - Monts", days, " - days", hours, " - Hours");
         int MontToHours = 0;
         int yea = months % 12;
         int fullMonths = months - (months % 12); // задел на будущее если робот подаст больше 12 месяцев
