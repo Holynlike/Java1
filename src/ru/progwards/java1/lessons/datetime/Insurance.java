@@ -20,6 +20,32 @@ public class Insurance {
     // Конструкторы:
     public Insurance(ZonedDateTime start) {this.start = start;}
 
+    public Insurance(String strStart, FormatStyle style) {
+        System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
+//        установить дату-время начала действия страховки
+//        SHORT соответствует ISO_LOCAL_DATE
+//        LONG  - ISO_LOCAL_DATE_TIME
+//        FULL - ISO_ZONED_DATE_TIME
+//        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
+        DateTimeFormatter dtf;
+        switch (style) {
+            case FULL:
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                break;
+            case LONG:
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                break;
+            case SHORT:
+                dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+// Чистый шорт она НИКАК не парсит - приходится ставить костыли (привешивать нулевые часы и минуты
+                strStart+=" 00:00";
+                break;
+            default:
+                dtf = DateTimeFormatter.BASIC_ISO_DATE;
+        }
+        LocalDateTime z = LocalDateTime.parse(strStart, dtf);
+        start = z.atZone(ZoneId.of("Europe/Moscow"));
+    }
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
