@@ -4,14 +4,11 @@ import java.util.Arrays;
 
 public class koltin {
     public static void main(String[] args) {
-        for (double d = 0; d < 0.8; d= d + 0.1) {
-            //System.out.println(d);
-        }
-        double res = 0, d = 1;
-        while (d >0){
+        double res = 0, d = 1000;
+        while (d >1){
             res = d;
             d /=2;
+            System.out.println(res);
         }
-        System.out.println(res);
     }
 }
