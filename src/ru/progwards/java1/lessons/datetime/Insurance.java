@@ -8,7 +8,6 @@ public class Insurance {
     public static enum FormatStyle {SHORT, LONG, FULL}
     private ZonedDateTime start;  // - дата-время начала действия страховки.
     private Duration duration;    // - продолжительность действия.
-
     // ======
     public static void main(String[] args) {
         Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-01T16:26:13.843932+03:00[Europe/Moscow]"));
@@ -138,7 +137,7 @@ public class Insurance {
             }
         }
         // Если продолжительность указана, сравниваем старт и окончание
-        ZonedDateTime z = this.start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
+        ZonedDateTime z = start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
         System.out.println(z);
         if (z.isAfter(dateTime) & start.isBefore(dateTime)) { // Если окончание страховки позднее, чем текущая дата, а старт страховки раньше текущего времени
             return true;
@@ -148,9 +147,9 @@ public class Insurance {
 
     public String toString() {
         if (checkValid(ZonedDateTime.now())) {
-            return "Insurance issued on " + this.start + " is valid";
+            return "Insurance issued on " + start + " is valid";
         } else {
-            return "Insurance issued on " + this.start + " is not valid";
+            return "Insurance issued on " + start + " is not valid";
         }
     }
 }

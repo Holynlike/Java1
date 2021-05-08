@@ -43,8 +43,8 @@ public class SalesInfo {
 
         if (getcustomers.size() == 0) { // если пуст
             getcustomers.put(stWhat1, new SimpleEntry(dblWhat2, intWhat1));
-        } else {
-            for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : getcustomers.entrySet()) { // если не пуст
+        } else {// если не пуст
+            for (Map.Entry<String, AbstractMap.SimpleEntry<Double, Integer>> ES : getcustomers.entrySet()) {
                 if (ES.getKey().equals(stWhat1)) { // ищем в словаре свежеспарсенное ФИО
                     intWhat1+=ES.getValue().getValue();
                     dblWhat2+=ES.getValue().getKey();
