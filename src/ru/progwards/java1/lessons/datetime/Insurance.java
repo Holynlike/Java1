@@ -10,10 +10,10 @@ public class Insurance {
     private Duration duration;    // - продолжительность действия.
     // ======
     public static void main(String[] args) {
-        Insurance insurance = new Insurance(ZonedDateTime.parse("2021-05-01T16:26:13.843932+03:00[Europe/Moscow]"));
+        Insurance insurance = new Insurance(ZonedDateTime.parse("2021-04-08T16:32:17.169824+03:00[Europe/Moscow]"));
         insurance.setDuration("0000-01-04T00:00:00", FormatStyle.LONG);
         System.out.println(insurance.toString());
-        System.out.println("Ожидалось:\n" + "Insurance issued on 2021-05-01T16:26:13.843932+03:00[Europe/Moscow] is valid\n");
+        System.out.println("Ожидалось:\n" + "Insurance issued on 2021-04-08T16:32:17.169824+03:00[Europe/Moscow] is valid\n");
     }
 
     // Конструкторы:
@@ -102,7 +102,6 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        System.out.println("вызов метода setDuration; strDuration = " + strDuration + "; FormatStyle = " + style.toString());
 //        установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
@@ -115,8 +114,17 @@ public class Insurance {
                 duration = Duration.ofSeconds(Long.valueOf(strDuration));
                 return;
             case LONG:
-                LocalDateTime ldt = LocalDateTime.parse(strDuration);
-                duration = Duration.ofSeconds(ldt.getSecond());
+                dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                // НИ КАК ВООБЩЕ НЕ парсится проклятый ISO_LOCAL_DATE_TIME;
+                // Приходится тупо перетаскивать в Лонг месяцы, дни и часы с конвертацией всего этого в секунды
+                // И только теперь оно работает. Крайне топорно, но иначе я просто не смог.
+                LocalDateTime l = LocalDateTime.parse(strDuration, dtf);
+                Long L1 = Long.valueOf(l.getYear());
+                L1+=Long.valueOf(l.getMonthValue()); // Вот здесь ждём плюсмесяц
+                L1*=2592000L;
+                L1+=Long.valueOf(l.getDayOfMonth())*86400; // А здесь ещё +4 дня (итого 5 дюрайшен)
+                L1+=Long.valueOf(l.getHour())*3600L;
+                duration = Duration.ofSeconds(L1);
                 return;
             case FULL: // FULL - стандартный формат Duration, который получается через toString()
                 dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
@@ -125,6 +133,7 @@ public class Insurance {
                 dtf = DateTimeFormatter.BASIC_ISO_DATE;
         }
         LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
+        System.out.println(z);
         duration = Duration.parse(z.toString());
     }
 
@@ -138,7 +147,7 @@ public class Insurance {
         }
         // Если продолжительность указана, сравниваем старт и окончание
         ZonedDateTime z = start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
-        System.out.println(z);
+        System.out.println(z + " - Это дата время окончания");
         if (z.isAfter(dateTime) & start.isBefore(dateTime)) { // Если окончание страховки позднее, чем текущая дата, а старт страховки раньше текущего времени
             return true;
         }
