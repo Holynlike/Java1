@@ -102,6 +102,7 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
+        System.out.println("вызван злой setDuration с параметрами: setDuration: " + strDuration + "FormatStyle: " + style);
 //        установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
@@ -114,17 +115,25 @@ public class Insurance {
                 duration = Duration.ofSeconds(Long.valueOf(strDuration));
                 return;
             case LONG:
+                System.out.println("\n\n\n");
                 dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                // НИ КАК ВООБЩЕ НЕ парсится проклятый ISO_LOCAL_DATE_TIME;
-                // Приходится тупо перетаскивать в Лонг месяцы, дни и часы с конвертацией всего этого в секунды
-                // И только теперь оно работает. Крайне топорно, но иначе я просто не смог.
+//                 НИ КАК ВООБЩЕ НЕ парсится проклятый ISO_LOCAL_DATE_TIME;
+//                 Приходится тупо перетаскивать в Лонг месяцы, дни и часы с конвертацией всего этого в секунды
+//                 И только теперь оно работает. Крайне топорно, но иначе я просто не смог.
                 LocalDateTime l = LocalDateTime.parse(strDuration, dtf);
+                System.out.println(l.toString());
                 Long L1 = Long.valueOf(l.getYear());
+                System.out.println(L1);
                 L1+=Long.valueOf(l.getMonthValue()); // Вот здесь ждём плюсмесяц
+                System.out.println(L1);
                 L1*=2592000L;
+                System.out.println(L1);
                 L1+=Long.valueOf(l.getDayOfMonth())*86400; // А здесь ещё +4 дня (итого 5 дюрайшен)
+                System.out.println(L1);
                 L1+=Long.valueOf(l.getHour())*3600L;
+                System.out.println(L1);
                 duration = Duration.ofSeconds(L1);
+                System.out.println("\n\n\n");
                 return;
             case FULL: // FULL - стандартный формат Duration, который получается через toString()
                 dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
@@ -133,7 +142,7 @@ public class Insurance {
                 dtf = DateTimeFormatter.BASIC_ISO_DATE;
         }
         LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
-        System.out.println(z);
+
         duration = Duration.parse(z.toString());
     }
 
