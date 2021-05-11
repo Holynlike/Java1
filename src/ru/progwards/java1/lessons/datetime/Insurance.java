@@ -11,7 +11,7 @@ public class Insurance {
     // ======
     public static void main(String[] args) {
         Insurance insurance = new Insurance(ZonedDateTime.parse("2021-04-08T16:32:17.169824+03:00[Europe/Moscow]"));
-        insurance.setDuration("0000-01-04T00:00:00", FormatStyle.LONG);
+        insurance.setDuration("PT48H", FormatStyle.FULL);
         System.out.println(insurance.toString());
         System.out.println("Ожидалось:\n" + "Insurance issued on 2021-04-08T16:32:17.169824+03:00[Europe/Moscow] is valid\n");
     }
@@ -102,7 +102,7 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        System.out.println("вызван злой setDuration с параметрами: setDuration: " + strDuration + "FormatStyle: " + style);
+        System.out.println("вызван злой setDuration с параметрами: strDuration= " + strDuration + ", FormatStyle= " + style);
 //        установить дату-время начала действия страховки
 //        SHORT соответствует ISO_LOCAL_DATE
 //        LONG  - ISO_LOCAL_DATE_TIME
@@ -115,35 +115,29 @@ public class Insurance {
                 duration = Duration.ofSeconds(Long.valueOf(strDuration));
                 return;
             case LONG:
-                System.out.println("\n\n\n");
                 dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-//                 НИ КАК ВООБЩЕ НЕ парсится проклятый ISO_LOCAL_DATE_TIME;
-//                 Приходится тупо перетаскивать в Лонг месяцы, дни и часы с конвертацией всего этого в секунды
-//                 И только теперь оно работает. Крайне топорно, но иначе я просто не смог.
                 LocalDateTime l = LocalDateTime.parse(strDuration, dtf);
-                System.out.println(l.toString());
                 Long L1 = Long.valueOf(l.getYear());
-                System.out.println(L1);
-                L1+=Long.valueOf(l.getMonthValue()); // Вот здесь ждём плюсмесяц
-                System.out.println(L1);
-                L1*=2592000L;
-                System.out.println(L1);
-                L1+=Long.valueOf(l.getDayOfMonth())*86400; // А здесь ещё +4 дня (итого 5 дюрайшен)
-                System.out.println(L1);
-                L1+=Long.valueOf(l.getHour())*3600L;
-                System.out.println(L1);
+                L1 += Long.valueOf(l.getMonthValue()); // Вот здесь ждём плюсмесяц
+                L1 *= 2592000L;
+                L1 += Long.valueOf(l.getDayOfMonth()) * 86400; // А здесь ещё +4 дня (итого 5 дюрайшен)
+                L1 += Long.valueOf(l.getHour()) * 3600L;
                 duration = Duration.ofSeconds(L1);
-                System.out.println("\n\n\n");
                 return;
             case FULL: // FULL - стандартный формат Duration, который получается через toString()
-                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+                dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME; // Нью затык живёт здесь! Организую трайкеч
                 break;
             default:
                 dtf = DateTimeFormatter.BASIC_ISO_DATE;
         }
-        LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
+        try {
+            LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
+            duration = Duration.parse(z.toString()); // Трайкеч. По идее должна быть датавремя в полном формате, а робот подаёт 48 часов с буковкаме!
+        }catch (Exception E){
+            //LocalDateTime z = LocalDateTime.parse(strDuration, DateTimeFormatter.ofPattern("'PT'HH'H'"));
+            duration = Duration.parse(strDuration);
+        }
 
-        duration = Duration.parse(z.toString());
     }
 
     public boolean checkValid(ZonedDateTime dateTime) {
