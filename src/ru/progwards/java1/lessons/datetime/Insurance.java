@@ -20,12 +20,6 @@ public class Insurance {
     public Insurance(ZonedDateTime start) {this.start = start;}
 
     public Insurance(String strStart, FormatStyle style) {
-        System.out.println("вызов конструктора Insurance; strStart = " + strStart + "FormatStyle = " + style.toString());
-//        установить дату-время начала действия страховки
-//        SHORT соответствует ISO_LOCAL_DATE
-//        LONG  - ISO_LOCAL_DATE_TIME
-//        FULL - ISO_ZONED_DATE_TIME
-//        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
         DateTimeFormatter dtf;
         switch (style) {
             case FULL:
@@ -51,15 +45,6 @@ public class Insurance {
     public void setDuration(ZonedDateTime expiration) {duration = Duration.between(start, expiration);}
 
     public void setDuration(int months, int days, int hours) {
-        try {
-            System.out.println("Вызван метод: public void setDuration(int months, int days, int hours)");
-            System.out.printf(String.valueOf(months), " - Monts", days, " - days", hours, " - Hours");
-        } catch (Exception E) {
-            E.printStackTrace();
-        }
-
-        System.out.println("Вызван метод: public void setDuration(int months, int days, int hours)");
-        System.out.printf(String.valueOf(months), " - Monts", days, " - days", hours, " - Hours");
         int MontToHours = 0;
         int yea = months % 12;
         int fullMonths = months - (months % 12); // задел на будущее если робот подаст больше 12 месяцев
@@ -102,13 +87,6 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
-        System.out.println("вызван злой setDuration с параметрами: strDuration= " + strDuration + ", FormatStyle= " + style);
-//        установить дату-время начала действия страховки
-//        SHORT соответствует ISO_LOCAL_DATE
-//        LONG  - ISO_LOCAL_DATE_TIME
-//        FULL - ISO_ZONED_DATE_TIME
-//        Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.
-
         DateTimeFormatter dtf;
         switch (style) {
             case SHORT:
@@ -134,7 +112,6 @@ public class Insurance {
             LocalDateTime z = LocalDateTime.parse(strDuration, dtf);
             duration = Duration.parse(z.toString()); // Трайкеч. По идее должна быть датавремя в полном формате, а робот подаёт 48 часов с буковкаме!
         }catch (Exception E){
-            //LocalDateTime z = LocalDateTime.parse(strDuration, DateTimeFormatter.ofPattern("'PT'HH'H'"));
             duration = Duration.parse(strDuration);
         }
 
@@ -150,7 +127,6 @@ public class Insurance {
         }
         // Если продолжительность указана, сравниваем старт и окончание
         ZonedDateTime z = start.plusSeconds(duration.toSeconds()); // Здесь должно получиться время окончания страховки
-        System.out.println(z + " - Это дата время окончания");
         if (z.isAfter(dateTime) & start.isBefore(dateTime)) { // Если окончание страховки позднее, чем текущая дата, а старт страховки раньше текущего времени
             return true;
         }

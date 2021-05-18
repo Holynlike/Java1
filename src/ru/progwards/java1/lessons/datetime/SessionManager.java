@@ -4,6 +4,10 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 public class SessionManager {
+    public static void main(String[] args) {
+        UserSession us = new UserSession("Иван");
+
+    }
     /**
      * Реализовать класс для хранения пользовательских сессий для сервера,
      * который проверяет аутентификацию пользователей. Менеджер работает
@@ -15,7 +19,7 @@ public class SessionManager {
      * максимально быстро. У каждого пользователя может быть только одна сессия.
      */
     private int sessionValid;
-    //public List<T> sessions = new List();
+    public ArrayList sessions = new ArrayList();
 
     public SessionManager(int sessionValid) {
         this.sessionValid = sessionValid;
@@ -24,14 +28,15 @@ public class SessionManager {
     public void add(UserSession userSession) {
 
     }
-    public UserSession find(String userName){
+    public UserSession find(String userName) {
         //if(sessions.containsKey(userName)){
-        return new UserSession("");
+            return new UserSession("");
+        //}
     }
 
 
 
-    class UserSession {
+    static class UserSession {
         private int sessionHandle;
         private String userName;
         private ZonedDateTime lastAccess;
@@ -64,6 +69,7 @@ public class SessionManager {
         public UserSession(String userName) {
             lastAccess = ZonedDateTime.now();
             sessionHandle = (int) Math.random();
+            System.out.println(sessionHandle);
         }
     }
 
