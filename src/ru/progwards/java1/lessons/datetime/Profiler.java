@@ -15,6 +15,7 @@ import java.util.List;
 public class Profiler {
     static LocalDateTime Start;
     static LocalDateTime Stop;
+    public static ArrayList<StatisticInfo> list = new ArrayList();
 
     public static void main(String[] args) {
         String s = "";
@@ -29,7 +30,7 @@ public class Profiler {
         // войти в профилировочную секцию, замерить время входа.
         Start = LocalDateTime.now();
         System.out.println(Start + " - Время входа в сессию");
-        getStatisticInfo().add(new StatisticInfo(name));
+        list.add(new StatisticInfo(name));
     }
 
     public static void exitSection(String name) {
@@ -44,7 +45,6 @@ public class Profiler {
      * получить профилировочную статистику, отсортировать по наименованию секции
      */
     public static List<StatisticInfo> getStatisticInfo(){
-        ArrayList<StatisticInfo> list = new ArrayList();
         return list; //TODO: Доделать!
         }
     }

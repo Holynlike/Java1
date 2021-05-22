@@ -1,12 +1,12 @@
 package ru.progwards.java1.lessons.datetime;
 
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+
 
 public class SessionManager {
     public static void main(String[] args) {
         UserSession us = new UserSession("Иван");
-
     }
     /**
      * Реализовать класс для хранения пользовательских сессий для сервера,
@@ -26,51 +26,25 @@ public class SessionManager {
     }
 
     public void add(UserSession userSession) {
-
+        sessions.add(userSession);
     }
+
     public UserSession find(String userName) {
-        //if(sessions.containsKey(userName)){
-            return new UserSession("");
-        //}
-    }
-
-
-
-    static class UserSession {
-        private int sessionHandle;
-        private String userName;
-        private ZonedDateTime lastAccess;
-
-        public ZonedDateTime getLastAccess() {
-            return lastAccess;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public int getSessionHandle() {
-            return sessionHandle;
-        }
-
-        public void updateLastAccess() {
-            // Обновляет время доступа к сессии
-            lastAccess = ZonedDateTime.now();
-        }
-
         /**
-         * - создать сессию пользователя.
-         * Внутри автоматически сгенерировать sessionHanle,
-         * для примера использовать просто случайное число через
-         * класс Random, а так же установить текущее время доступа.
-         *
-         * @param userName
+         * - проверяет наличие существующей сессии по userName.
+         * Если срок валидности истек, или такой  сессии нет,
+         * возвращает null. В противном случае возвращает сессию, обновив ее дату доступа.
          */
-        public UserSession(String userName) {
-            lastAccess = ZonedDateTime.now();
-            sessionHandle = (int) Math.random();
-            System.out.println(sessionHandle);
-        }
-    }
 
+        if (sessions.isEmpty()) {
+            return new UserSession("User not Found!");
+        }
+        for (int i = 0; i < sessions.size(); i++) {
+            UserSession u = (UserSession) sessions.get(i);
+            if(u.getUserName() == userName){
+                return u;
+            }
+        }
+        return new UserSession("User not Found!");
+    }
 }
