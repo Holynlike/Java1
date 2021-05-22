@@ -34,17 +34,14 @@ public class SessionManager {
          * Если срок валидности истек, или такой  сессии нет,
          * возвращает null. В противном случае возвращает сессию, обновив ее дату доступа.
          */
-
-        if (sessions.isEmpty()) {
-            return new UserSession("User not Found!");
-        }
+        UserSession u;
         for (int i = 0; i < sessions.size(); i++) {
-            UserSession u = (UserSession) sessions.get(i);
+            u = (UserSession) sessions.get(i);
             if(u.getUserName() == userName){
                 return u;
             }
         }
-        return new UserSession("User not Found!");
+        return null;
     }
     public UserSession get(int sessionHandle){
         if (sessions.isEmpty()) {
