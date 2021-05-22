@@ -3,7 +3,6 @@ package ru.progwards.java1.lessons.datetime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-
 public class SessionManager {
     public static void main(String[] args) {
         UserSession us = new UserSession("Иван");
@@ -46,5 +45,36 @@ public class SessionManager {
             }
         }
         return new UserSession("User not Found!");
+    }
+    public UserSession get(int sessionHandle){
+        if (sessions.isEmpty()) {
+            return new UserSession("User not Found!");
+        }
+        for (int i = 0; i < sessions.size(); i++) {
+            UserSession u = (UserSession) sessions.get(i);
+            if(u.getSessionHandle() == sessionHandle){
+                return u;
+            }
+        }
+        return new UserSession("User not Found!");
+    }
+    public void delete(int sessionHandle){
+        for (int i = 0; i < sessions.size(); i++) {
+            UserSession u = (UserSession) sessions.get(i);
+            if(u.getSessionHandle() == sessionHandle){
+                sessions.remove(i);
+            }
+        }
+    }
+    public void deleteExpired(){
+        if (sessions.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < sessions.size(); i++) {
+            UserSession u = (UserSession) sessions.get(i);
+            if(u.getLastAccess().isBefore(ZonedDateTime.now()) ){ // Если последний доступ был ранее, чем текущее время, удаляем (Дичь полная!)
+                sessions.remove(i);
+            }
+        }
     }
 }

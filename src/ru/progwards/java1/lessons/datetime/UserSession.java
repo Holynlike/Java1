@@ -38,4 +38,5 @@ public class UserSession {
         sessionHandle = (int) Math.random();
         System.out.println(sessionHandle);
     }
+
 }

@@ -20,7 +20,7 @@ public class Profiler {
     public static void main(String[] args) {
         String s = "";
         Profiler.enterSection("ВасисДас!");
-        for (int i = 0; i < 857_143; i++) {
+        for (int i = 0; i < 405_00; i++) { // Примерно секунда выполнения на моём ПК
             s+=" 0123456789";
         }
         Profiler.exitSection("ВасисДас");
