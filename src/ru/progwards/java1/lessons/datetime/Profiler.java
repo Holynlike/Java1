@@ -30,7 +30,8 @@ public class Profiler {
         // войти в профилировочную секцию, замерить время входа.
         Start = LocalDateTime.now();
         System.out.println(Start + " - Время входа в сессию");
-        list.add(new StatisticInfo(name));
+        StatisticInfo sa = new StatisticInfo(name);
+        list.add(sa);
     }
 
     public static void exitSection(String name) {
@@ -73,6 +74,7 @@ class StatisticInfo {
      * Методы класса==========================================================
      */
     public StatisticInfo(String sectionName) {
+        this.sectionName = sectionName;
         count++;
         Date_Time_Start = LocalDateTime.now();// Здесь будет дата и время начала
     }
