@@ -28,9 +28,7 @@ public class TriangleInfo {
     }
 
     // Вариант 3
-    public static boolean isTriangle3(int a, int b, int c) {
-        return ((a + b) > c && (a + c) > b && (c + b) > a);
-    }
+    public static boolean isTriangle3(int a, int b, int c) {return ((a + b) > c && (a + c) > b && (c + b) > a);}
 
     // Вариант 4
     public static boolean isTriangle4(int a, int b, int c) {

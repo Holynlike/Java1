@@ -31,6 +31,16 @@ public class Profiler {
         Start = LocalDateTime.now();
         System.out.println(Start + " - Время входа в сессию");
         StatisticInfo sa = new StatisticInfo(name);
+        StatisticInfo findSA;
+        for (int i = 0; i < list.size(); i++) {
+            findSA = list.get(i);
+            if  (findSA.sectionName == name){
+                sa.count = findSA.count + 1;
+                sa.fullTime+=findSA.fullTime + LocalDateTime.now().getNano() - findSA.Date_Time_Start.getNano();
+            }
+        }
+        sa = new StatisticInfo(name);
+
         list.add(sa);
     }
 
