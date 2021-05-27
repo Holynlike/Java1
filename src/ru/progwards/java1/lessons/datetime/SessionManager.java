@@ -6,6 +6,15 @@ import java.util.ArrayList;
 public class SessionManager {
     public static void main(String[] args) {
         UserSession us = new UserSession("Иван");
+        UserSession us2 = new UserSession("Иван");
+        UserSession us3 = new UserSession("Марья");
+        SessionManager su = new SessionManager(3);
+
+        su.add(us);
+        su.add(us2);
+        su.add(us3);
+
+
     }
     /**
      * Реализовать класс для хранения пользовательских сессий для сервера,
@@ -28,7 +37,7 @@ public class SessionManager {
         boolean b = false;
         for (int i = 0; i < sessions.size(); i++) {
             UserSession u = (UserSession) sessions.get(i);
-            if(u.getUserName() == userSession.getUserName()){ // Если последний доступ был ранее, чем текущее время, удаляем (Дичь полная!)
+            if(u.getUserName() == userSession.getUserName()){
                 b= true;
             }
         }

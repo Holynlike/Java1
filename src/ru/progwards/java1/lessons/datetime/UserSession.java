@@ -37,6 +37,7 @@ public class UserSession {
         lastAccess = ZonedDateTime.now();
         sessionHandle = (int) Math.random();
         System.out.println(sessionHandle);
+        this.userName = userName;
     }
 
 }
