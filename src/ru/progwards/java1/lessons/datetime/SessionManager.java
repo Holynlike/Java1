@@ -25,7 +25,14 @@ public class SessionManager {
     }
 
     public void add(UserSession userSession) {
-        sessions.add(userSession);
+        boolean b = false;
+        for (int i = 0; i < sessions.size(); i++) {
+            UserSession u = (UserSession) sessions.get(i);
+            if(u.getUserName() == userSession.getUserName()){ // Если последний доступ был ранее, чем текущее время, удаляем (Дичь полная!)
+                b= true;
+            }
+        }
+        if (!b) sessions.add(userSession);
     }
 
     public UserSession find(String userName) {
