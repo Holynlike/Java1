@@ -40,7 +40,7 @@ public class Profiler {
             if (list.get(i).sectionName == sa.sectionName){
                 b = true;
                 list.get(i).count += sa.count;
-                list.get(i).fullTime = Duration.between(LocalDateTime.now(), list.get(i).Date_Time_Start).getNano();
+                list.get(i).fullTime = Duration.between(LocalDateTime.now(), list.get(i).Date_Time_Start).toMillisPart();
 
                 list.get(i).selfTime += sa.selfTime;
             }
