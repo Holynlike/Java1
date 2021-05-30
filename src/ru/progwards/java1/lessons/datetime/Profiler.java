@@ -40,8 +40,17 @@ public class Profiler {
             }
         }
         sa = new StatisticInfo(name);
+        boolean b = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).sectionName == sa.sectionName){
+                b = true;
+                list.get(i).count += sa.count;
+                list.get(i).fullTime += sa.fullTime;
+                list.get(i).selfTime += sa.selfTime;
+            }
+        }
+        if(!b){list.add(sa);}
 
-        list.add(sa);
     }
 
     public static void exitSection(String name) {
