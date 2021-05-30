@@ -24,6 +24,7 @@ public class Profiler {
             s+=" 0123456789";
         }
         Profiler.exitSection("ВасисДас");
+        Profiler.enterSection("ВасисДас!");
     }
 
     public static void enterSection(String name) {
@@ -39,7 +40,7 @@ public class Profiler {
             if (list.get(i).sectionName == sa.sectionName){
                 b = true;
                 list.get(i).count += sa.count;
-                list.get(i).fullTime += LocalDateTime.now().getSecond() - list.get(i).Date_Time_Start.getSecond();
+                list.get(i).fullTime = Duration.between(LocalDateTime.now(), list.get(i).Date_Time_Start).getNano();
 
                 list.get(i).selfTime += sa.selfTime;
             }
@@ -52,8 +53,14 @@ public class Profiler {
         // выйти из профилировочной секции. Замерить время выхода,
         // вычислить промежуток времени между входом и выходом в миллисекундах.
         Stop = LocalDateTime.now();
+        StatisticInfo sa = new StatisticInfo(name);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).sectionName == sa.sectionName){
+
+            }
+        }
         System.out.println(Stop + " - Время выхода из сессии");
-        System.out.println(Duration.between(Start, Stop).toSeconds());
+        System.out.println(Duration.between(Start, Stop).getSeconds());
     }
 
     /**
