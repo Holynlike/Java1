@@ -7,22 +7,13 @@ public class UserSession {
     private String userName;
     private ZonedDateTime lastAccess;
 
-    public ZonedDateTime getLastAccess() {
-        return lastAccess;
-    }
+    public ZonedDateTime getLastAccess() {return lastAccess;}
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() {return userName;}
 
-    public int getSessionHandle() {
-        return sessionHandle;
-    }
+    public int getSessionHandle() {return sessionHandle;}
 
-    public void updateLastAccess() {
-        // Обновляет время доступа к сессии
-        lastAccess = ZonedDateTime.now();
-    }
+    public void updateLastAccess() {lastAccess = ZonedDateTime.now();}
 
     /**
      * - создать сессию пользователя.

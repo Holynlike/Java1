@@ -31,21 +31,16 @@ public class Profiler {
         Start = LocalDateTime.now();
         System.out.println(Start + " - Время входа в сессию");
         StatisticInfo sa = new StatisticInfo(name);
-        StatisticInfo findSA;
-        for (int i = 0; i < list.size(); i++) {
-            findSA = list.get(i);
-            if  (findSA.sectionName == name){
-                sa.count = findSA.count + 1;
-                sa.fullTime+=findSA.fullTime + LocalDateTime.now().getNano() - findSA.Date_Time_Start.getNano();
-            }
-        }
+        StatisticInfo findSA; // поисковая переменная
+
         sa = new StatisticInfo(name);
         boolean b = false;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).sectionName == sa.sectionName){
                 b = true;
                 list.get(i).count += sa.count;
-                list.get(i).fullTime += sa.fullTime;
+                list.get(i).fullTime += LocalDateTime.now().getNano() - list.get(i).Date_Time_Start.getNano();
+                //list.get(i).fullTime += sa.fullTime;
                 list.get(i).selfTime += sa.selfTime;
             }
         }
