@@ -39,8 +39,8 @@ public class Profiler {
             if (list.get(i).sectionName == sa.sectionName){
                 b = true;
                 list.get(i).count += sa.count;
-                list.get(i).fullTime += LocalDateTime.now().getNano() - list.get(i).Date_Time_Start.getNano();
-                //list.get(i).fullTime += sa.fullTime;
+                list.get(i).fullTime += LocalDateTime.now().getSecond() - list.get(i).Date_Time_Start.getSecond();
+
                 list.get(i).selfTime += sa.selfTime;
             }
         }
